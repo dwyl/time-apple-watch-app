@@ -74,8 +74,7 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         
         if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as? Project {
             
-            project.name = name
-            project.time = time
+            project.project_name = name
             project.red = red
             project.green = green
             project.blue = blue

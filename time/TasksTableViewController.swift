@@ -12,8 +12,15 @@ import CoreData
 
 class TasksTableViewController: UITableViewController {
     
-    var projects: [NSManagedObject] = []
+    var projects: [Project] = []
     var selectedTask: NSManagedObject!
+    var objects:[[String:AnyObject]]?
+    var projectNames = [String]()
+    
+//    var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,22 +44,85 @@ class TasksTableViewController: UITableViewController {
                 return
         }
         
+        
+//        let projects = Project.fetchListOfProjectsFromDatabase(inManagedObjectContext: self.managedObjectContext!)
+        
+        
         let managedContext =
             appDelegate.persistentContainer.viewContext
         
         //2
+
+                //3
+        
+        let entity = NSEntityDescription.entity( forEntityName: "Project",  in:managedContext )
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.entity = entity
+        request.resultType = .dictionaryResultType
+        request.returnsDistinctResults = true
+        request.propertiesToFetch = [ "project_name" ]
+        
+        
+        //fetching only unique project_names from db
+//        do
+//        {
+//            try objects = (managedContext.fetch(request) as? [[String:AnyObject]])!
+//            for object in objects! {
+//                print("\(object["project_name"])")
+//            }
+//        }
+//        catch
+//        {
+//            // handle failed fetch
+//        }
+        
+        
         let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Project")
+            NSFetchRequest<Project>(entityName: "Project")
         
-        //3
+//         fetching all information from the db
         do {
-            fetchRequest.relationshipKeyPathsForPrefetching = ["tasks_list"]
             projects = try managedContext.fetch(fetchRequest)
-            
-        
+
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        
+        // find unique projects
+        var aggregatedProjects = [String]()
+        for p in projects {
+            aggregatedProjects.append(p.project_name!)
+        }
+        // list of unique projects
+        var uniqueProjects = Array(Set(aggregatedProjects))
+        
+        /*
+         
+         var store =
+            {
+                "ios" : {
+                    "project_name": "iOS",
+                    "total_time":0
+                    "color":"blue"
+                },
+                "elm": {
+                    "project_name": "elm",
+                    "total_time":0
+                    "color":"blue"
+                }
+            }
+         */
+        
+        // build array of projects
+        for p in uniqueProjects {
+            // object to store total time and color for a project
+            var project: [[String: AnyObject]]
+            // sum total time for each project
+            for
+        }
+        print("\(uniqueProjects)")
+
 
         
 //        NotificationCenter.default.addObserver(self, selector: "loadList:", name: "load", object: nil)
@@ -82,7 +152,7 @@ class TasksTableViewController: UITableViewController {
         
         //2
         let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Project")
+            NSFetchRequest<Project>(entityName: "Project")
         
         //3
         do {
@@ -125,16 +195,14 @@ class TasksTableViewController: UITableViewController {
  
         cell.backgroundColor = UIColor(red: CGFloat((project.value(forKey: "red") as! Double)/255.0), green: CGFloat((project.value(forKey: "green") as! Double)/255.0), blue: CGFloat((project.value(forKey: "blue") as! Double)/255.0), alpha: CGFloat(1.0))
         
-        let time = project.value(forKey: "time") as? Double
+        let time = project.value(forKey: "total_task_time") as? Double
         let seconds = (time! / 1000).truncatingRemainder(dividingBy: Double(60))
         let minutes = (time! / (1000*60)).truncatingRemainder(dividingBy: Double(60))
         let hours = (time! / (1000*60*60)).truncatingRemainder(dividingBy: Double(24))
 
-        cell.taskName.text = project.value(forKey: "name") as? String
+        cell.taskName.text = project.value(forKey: "project_name") as? String
 //        cell.taskTime.text = "\(hours)H\(minutes)M\(seconds)S"
-        var arr = project.value(forKey: "tasks_list")
         
-        print("\(project.value(forKey: "tasks_list")), FOR KEY")
 
         cell.taskTime.text = "\(time!)"
 

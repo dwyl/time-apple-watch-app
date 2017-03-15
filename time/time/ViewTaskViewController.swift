@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewTaskViewController: UIViewController {
+class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
     var receivedData: NSManagedObject!
@@ -22,7 +22,8 @@ class ViewTaskViewController: UIViewController {
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
-    var tasks: [NSManagedObject] = []
+    @IBOutlet weak var listOfTasks: UITableView!
+    var projects: [Project] = []
 
     var timer = Timer()
     var seconds = 00
@@ -35,6 +36,13 @@ class ViewTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TABLE RELATED 
+
+        listOfTasks.delegate = self
+        listOfTasks.dataSource = self
+        
+        
         
         let image : UIImage = UIImage(named: "dwyl-heart-logo")!
         
@@ -50,7 +58,7 @@ class ViewTaskViewController: UIViewController {
         self.navigationItem.titleView = view
 
     
-        task.text = receivedData.value(forKey: "name") as! String?
+        task.text = receivedData.value(forKey: "project_name") as! String?
         taskBackground.backgroundColor = UIColor(red: CGFloat((receivedData.value(forKey: "red") as! Double)/255.0), green: CGFloat((receivedData.value(forKey: "green") as! Double)/255.0), blue: CGFloat((receivedData.value(forKey: "blue") as! Double)/255.0), alpha: CGFloat(1.0))
         
         secondsLabel.text = String(format: "%02d", seconds)
@@ -71,20 +79,18 @@ class ViewTaskViewController: UIViewController {
 
         //2
         let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Task")
-        let name = receivedData.value(forKey: "name") as! String
-        let predicate = NSPredicate(format: "project_name.name = %@", name)
+            NSFetchRequest<Project>(entityName: "Project")
+        let name = receivedData.value(forKey: "project_name") as! String
+        let predicate = NSPredicate(format: "project_name = %@", name)
         
 
         //3
         do {
             fetchRequest.predicate = predicate
-            tasks = try managedContext.fetch(fetchRequest)
-
-            for task in tasks {
-                print("\(task.value(forKey: "total_time"))")
-                print("\(task.value(forKeyPath: "project_name"))")
-
+            projects = try managedContext.fetch(fetchRequest)
+            
+            for project in projects {
+                print("\(project.total_task_time)")
             }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -136,9 +142,9 @@ class ViewTaskViewController: UIViewController {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        if let task = NSEntityDescription.insertNewObject(forEntityName: "Task", into: managedContext) as? Task {
-            task.total_time = Int32(totalTimeInSeconds)
-            task.project_name = receivedData as! Project?
+        if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as? Project {
+            project.total_task_time = Double(Int32(totalTimeInSeconds))
+            project.project_name = receivedData.value(forKey: "project_name") as! String?
         }
         
         
@@ -173,6 +179,37 @@ class ViewTaskViewController: UIViewController {
 
     }
 
+    
+    
+    // TABLE VIEW 
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("\(projects.count)")
+        return projects.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskListTableViewCell
+        
+        let task = projects[indexPath.row]
+        
+        cell.taskName.text = task.task_name ?? task.project_name
+        cell.totalTaskTime.text = String(task.total_task_time)
+        
+        return cell
+        
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
