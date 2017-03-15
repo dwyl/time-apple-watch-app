@@ -8,10 +8,12 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class TasksTableViewController: UITableViewController {
     
-    var tasks = [["taskName": "iOS", "taskTime": "00H24M", "red": 155.0, "green": 226.0, "blue": 0.0], ["taskName": "F&C", "taskTime": "02H09M",  "red": 255.0, "green": 126.0, "blue": 0.0],["taskName": "Video", "taskTime": "05H21M", "red": 55.0, "green": 226.0, "blue": 10.0]]
+    var projects: [NSManagedObject] = []
+    var selectedTask: NSManagedObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,35 @@ class TasksTableViewController: UITableViewController {
         view.addSubview(imageView)
         
         self.navigationItem.titleView = view
+        
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Project")
+        
+        //3
+        do {
+            fetchRequest.relationshipKeyPathsForPrefetching = ["tasks_list"]
+            projects = try managedContext.fetch(fetchRequest)
+            
+        
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
 
         
+//        NotificationCenter.default.addObserver(self, selector: "loadList:", name: "load", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,6 +66,34 @@ class TasksTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
+    }
+    
+    func loadList(){
+        //load data here
+        print("you have made it here")
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Project")
+        
+        //3
+        do {
+            projects = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+
+        
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,25 +114,36 @@ class TasksTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tasks.count
+        return projects.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TasksTableViewCell
         
-        let task = tasks[indexPath.row]
+        let project = projects[indexPath.row]
  
-
-        cell.backgroundColor = UIColor(red: CGFloat(task["red"] as! Double/255.0), green: CGFloat(task["green"] as! Double/255.0), blue: CGFloat(task["blue"] as! Double/255.0), alpha: CGFloat(1.0))
+        cell.backgroundColor = UIColor(red: CGFloat((project.value(forKey: "red") as! Double)/255.0), green: CGFloat((project.value(forKey: "green") as! Double)/255.0), blue: CGFloat((project.value(forKey: "blue") as! Double)/255.0), alpha: CGFloat(1.0))
         
-        cell.taskName.text = task["taskName"] as! String?
-        cell.taskTime.text = task["taskTime"] as! String?
+        let time = project.value(forKey: "time") as? Double
+        let seconds = (time! / 1000).truncatingRemainder(dividingBy: Double(60))
+        let minutes = (time! / (1000*60)).truncatingRemainder(dividingBy: Double(60))
+        let hours = (time! / (1000*60*60)).truncatingRemainder(dividingBy: Double(24))
+
+        cell.taskName.text = project.value(forKey: "name") as? String
+//        cell.taskTime.text = "\(hours)H\(minutes)M\(seconds)S"
+        var arr = project.value(forKey: "tasks_list")
+        
+        print("\(project.value(forKey: "tasks_list")), FOR KEY")
+        print("\(project.value(forKeyPath: "tasks_list")), KET PATH")
+
+        cell.taskTime.text = "\(time!)"
 
         // Configure the cell...
 
         return cell
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -85,17 +153,51 @@ class TasksTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return
+            }
+
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            
+
+                managedContext.delete(projects[indexPath.row])
+        
+            projects.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //redirect to viewTaskController
+        self.performSegue(withIdentifier: "viewProject", sender: self)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "viewProject" {
+            let viewTaskViewController = segue.destination as! ViewTaskViewController
+            let path = self.tableView.indexPathForSelectedRow!
+            
+            selectedTask = projects[(path.row)]
+            
+            viewTaskViewController.receivedData = selectedTask
+        }
+
+            
+    }
 
     /*
     // Override to support rearranging the table view.
