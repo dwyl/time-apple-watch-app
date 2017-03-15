@@ -135,7 +135,6 @@ class TasksTableViewController: UITableViewController {
         var arr = project.value(forKey: "tasks_list")
         
         print("\(project.value(forKey: "tasks_list")), FOR KEY")
-        print("\(project.value(forKeyPath: "tasks_list")), KET PATH")
 
         cell.taskTime.text = "\(time!)"
 

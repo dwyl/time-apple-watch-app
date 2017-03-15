@@ -78,7 +78,7 @@ class ViewTaskViewController: UIViewController {
 
         //3
         do {
-//            fetchRequest.predicate = predicate
+            fetchRequest.predicate = predicate
             tasks = try managedContext.fetch(fetchRequest)
 
             for task in tasks {
