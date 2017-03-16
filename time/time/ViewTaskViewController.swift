@@ -12,7 +12,11 @@ import CoreData
 class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
-    var receivedData: NSManagedObject!
+    var receivedData = [String: Dictionary<String, Any>]()
+    var project_name = String()
+    var red = Double()
+    var blue = Double()
+    var green = Double()
     
     @IBOutlet weak var task: UILabel!
     @IBOutlet weak var taskBackground: UIView!
@@ -31,35 +35,41 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     var isRunning = false
     var totalTimeInSeconds = 00
 
-    
-    
+    //initialise managecontextobject
+    var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TABLE RELATED 
-
+        for project in receivedData {
+            print("in for loop\(project.value["project_name"])")
+            project_name = project.value["project_name"] as! String
+            red = project.value["red"] as! Double
+            green = project.value["green"] as! Double
+            blue = project.value["blue"] as! Double
+        }
+        
+        
+        //TABLE RELATED
         listOfTasks.delegate = self
         listOfTasks.dataSource = self
         
-        
-        
+        // NAVIGATION RELATED
         let image : UIImage = UIImage(named: "dwyl-heart-logo")!
-        
-        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
-        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        
         view.addSubview(imageView)
-        
         self.navigationItem.titleView = view
+        
+        
+        // UPDATE VIEW
 
-    
-        task.text = receivedData.value(forKey: "project_name") as! String?
-        taskBackground.backgroundColor = UIColor(red: CGFloat((receivedData.value(forKey: "red") as! Double)/255.0), green: CGFloat((receivedData.value(forKey: "green") as! Double)/255.0), blue: CGFloat((receivedData.value(forKey: "blue") as! Double)/255.0), alpha: CGFloat(1.0))
+        print("\(project_name)")
+        task.text = project_name
+        taskBackground.backgroundColor = UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
         
         secondsLabel.text = String(format: "%02d", seconds)
         minutesLabel.text = String(format: "%02d", minutes)
@@ -67,37 +77,8 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         pauseButton.isEnabled = false
         isRunning = false
       
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-
-        //2
-        let fetchRequest =
-            NSFetchRequest<Project>(entityName: "Project")
-        let name = receivedData.value(forKey: "project_name") as! String
-        let predicate = NSPredicate(format: "project_name = %@", name)
-        
-
-        //3
-        do {
-            fetchRequest.predicate = predicate
-            projects = try managedContext.fetch(fetchRequest)
-            
-            for project in projects {
-                print("\(project.total_task_time)")
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-
-        
+        // fetches items from database and then loads it into the view
+        updateTableView(name: project_name)
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,8 +87,13 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func startTimer(_ sender: UIButton) {
-        print("YOU IN HERE")
-        print("\(isRunning)")
+        
+        let start_time = NSTimeIntervalSince1970
+        let project_name = self.project_name
+        //When the user select start
+        // create an item in the database and set the start_time to timeIntervalSince1970, project name and is_task_running to true
+        createTask(project_name: project_name, start_time: start_time)
+        
         if !isRunning {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewTaskViewController.updateTimer), userInfo: nil, repeats: true)
             
@@ -117,6 +103,21 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
 
+    func createTask(project_name: String, start_time: Double) {
+        // create item in database where we set the name and start time
+        if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext!)  as? Project {
+            newTaskInProject.project_name = project_name
+            newTaskInProject.start_time = Int64(start_time)
+            newTaskInProject.is_task_running = true
+        }
+        
+        do {
+            try managedObjectContext?.save()
+        } catch let error as NSError {
+            print("could not save newTaskInProject. \(error)")
+        }
+    }
+    
     
     @IBAction func pauseTimer(_ sender: UIButton) {
         
@@ -131,35 +132,64 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         isRunning = false
         timer.invalidate()
         
-        print("\(totalTimeInSeconds)")
-        
-        //save to database
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            else {
-                return
-            }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as? Project {
-            project.total_task_time = Double(Int32(totalTimeInSeconds))
-            project.project_name = receivedData.value(forKey: "project_name") as! String?
-        }
         
         
+        //find the existing item in the database which has a is_task_running for the given project
+        
+        let fetchRequest =
+            NSFetchRequest<Project>(entityName: "Project")
+        fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+        
+        //3
         do {
-            try managedContext.save()
+            let project = try managedObjectContext!.fetch(fetchRequest)
+
+            // now set the task end date, is task running and total task time and then save the project
+            let task_end_date = Date()
+            project.first?.task_end_date = task_end_date as NSDate?
+            project.first?.is_task_running = false
+            project.first?.total_task_time = Double(totalTimeInSeconds)
+            
+            
+            do {
+                try managedObjectContext!.save()
+                updateTableView(name: project_name)
+            } catch let error as NSError {
+                print("unable to save project. \(error)")
+            }
         } catch let error as NSError {
-            print("could not save. \(error), \(error.userInfo)")
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
-                
+        
         seconds = 00
         minutes = 00
         secondsLabel.text = String(format: "%02d", seconds)
         minutesLabel.text = String(format: "%02d", minutes)
         playButton.isEnabled = true
         pauseButton.isEnabled = false
+    }
+    
+    func updateTableView (name: String) {
+        let fetchRequest =  NSFetchRequest<Project>(entityName: "Project")
+//        let predicate = NSPredicate(format: "any project_name = %@", name)
+        let predicate1 = NSPredicate(format: "project_name == %@", name)
+        let predicate2 = NSPredicate(format: "total_task_time != 0.0")
+        let predicateCompound = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1,predicate2])
+
+        do {
+            fetchRequest.predicate = predicateCompound
+            
+            projects = try managedObjectContext!.fetch(fetchRequest)
+            
+            
+            for project in projects {
+//                print("\(project.total_task_time)")
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        self.listOfTasks.reloadData()
     }
     
     func updateTimer () {
@@ -192,7 +222,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(projects.count)")
         return projects.count
     }
     
