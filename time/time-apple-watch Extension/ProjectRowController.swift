@@ -11,6 +11,7 @@ import WatchConnectivity
 
 class ProjectRowController: NSObject {
 
+    @IBOutlet var timerGroup: WKInterfaceGroup!
     @IBOutlet var ProjectName: WKInterfaceLabel!
     @IBOutlet var startTimer: WKInterfaceImage!
     @IBOutlet var timer: WKInterfaceTimer!
@@ -19,6 +20,7 @@ class ProjectRowController: NSObject {
     let stopImage = UIImage(named: "fa-stop")
     
     func startTimerForRow() {
+        timerGroup.setHidden(false)
         timer.setHidden(false)
         timer.setDate(Date(timeIntervalSinceNow: 0.0))
         timer.start()

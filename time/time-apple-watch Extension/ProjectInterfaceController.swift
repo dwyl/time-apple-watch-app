@@ -27,7 +27,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     var totalTime = Double()
     var currentTimerForProjectName = ""
     
-    
     //MARK: Watch Connection
     
     
@@ -134,14 +133,50 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
             //currently not much apart from changing the background color but this is where a lot of work will need to take place.
 
             // if timer is not running then start the timer
-            
+
+            print("\(isTimerRunning)ISTIMERRUNNING")
             if !isTimerRunning {
                 cell.startTimerForRow()
                 startTimer(forProject: uniqueProjects[rowIndex])
             } else {
-                cell.stopTimerForRow()
-                stopTimer(forProject: uniqueProjects[rowIndex], totalTime: totalTime)
+                
+                // when the user selects the same cell we can
+                    // stop the timer for the cell with the row index
+                    // stop the timer UI
+                    // set isTimerRunning to false
+                if (currentTimerForProjectName == uniqueProjects[rowIndex]) {
+                    print("\(currentTimerForProjectName) Project NAME CURRENT")
+                    print("\(uniqueProjects[rowIndex]) selected Project Name")
+                    cell.stopTimerForRow()
+                    stopTimer(forProject: uniqueProjects[rowIndex], totalTime: totalTime)
+                    currentTimerForProjectName = uniqueProjects[rowIndex]
+                    isTimerRunning = false
+                }
+                // when the user selects a different cell
+                // stop the timer for the currentTimerForProjectName send old timer infomation.
+                // reload the data
+                // send a message to the selected row to start the timer
+                // set the currentTimerForProjectName to the selected Item
+                // keep the isTimerRunning to true as we will start a new one
+                // reset the timer to 0.0
+                else {
+                    stopTimer(forProject: currentTimerForProjectName, totalTime: totalTime)
+                    
+                    // instead of reloading the data we can target the specific
+                    let indexOf = uniqueProjects.index(of: currentTimerForProjectName)
+                    if let cell = projectTable.rowController(at: indexOf!) as? ProjectRowController {
+                        cell.ProjectName.setText(uniqueProjects[indexOf!])
+                        cell.stopTimerForRow()
+                    }
+                    print("\(uniqueProjects[indexOf!]) OLD ROW")
+                    print("\(uniqueProjects[rowIndex]) NEW ROW")
+                    startTimer(forProject: uniqueProjects[rowIndex])
+                    cell.startTimerForRow()
+                }
+                
             }
+            
+          
             
         }
     }
@@ -165,20 +200,15 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func stopTimer(forProject project:String, totalTime time:Double) {
         print("Stopped the timer at \(totalTime)")
-
+        self.timerTotal.invalidate()
         
         // send a message to the phone which will update the existing project with the total time
         session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "total_task_time": totalTime], replyHandler: {
             replyData in
-            
             // if the data is set then we can reset the totalTime to 0
             print("You have sent the message!!! \(String(describing: replyData["savedToCoreData"]))")
-            if (replyData["savedToCoreData"] != nil) {
-                self.isTimerRunning = false
-                self.timerTotal.invalidate()
+//                self.timerTotal.invalidate()
                 self.totalTime = 0.0
-            }
-            
         }, errorHandler: { error in
             print("could not send name of the project for which the timer has started")
         })
@@ -187,7 +217,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func updateTimerOnWatch() {
         totalTime += 1.0
-        
+        print("You are in here")
         if totalTime == 1500 {
             
             WKInterfaceDevice.current().play(.notification)
