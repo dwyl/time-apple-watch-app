@@ -59,6 +59,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Nfh-GA-WfJ">
+                        <barButtonItem key="leftBarButtonItem" title="fetch data" id="d5v-xh-wNQ">
+                            <connections>
+                                <action selector="fetchDataButton:" destination="N4H-fn-RGJ" id="T2C-by-iWF"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZWu-SP-ND5">
                             <color key="tintColor" red="0.99246239780000001" green="1" blue="0.94277793600000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -194,7 +199,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0G-LG-nm4" id="ddm-Wr-99F">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="task_name/project_name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZm-BI-0fs">
@@ -304,7 +309,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="abR-Ou-TFL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="CZy-ZT-AnD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CZy-ZT-AnD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.29411764709999999" green="0.75294117650000003" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
