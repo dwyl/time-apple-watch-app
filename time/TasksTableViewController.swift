@@ -26,38 +26,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     var projectNames = [String]()
     var uniqueProjects = [String]()
     var store = [String: Dictionary<String, Any>]()
-    
-    @IBAction func fetchDataButton(_ sender: UIBarButtonItem) {
-        print("BUTTON PRESSED")
-//        sendDataToWatch()
-        
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        
-        let fetchRequest =
-            NSFetchRequest<Project>(entityName: "Project")
-        
-        //         fetching all information from the db
-        do {
-            projects = try managedContext.fetch(fetchRequest)
-            
-            for p in projects {
-                print("\(p.project_name)")
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-    }
-    
-    
     /*
      
      var store =
@@ -125,8 +93,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         //Use this to update the UI instantaneously (otherwise, takes a little while)
         DispatchQueue.main.async {
             if (message["project"] as? Int) != nil {
-                print("Instant Message")
-                self.sayHi()
                 replyHandler(["project": self.store , "uniqueProjects": self.uniqueProjects])
             }
             if (message["startTimerFor"] as? String) != nil {
@@ -147,17 +113,11 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     newTaskInProject.start_time = Int64(NSTimeIntervalSince1970)
                     newTaskInProject.is_task_running = true
                     
-                    print("\(newTaskInProject)<<<<<<<<<<")
-
                 }
                 // 4
                 do {
                     try managedContext.save()
-                    self.sayHi()
                     replyHandler(["savedToCoreData": true])
-                    print("DATA HAS BEEN SAVED")
-
-
                 } catch let error as NSError {
                     print("Could not save. \(error), \(error.userInfo)")
                 }
@@ -199,7 +159,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     
                     
                     do {
-                        self.sayHi()
                         self.loadList()
                         replyHandler(["savedToCoreData": "YOU SAVED TO THE DB"])
                         try managedContext.save()
@@ -216,7 +175,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             
         }
     }
-
+    
+    
+//  Dummy alert function that's job is to show a pop up.
     func sayHi(){
         let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
@@ -226,18 +187,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         let image : UIImage = UIImage(named: "dwyl-heart-logo")!
-        sayHi()
-        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
-        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        
         view.addSubview(imageView)
-        
         self.navigationItem.titleView = view
         
          configureWCSession()
@@ -256,21 +211,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         request.returnsDistinctResults = true
         request.propertiesToFetch = [ "project_name" ]
         
-        
-        //fetching only unique project_names from db
-//        do
-//        {
-//            try objects = (managedContext.fetch(request) as? [[String:AnyObject]])!
-//            for object in objects! {
-//                print("\(object["project_name"])")
-//            }
-//        }
-//        catch
-//        {
-//            // handle failed fetch
-//        }
-        
-        
         let fetchRequest =
             NSFetchRequest<Project>(entityName: "Project")
         
@@ -285,17 +225,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         // SETTING UP THE STORE
         setupStore()
 
-        
         // create a listerner that will reload the list if a new project is added to the list
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         
     }
     
@@ -366,7 +297,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         
         //As this happens when the user saves a new project, we also need to let the watch know that the data has changed.
         // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
-        
 //        if sender is segue then run this else do not run this. 
         sendDataToWatch()
         }
@@ -426,21 +356,32 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 
             }
         }
-//
         
         cell.backgroundColor = UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
 
         cell.taskName.text = project_name
-//        cell.taskTime.text = "\(hours)H\(minutes)M\(seconds)S"
+        let seconds = (total_time.truncatingRemainder(dividingBy: 3600)).truncatingRemainder(dividingBy: 60)
+        let minutes = (total_time.truncatingRemainder(dividingBy: 3600)) / 60
+        let hours = (total_time / 3600)
+        print("\(total_time)totalTime")
+        print("\(hours)HH\(minutes)MM\(seconds)SS")
+
+        secondsToHsMsSs(seconds: Int(total_time), result: {(hours, minutes, seconds) in
+            cell.taskTime.text = "\(self.timeToText(s: hours))h\(self.timeToText(s: minutes))m\(self.timeToText(s: seconds))s"
+        })
         
 
-        cell.taskTime.text = "\(total_time)"
-
-        // Configure the cell...
 
         return cell
     }
     
+    func timeToText(s: Int) -> String {
+        return s < 10 ? "0\(s)" : "\(s)"
+    }
+    
+    func secondsToHsMsSs(seconds : Int, result: @escaping (Int, Int, Int)->()) {
+        result(seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
 
     /*
     // Override to support conditional editing of the table view.

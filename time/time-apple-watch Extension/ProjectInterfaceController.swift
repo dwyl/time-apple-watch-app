@@ -189,6 +189,8 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         totalTime += 1.0
         
         if totalTime == 1500 {
+            
+            WKInterfaceDevice.current().play(.notification)
             let titleOfAlert = "Take a break?"
             let messageOfAlert = "it's been 25 mins"
             self.presentAlert(withTitle: titleOfAlert, message: messageOfAlert, preferredStyle: .alert, actions: [WKAlertAction(title: "OK", style: .default) {
