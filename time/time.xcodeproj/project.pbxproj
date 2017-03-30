@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */; };
+		0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */; };
+		0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */; };
+		0D1D193A1E796B36003C9B39 /* TaskListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19391E796B36003C9B39 /* TaskListTableViewCell.swift */; };
 		0D2038091E6D82FD008CB3F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */; };
 		0D20380E1E6D82FD008CB3F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D20380C1E6D82FD008CB3F4 /* Main.storyboard */; };
 		0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */; };
@@ -16,6 +20,20 @@
 		0D20382C1E6D82FD008CB3F4 /* timeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20382B1E6D82FD008CB3F4 /* timeUITests.swift */; };
 		0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */; };
 		0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */; };
+		0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */; };
+		0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */; };
+		0D662CE21E70537900AFDE32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D662CE11E70537900AFDE32 /* Task.swift */; };
+		0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */; };
+		0DC628C11E7C3F7C00B47419 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628BF1E7C3F7C00B47419 /* Interface.storyboard */; };
+		0DC628C31E7C3F7C00B47419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628C21E7C3F7C00B47419 /* Assets.xcassets */; };
+		0DC628CA1E7C3F7C00B47419 /* time-apple-watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0DC628D11E7C3F7C00B47419 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D01E7C3F7C00B47419 /* InterfaceController.swift */; };
+		0DC628D31E7C3F7C00B47419 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */; };
+		0DC628D51E7C3F7C00B47419 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D41E7C3F7C00B47419 /* NotificationController.swift */; };
+		0DC628D71E7C3F7C00B47419 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */; };
+		0DC628DD1E7C3F7C00B47419 /* time-apple-watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */; };
+		0DC628E71E7D266C00B47419 /* ProjectInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */; };
+		0DC628E91E80078B00B47419 /* ProjectRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628E81E80078B00B47419 /* ProjectRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +51,52 @@
 			remoteGlobalIDString = 0D2038041E6D82FD008CB3F4;
 			remoteInfo = time;
 		};
+		0DC628CB1E7C3F7C00B47419 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D2037FD1E6D82FD008CB3F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DC628C81E7C3F7C00B47419;
+			remoteInfo = "time-apple-watch Extension";
+		};
+		0DC628DB1E7C3F7C00B47419 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D2037FD1E6D82FD008CB3F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DC628BC1E7C3F7C00B47419;
+			remoteInfo = "time-apple-watch";
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0DC628E31E7C3F7C00B47419 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0DC628CA1E7C3F7C00B47419 /* time-apple-watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DC628E51E7C3F7C00B47419 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				0DC628DD1E7C3F7C00B47419 /* time-apple-watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTaskViewController.swift; sourceTree = "<group>"; };
+		0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0D1D19391E796B36003C9B39 /* TaskListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListTableViewCell.swift; sourceTree = "<group>"; };
 		0D2038051E6D82FD008CB3F4 /* time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = time.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D20380D1E6D82FD008CB3F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +112,23 @@
 		0D20382D1E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksTableViewController.swift; path = ../TasksTableViewController.swift; sourceTree = "<group>"; };
 		0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
+		0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddTaskViewController.swift; path = ../AddTaskViewController.swift; sourceTree = "<group>"; };
+		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
+		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "time-apple-watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC628C01E7C3F7C00B47419 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		0DC628C21E7C3F7C00B47419 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0DC628C41E7C3F7C00B47419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "time-apple-watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC628CF1E7C3F7C00B47419 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		0DC628D01E7C3F7C00B47419 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		0DC628D41E7C3F7C00B47419 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		0DC628DA1E7C3F7C00B47419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectInterfaceController.swift; sourceTree = "<group>"; };
+		0DC628E81E80078B00B47419 /* ProjectRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,15 +153,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DC628C61E7C3F7C00B47419 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D1D19341E7956F4003C9B39 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */,
+				0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */,
+				0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
 		0D2037FC1E6D82FD008CB3F4 = {
 			isa = PBXGroup;
 			children = (
 				0D2038071E6D82FD008CB3F4 /* time */,
 				0D20381F1E6D82FD008CB3F4 /* timeTests */,
 				0D20382A1E6D82FD008CB3F4 /* timeUITests */,
+				0DC628BE1E7C3F7C00B47419 /* time-apple-watch */,
+				0DC628CD1E7C3F7C00B47419 /* time-apple-watch Extension */,
 				0D2038061E6D82FD008CB3F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,6 +191,8 @@
 				0D2038051E6D82FD008CB3F4 /* time.app */,
 				0D20381C1E6D82FD008CB3F4 /* timeTests.xctest */,
 				0D2038271E6D82FD008CB3F4 /* timeUITests.xctest */,
+				0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */,
+				0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,14 +200,19 @@
 		0D2038071E6D82FD008CB3F4 /* time */ = {
 			isa = PBXGroup;
 			children = (
+				0D1D19341E7956F4003C9B39 /* Core Data */,
 				0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */,
 				0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */,
 				0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */,
+				0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */,
+				0D662CE11E70537900AFDE32 /* Task.swift */,
 				0D20380C1E6D82FD008CB3F4 /* Main.storyboard */,
+				0D1D19391E796B36003C9B39 /* TaskListTableViewCell.swift */,
+				0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */,
 				0D2038121E6D82FD008CB3F4 /* Assets.xcassets */,
 				0D2038141E6D82FD008CB3F4 /* LaunchScreen.storyboard */,
 				0D2038171E6D82FD008CB3F4 /* Info.plist */,
-				0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */,
+				0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */,
 			);
 			path = time;
 			sourceTree = "<group>";
@@ -131,6 +235,40 @@
 			path = timeUITests;
 			sourceTree = "<group>";
 		};
+		0DC628BE1E7C3F7C00B47419 /* time-apple-watch */ = {
+			isa = PBXGroup;
+			children = (
+				0DC628BF1E7C3F7C00B47419 /* Interface.storyboard */,
+				0DC628C21E7C3F7C00B47419 /* Assets.xcassets */,
+				0DC628C41E7C3F7C00B47419 /* Info.plist */,
+			);
+			path = "time-apple-watch";
+			sourceTree = "<group>";
+		};
+		0DC628CD1E7C3F7C00B47419 /* time-apple-watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */,
+				0DC628D01E7C3F7C00B47419 /* InterfaceController.swift */,
+				0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */,
+				0DC628D41E7C3F7C00B47419 /* NotificationController.swift */,
+				0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */,
+				0DC628DA1E7C3F7C00B47419 /* Info.plist */,
+				0DC628CE1E7C3F7C00B47419 /* Supporting Files */,
+				0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */,
+				0DC628E81E80078B00B47419 /* ProjectRowController.swift */,
+			);
+			path = "time-apple-watch Extension";
+			sourceTree = "<group>";
+		};
+		0DC628CE1E7C3F7C00B47419 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0DC628CF1E7C3F7C00B47419 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,10 +279,12 @@
 				0D2038011E6D82FD008CB3F4 /* Sources */,
 				0D2038021E6D82FD008CB3F4 /* Frameworks */,
 				0D2038031E6D82FD008CB3F4 /* Resources */,
+				0DC628E51E7C3F7C00B47419 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0DC628DC1E7C3F7C00B47419 /* PBXTargetDependency */,
 			);
 			name = time;
 			productName = time;
@@ -187,6 +327,40 @@
 			productReference = 0D2038271E6D82FD008CB3F4 /* timeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		0DC628BC1E7C3F7C00B47419 /* time-apple-watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DC628E41E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch" */;
+			buildPhases = (
+				0DC628BB1E7C3F7C00B47419 /* Resources */,
+				0DC628E31E7C3F7C00B47419 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0DC628CC1E7C3F7C00B47419 /* PBXTargetDependency */,
+			);
+			name = "time-apple-watch";
+			productName = "time-apple-watch";
+			productReference = 0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		0DC628C81E7C3F7C00B47419 /* time-apple-watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DC628E21E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch Extension" */;
+			buildPhases = (
+				0DC628C51E7C3F7C00B47419 /* Sources */,
+				0DC628C61E7C3F7C00B47419 /* Frameworks */,
+				0DC628C71E7C3F7C00B47419 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "time-apple-watch Extension";
+			productName = "time-apple-watch Extension";
+			productReference = 0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -199,6 +373,7 @@
 				TargetAttributes = {
 					0D2038041E6D82FD008CB3F4 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = UA39PFNU5W;
 						ProvisioningStyle = Automatic;
 					};
 					0D20381B1E6D82FD008CB3F4 = {
@@ -210,6 +385,16 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0D2038041E6D82FD008CB3F4;
+					};
+					0DC628BC1E7C3F7C00B47419 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = UA39PFNU5W;
+						ProvisioningStyle = Automatic;
+					};
+					0DC628C81E7C3F7C00B47419 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = UA39PFNU5W;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -229,6 +414,8 @@
 				0D2038041E6D82FD008CB3F4 /* time */,
 				0D20381B1E6D82FD008CB3F4 /* timeTests */,
 				0D2038261E6D82FD008CB3F4 /* timeUITests */,
+				0DC628BC1E7C3F7C00B47419 /* time-apple-watch */,
+				0DC628C81E7C3F7C00B47419 /* time-apple-watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -258,6 +445,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DC628BB1E7C3F7C00B47419 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DC628C31E7C3F7C00B47419 /* Assets.xcassets in Resources */,
+				0DC628C11E7C3F7C00B47419 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DC628C71E7C3F7C00B47419 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -267,8 +471,15 @@
 			files = (
 				0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */,
 				0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */,
+				0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */,
 				0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */,
+				0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */,
+				0D1D193A1E796B36003C9B39 /* TaskListTableViewCell.swift in Sources */,
 				0D2038091E6D82FD008CB3F4 /* AppDelegate.swift in Sources */,
+				0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */,
+				0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */,
+				0D662CE21E70537900AFDE32 /* Task.swift in Sources */,
+				0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +499,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DC628C51E7C3F7C00B47419 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DC628D51E7C3F7C00B47419 /* NotificationController.swift in Sources */,
+				0DC628E71E7D266C00B47419 /* ProjectInterfaceController.swift in Sources */,
+				0DC628D71E7C3F7C00B47419 /* ComplicationController.swift in Sources */,
+				0DC628D31E7C3F7C00B47419 /* ExtensionDelegate.swift in Sources */,
+				0DC628E91E80078B00B47419 /* ProjectRowController.swift in Sources */,
+				0DC628D11E7C3F7C00B47419 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -300,6 +524,16 @@
 			isa = PBXTargetDependency;
 			target = 0D2038041E6D82FD008CB3F4 /* time */;
 			targetProxy = 0D2038281E6D82FD008CB3F4 /* PBXContainerItemProxy */;
+		};
+		0DC628CC1E7C3F7C00B47419 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DC628C81E7C3F7C00B47419 /* time-apple-watch Extension */;
+			targetProxy = 0DC628CB1E7C3F7C00B47419 /* PBXContainerItemProxy */;
+		};
+		0DC628DC1E7C3F7C00B47419 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DC628BC1E7C3F7C00B47419 /* time-apple-watch */;
+			targetProxy = 0DC628DB1E7C3F7C00B47419 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -318,6 +552,14 @@
 				0D2038151E6D82FD008CB3F4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0DC628BF1E7C3F7C00B47419 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DC628C01E7C3F7C00B47419 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -420,6 +662,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = UA39PFNU5W;
 				INFOPLIST_FILE = time/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time;
@@ -432,6 +677,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = UA39PFNU5W;
 				INFOPLIST_FILE = time/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time;
@@ -494,6 +742,76 @@
 			};
 			name = Release;
 		};
+		0DC628DE1E7C3F7C00B47419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = UA39PFNU5W;
+				IBSC_MODULE = time_apple_watch_Extension;
+				INFOPLIST_FILE = "time-apple-watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		0DC628DF1E7C3F7C00B47419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = UA39PFNU5W;
+				IBSC_MODULE = time_apple_watch_Extension;
+				INFOPLIST_FILE = "time-apple-watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
+		0DC628E01E7C3F7C00B47419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = UA39PFNU5W;
+				INFOPLIST_FILE = "time-apple-watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		0DC628E11E7C3F7C00B47419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				DEVELOPMENT_TEAM = UA39PFNU5W;
+				INFOPLIST_FILE = "time-apple-watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,6 +831,7 @@
 				0D2038321E6D82FD008CB3F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0D2038331E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "timeTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +840,7 @@
 				0D2038351E6D82FD008CB3F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0D2038361E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "timeUITests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +849,25 @@
 				0D2038381E6D82FD008CB3F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DC628E21E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DC628E01E7C3F7C00B47419 /* Debug */,
+				0DC628E11E7C3F7C00B47419 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DC628E41E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DC628DE1E7C3F7C00B47419 /* Debug */,
+				0DC628DF1E7C3F7C00B47419 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>time-apple-watch (Complication).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>time-apple-watch (Notification).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>time-apple-watch 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>time-apple-watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>time.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +43,11 @@
 			<true/>
 		</dict>
 		<key>0D2038261E6D82FD008CB3F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0DC628BC1E7C3F7C00B47419</key>
 		<dict>
 			<key>primary</key>
 			<true/>
