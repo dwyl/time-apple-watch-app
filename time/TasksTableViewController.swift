@@ -11,23 +11,43 @@ import Foundation
 import CoreData
 import WatchConnectivity
 
-//// MARK: WCSessionDelegate
-//extension TasksTableViewController: WCSessionDelegate {
-//    /** Called when all delegate callbacks for the previously selected watch has occurred. The session can be re-activated for the now selected watch using activateSession. */
-//   }
-
 
 class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        
+        let view = setNavbarLogo()
+        self.navigationItem.titleView = view
+        
+        configureWCSession() // activate the WCSession
+        projects = fetchProjectNames(managedObjectContext: managedObjectContext!) // fetch the list of project names
+        // SETTING UP THE STORE
+        setupStore()
+        // create a listerner that will reload the list if a new project is added to the list
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        
+    }
 
+
+
+    // MARK: SETUP
+    // Here you'll find all the initialising for this particular view controller (Home Page Table View)
+    
+    // Create a session so that we can interact with the Apple Watch at a later time using it.
     fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
-    var projects: [Project] = []
-    var objects:[[String:AnyObject]]?
-    var projectNames = [String]()
-    var uniqueProjects = [String]()
-    var store = [String: Dictionary<String, Any>]()
+    // setup the managed context required for connecting with the core data
+    var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+
+    var projects: [Project] = [] // List of projects as an array. These are of the class Project from Code Data
+    var projectNames = [String]() // List of project names.
+    var uniqueProjects = [String]() // List of unique project names
+    var store = [String: Dictionary<String, Any>]() // Data structure that contains information about each individual project as shown in the example below
     /*
-     
+     This is how the localStore will look like.
      var store =
      {
         "ios" : {
@@ -43,10 +63,13 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
      }
      */
     
-//    var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    
+    
     
     
     //WATCH
+    
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -55,36 +78,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
         configureWCSession()
     }
     
     fileprivate func configureWCSession() {
         session?.delegate = self;
         session?.activate()
-    }
-
-    
-    //PHONE
-    
-    @available(iOS 9.3, *)
-    public func sessionDidDeactivate(_ session: WCSession) {
-        //Dummy Implementation
-        print("")
-    }
-    
-    /** Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled, but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed. */
-    @available(iOS 9.3, *)
-    public func sessionDidBecomeInactive(_ session: WCSession) {
-        //Dummy Implementation
-        print("")
-    }
-    
-    /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
-    @available(iOS 9.3, *)
-    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
-        //Dummy Implementation
     }
     
     
@@ -97,16 +96,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             }
             if (message["startTimerFor"] as? String) != nil {
                 
-                // save the given item to the coredata create a new field called fromAppleWatch which we have to set to true here. 
-                guard let appDelegate =
-                    UIApplication.shared.delegate as? AppDelegate else {
-                        return
-                }
+                // save the given item to the coredata create a new field called fromAppleWatch which we have to set to true here.
                 
-                let managedContext =
-                    appDelegate.persistentContainer.viewContext
-                
-                if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext)  as? Project {
+                if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.managedObjectContext!)  as? Project {
                     // setting from apple watch to true as this comes from the apple watch
                     newTaskInProject.from_apple_watch = true
                     newTaskInProject.project_name = message["startTimerFor"] as! String?
@@ -116,24 +108,17 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 }
                 // 4
                 do {
-                    try managedContext.save()
+                    try self.managedObjectContext!.save()
                     replyHandler(["savedToCoreData": true])
                 } catch let error as NSError {
                     print("Could not save. \(error), \(error.userInfo)")
                 }
-
+                
             }
             if (message["stopTimerFor"] as? String) != nil {
                 
                 let project_name = message["stopTimerFor"] as! String?
                 let total_task_time = message["total_task_time"] as! Double
-                guard let appDelegate =
-                    UIApplication.shared.delegate as? AppDelegate else {
-                        return
-                }
-                
-                let managedContext =
-                    appDelegate.persistentContainer.viewContext
                 
                 let fetchRequest =  NSFetchRequest<Project>(entityName: "Project")
                 //        let predicate = NSPredicate(format: "any project_name = %@", name)
@@ -145,9 +130,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 do {
                     fetchRequest.predicate = predicateCompound
                     
-                    let project = try managedContext.fetch(fetchRequest)
+                    let project = try self.managedObjectContext!.fetch(fetchRequest)
                     for p in project {
-                        print("\(p.total_task_time), \(p.task_name)")
+                        print("\(p.total_task_time)")
                     }
                     
                     print("\(project)<<<< THIS IS THE PROJECT FETCHED FROM COREDATA")
@@ -161,7 +146,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     do {
                         self.loadList()
                         replyHandler(["savedToCoreData": "YOU SAVED TO THE DB"])
-                        try managedContext.save()
+                        try self.managedObjectContext!.save()
                         
                     } catch let error as NSError {
                         print("unable to save project. \(error)")
@@ -175,60 +160,32 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             
         }
     }
+
     
+    //PHONE
     
-//  Dummy alert function that's job is to show a pop up.
-    func sayHi(){
-        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    @available(iOS 9.3, *)
+    public func sessionDidDeactivate(_ session: WCSession) {
+        //maybe we want to do something when the session between the two devices deactivates
+        // it can be done here
+    
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let image : UIImage = UIImage(named: "dwyl-heart-logo")!
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = image
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        view.addSubview(imageView)
-        self.navigationItem.titleView = view
-        
-         configureWCSession()
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-//        let projects = Project.fetchListOfProjectsFromDatabase(inManagedObjectContext: self.managedObjectContext!)
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity( forEntityName: "Project",  in:managedContext )
-        let request = NSFetchRequest<NSFetchRequestResult>()
-        request.entity = entity
-        request.resultType = .dictionaryResultType
-        request.returnsDistinctResults = true
-        request.propertiesToFetch = [ "project_name" ]
-        
-        let fetchRequest =
-            NSFetchRequest<Project>(entityName: "Project")
-        
-//         fetching all information from the db
-        do {
-            projects = try managedContext.fetch(fetchRequest)
+    /** Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled, but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed. */
+    
+    
+    @available(iOS 9.3, *)
+    public func sessionDidBecomeInactive(_ session: WCSession) {
 
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        // SETTING UP THE STORE
-        setupStore()
-
-        // create a listerner that will reload the list if a new project is added to the list
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        
     }
+    
+    /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
+    @available(iOS 9.3, *)
+    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    
+    }
+    
+
     
     func setupStore() {
 
@@ -273,21 +230,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     func loadList(){
         //load data here
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        //2
+
         let fetchRequest =
             NSFetchRequest<Project>(entityName: "Project")
         
-        //3
         do {
-            projects = try managedContext.fetch(fetchRequest)
+            projects = try managedObjectContext!.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }

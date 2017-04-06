@@ -1,17 +1,15 @@
 //
-//  timeTests.swift
-//  timeTests
+//  TaskTableViewControllerTest.swift
+//  time
 //
-//  Created by Sohil Pandya on 06/03/2017.
+//  Created by Sohil Pandya on 06/04/2017.
 //  Copyright © 2017 dwyl. All rights reserved.
 //
 
 import XCTest
 @testable import time
 
-
-class timeTests: XCTestCase {
-    
+class TaskTableViewControllerTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -22,14 +20,8 @@ class timeTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+
     
-    func testExample() {
-        
-        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
-        let tableViewController = navigationController.viewControllers[0] as! TasksTableViewController
-        
-    }
     
     
 }

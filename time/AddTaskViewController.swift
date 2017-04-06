@@ -21,19 +21,8 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         taskName.delegate = self
         updateSaveButtonState()
         
-        let image : UIImage = UIImage(named: "dwyl-heart-logo")!
-        
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = image
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        
-        view.addSubview(imageView)
-        
+        let view = setNavbarLogo()
         self.navigationItem.titleView = view
-        // Do any additional setup after loading the view.
     }
 
     
