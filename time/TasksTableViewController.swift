@@ -15,6 +15,7 @@ import WatchConnectivity
 class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,8 +32,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
     }
-
-
 
     // MARK: SETUP
     // Here you'll find all the initialising for this particular view controller (Home Page Table View)
@@ -306,16 +305,10 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         }
         
         cell.backgroundColor = UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
-
         cell.taskName.text = project_name
-        let seconds = (total_time.truncatingRemainder(dividingBy: 3600)).truncatingRemainder(dividingBy: 60)
-        let minutes = (total_time.truncatingRemainder(dividingBy: 3600)) / 60
-        let hours = (total_time / 3600)
-        print("\(total_time)totalTime")
-        print("\(hours)HH\(minutes)MM\(seconds)SS")
 
         secondsToHsMsSs(seconds: Int(total_time), result: {(hours, minutes, seconds) in
-            cell.taskTime.text = "\(self.timeToText(s: hours))h\(self.timeToText(s: minutes))m\(self.timeToText(s: seconds))s"
+            cell.taskTime.text = "\(timeToText(s: hours))h\(timeToText(s: minutes))m\(timeToText(s: seconds))s"
         })
         
 
@@ -323,22 +316,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         return cell
     }
     
-    func timeToText(s: Int) -> String {
-        return s < 10 ? "0\(s)" : "\(s)"
-    }
-    
-    func secondsToHsMsSs(seconds : Int, result: @escaping (Int, Int, Int)->()) {
-        result(seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -352,28 +329,17 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             // also remove the item from the store
             store.removeValue(forKey: project)
 
-            
-            // delete all instances of the project from the db
-            
-            guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-                    return
-            }
-            
-            let managedContext =
-                appDelegate.persistentContainer.viewContext
-            
             let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
             fetchRequest.predicate = NSPredicate(format: "project_name == %@", project)
             
             //fetch all items with the project name then loop through and delete them.
             do {
-                let projectList = try managedContext.fetch(fetchRequest)
+                let projectList = try managedObjectContext!.fetch(fetchRequest)
                 for project in projectList {
-                    managedContext.delete(project)
+                    managedObjectContext!.delete(project)
                 }
                 // have to save otherwise the deleted items are not removed from the db.
-                try managedContext.save()
+                try managedObjectContext!.save()
                 
                 // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
                 sendDataToWatch()
@@ -422,30 +388,5 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         loadList()
         tableView.reloadData()
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

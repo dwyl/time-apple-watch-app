@@ -10,9 +10,9 @@ import WatchKit
 import Foundation
 import WatchConnectivity
 
-
 class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
-
+    
+    // MARK: SETUP
     @IBOutlet var projectTable: WKInterfaceTable!
     var store = [String: Dictionary<String, Any> ]()
     var uniqueProjects = [String]()
@@ -28,8 +28,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     var currentTimerForProjectName = ""
     
     //MARK: Watch Connection
-    
-    
     // set the wcsession as a method we can use in this file.
     fileprivate let session : WCSession? = WCSession.isSupported() ? WCSession.default() : nil
 
@@ -62,11 +60,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         }
     }
     
-
-    func send(fromProject:String){
-        
-    }
-    
     func fetchDataFromWatch (session: WCSession) {
         
         // Once the session is active, send a message to the iphone
@@ -93,7 +86,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
             if (message["project"]) != nil {
                 let receivedListOfUniqueProjects = message["uniqueProjects"] as! [String]
                 
-                print("Instant Message")
                 if self.uniqueProjects == receivedListOfUniqueProjects {
                     // if the list of items being received are the same then we do not want to reload the data.
                     replyHandler(["set": true])
@@ -111,7 +103,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        print("YOU HAVE STARTED THE WATCH AGAIN!")
         fetchDataFromWatch(session: (session)!)
 
     }
@@ -131,10 +122,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         // if the user selects a given row what should happen next?
         if let cell = projectTable.rowController(at: rowIndex) as? ProjectRowController {
             //currently not much apart from changing the background color but this is where a lot of work will need to take place.
-
             // if timer is not running then start the timer
-
-            print("\(isTimerRunning)ISTIMERRUNNING")
             if !isTimerRunning {
                 cell.startTimerForRow()
                 startTimer(forProject: uniqueProjects[rowIndex])
@@ -145,8 +133,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                     // stop the timer UI
                     // set isTimerRunning to false
                 if (currentTimerForProjectName == uniqueProjects[rowIndex]) {
-                    print("\(currentTimerForProjectName) Project NAME CURRENT")
-                    print("\(uniqueProjects[rowIndex]) selected Project Name")
                     cell.stopTimerForRow()
                     stopTimer(forProject: uniqueProjects[rowIndex], totalTime: totalTime)
                     currentTimerForProjectName = uniqueProjects[rowIndex]
@@ -161,15 +147,12 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                 // reset the timer to 0.0
                 else {
                     stopTimer(forProject: currentTimerForProjectName, totalTime: totalTime)
-                    
                     // instead of reloading the data we can target the specific
                     let indexOf = uniqueProjects.index(of: currentTimerForProjectName)
                     if let cell = projectTable.rowController(at: indexOf!) as? ProjectRowController {
                         cell.ProjectName.setText(uniqueProjects[indexOf!])
                         cell.stopTimerForRow()
                     }
-                    print("\(uniqueProjects[indexOf!]) OLD ROW")
-                    print("\(uniqueProjects[rowIndex]) NEW ROW")
                     startTimer(forProject: uniqueProjects[rowIndex])
                     cell.startTimerForRow()
                 }
@@ -186,7 +169,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         // when the timer is not running
         // start the timer
         currentTimerForProjectName = project
-        print("YOU ARE IN START TIMER \(project) <<PROJECT and \(currentTimerForProjectName) CURRENT TIMER FOR PROJECT NAME<<<<<")
         // send a message to the phone which will save this data into the core data
         session?.sendMessage(["startTimerFor": project], replyHandler: {
             replyData in
@@ -206,8 +188,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "total_task_time": totalTime], replyHandler: {
             replyData in
             // if the data is set then we can reset the totalTime to 0
-            print("You have sent the message!!! \(String(describing: replyData["savedToCoreData"]))")
-//                self.timerTotal.invalidate()
                 self.totalTime = 0.0
         }, errorHandler: { error in
             print("could not send name of the project for which the timer has started")
@@ -219,7 +199,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         totalTime += 1.0
         print("You are in here")
         if totalTime == 1500 {
-            
             WKInterfaceDevice.current().play(.notification)
             let titleOfAlert = "Take a break?"
             let messageOfAlert = "it's been 25 mins"
@@ -228,11 +207,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                 }]
             )
         }
-
-        // if time reaches 25 mins, we can send a notification to the watch saying please take a break???
-        // option 1 to take a break
-        // option 2 to continue...
-        
         
     }
 

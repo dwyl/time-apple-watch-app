@@ -23,7 +23,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var secondsLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
     @IBOutlet weak var listOfTasks: UITableView!
@@ -74,7 +73,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         secondsLabel.text = String(format: "%02d", seconds)
         minutesLabel.text = String(format: "%02d", minutes)
         playButton.isEnabled = true
-        pauseButton.isEnabled = false
         isRunning = false
       
         // fetches items from database and then loads it into the view
@@ -98,7 +96,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewTaskViewController.updateTimer), userInfo: nil, repeats: true)
             
             playButton.isEnabled = false
-            pauseButton.isEnabled = true
             isRunning = true
         }
     }
@@ -122,7 +119,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func pauseTimer(_ sender: UIButton) {
         
         playButton.isEnabled = true
-        pauseButton.isEnabled = false
         timer.invalidate()
         isRunning = false
     }
@@ -166,7 +162,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         secondsLabel.text = String(format: "%02d", seconds)
         minutesLabel.text = String(format: "%02d", minutes)
         playButton.isEnabled = true
-        pauseButton.isEnabled = false
     }
     
     func updateTableView (name: String) {
@@ -180,11 +175,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             fetchRequest.predicate = predicateCompound
             
             projects = try managedObjectContext!.fetch(fetchRequest)
-            
-            
-            for project in projects {
-//                print("\(project.total_task_time)")
-            }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -194,7 +184,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func updateTimer () {
         
-        if seconds == 5 {
+        if seconds == 59 {
             secondsLabel.text = "00"
             minutes += 1
             minutesLabel.text = String(format: "%02d", minutes)
@@ -208,8 +198,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         }
 
     }
-
-    
     
     // TABLE VIEW 
     
@@ -236,17 +224,5 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
         
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
