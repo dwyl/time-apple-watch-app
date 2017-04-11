@@ -21,8 +21,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     //MARK: Timer Related Items
     var isTimerRunning = false
-    let startImage = UIImage(named: "fa-start")
-    let stopImage = UIImage(named: "fa-stop")
     var timerTotal = Timer()
     var totalTime = Double()
     var currentTimerForProjectName = ""

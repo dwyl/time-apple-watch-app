@@ -219,7 +219,10 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         let task = projects[indexPath.row]
         
         cell.taskName.text = task.task_name ?? task.project_name
-        cell.totalTaskTime.text = String(task.total_task_time)
+        secondsToHsMsSs(seconds: Int(task.total_task_time), result: {(hours, minutes, seconds) in
+            cell.totalTaskTime.text = "\(timeToText(s: hours))h\(timeToText(s: minutes))m\(timeToText(s: seconds))s"
+        })
+        
         
         return cell
         
