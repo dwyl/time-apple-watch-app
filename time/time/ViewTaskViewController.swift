@@ -32,7 +32,9 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     var seconds = 00
     var minutes = 00
     var isRunning = false
-    var totalTimeInSeconds = 00
+    
+    var watchTimer = Timer()
+    
 
     //initialise managecontextobject
     var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
@@ -67,6 +69,8 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         // UPDATE VIEW
 
         print("\(project_name)")
+        isTaskRunningOnWatch(project_name: project_name)
+
         task.text = project_name
         taskBackground.backgroundColor = UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
         
@@ -82,6 +86,56 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Timer
+    
+    // If a timer was started on the watch, the timer should represent that time.
+    
+    // fetch the list of tasks that are currently running on the watch for this given project.
+    func isTaskRunningOnWatch (project_name: String) {
+        print("You are in isTaskRunningOnWatch <<<<<< \(project_name)")
+        let fetchRequest = NSFetchRequest<Project>(entityName:"Project")
+        let predicate1 = NSPredicate(format: "project_name == %@", project_name)
+        let predicate2 = NSPredicate(format: "from_apple_watch == YES")
+        let predicate3 = NSPredicate(format: "is_task_running == YES")
+        let predicateCompound = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate2, predicate3])
+        
+        do {
+            fetchRequest.predicate = predicateCompound
+            
+            let project = try self.managedObjectContext!.fetch(fetchRequest)
+            
+            for p in project {
+                
+                // if a project is returned
+                // we need to capture the time difference
+                let start_time = p.task_start_date!
+                let end_time = Date() as NSDate
+                //roudning the total time
+                let total_time = CFDateGetTimeIntervalSinceDate(end_time, start_time).rounded()
+                seconds = Int(total_time)
+                // start the timer from the time difference
+                watchTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+                // enable stop button and disable play button
+                playButton.isEnabled = false
+                stopButton.isEnabled = true
+                
+                
+                // if a user stops the timer on the watch
+                // send a notification from tableview to this detailed view
+                // reset the timer.
+                
+                
+                
+                
+                
+                print("YOU ARE in P loop \(total_time)")
+                print("\(String(describing: p.task_start_date))<<<<<<<")
+            }
+        } catch let error as NSError {
+            print("Error, not fetched the data from CoreData \(error.userInfo)")
+        }
     }
     
     @IBAction func startTimer(_ sender: UIButton) {
@@ -144,7 +198,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             let task_end_date = Date()
             project.first?.task_end_date = task_end_date as NSDate?
             project.first?.is_task_running = false
-            project.first?.total_task_time = Double(totalTimeInSeconds)
+            project.first?.total_task_time = Double(seconds)
             
             
             do {
@@ -183,20 +237,9 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func updateTimer () {
-        
-        if seconds == 59 {
-            secondsLabel.text = "00"
-            minutes += 1
-            minutesLabel.text = String(format: "%02d", minutes)
-            seconds = 00
-            totalTimeInSeconds += 1
-        } else {
-            seconds += 1
-            minutesLabel.text = String(format: "%02d", minutes)
-            secondsLabel.text = String(format: "%02d", seconds)
-            totalTimeInSeconds += 1
-        }
-
+        seconds += 1
+        secondsLabel.text = String(format: "%02d", (seconds % 3600) % 60)
+        minutesLabel.text = String(format: "%02d", (seconds % 3600) / 60)
     }
     
     // TABLE VIEW 

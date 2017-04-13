@@ -99,6 +99,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 
                 if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.managedObjectContext!)  as? Project {
                     // setting from apple watch to true as this comes from the apple watch
+                    newTaskInProject.task_start_date = Date() as NSDate
                     newTaskInProject.from_apple_watch = true
                     newTaskInProject.project_name = message["startTimerFor"] as! String?
                     newTaskInProject.start_time = Int64(NSTimeIntervalSince1970)

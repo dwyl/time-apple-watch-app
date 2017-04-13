@@ -67,7 +67,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                                 // we are setting the store and unique projects once we recive them from the iPhone
                                 self.store = replyData["project"] as! [String : Dictionary<String, Any>]
                                 self.uniqueProjects = replyData["uniqueProjects"] as! [String]
-                                print("store \(self.uniqueProjects)>>>>>>>>>>>>")
                                 self.reloadData()
                                 
         }, errorHandler: { error in

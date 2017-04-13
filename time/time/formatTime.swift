@@ -16,3 +16,7 @@ func timeToText(s: Int) -> String {
 func secondsToHsMsSs(seconds : Int, result: @escaping (Int, Int, Int)->()) {
     result(seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
 }
+
+
+
+
