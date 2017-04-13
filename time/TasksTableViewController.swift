@@ -31,6 +31,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         // create a listerner that will reload the list if a new project is added to the list
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
+        
+        
     }
 
     // MARK: SETUP
@@ -116,6 +118,11 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 
             }
             if (message["stopTimerFor"] as? String) != nil {
+                
+                // send message to viewTaskViewController to stop the timer
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
+                
+                
                 
                 let project_name = message["stopTimerFor"] as! String?
                 let total_task_time = message["total_task_time"] as! Double

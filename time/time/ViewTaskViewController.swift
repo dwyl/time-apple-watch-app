@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import Foundation
 
 class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
 
     
     var receivedData = [String: Dictionary<String, Any>]()
@@ -32,6 +34,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     var seconds = 00
     var minutes = 00
     var isRunning = false
+    var isTimerRunningOnWatch = false
     
     var watchTimer = Timer()
     
@@ -50,6 +53,12 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             green = project.value["green"] as! Double
             blue = project.value["blue"] as! Double
         }
+        
+        
+        // if a user stops the timer on the watch
+        // send a notification from tableview to this detailed view
+        // reset the timer.
+        NotificationCenter.default.addObserver(self, selector: #selector(stopTimerOnPhone), name: NSNotification.Name(rawValue:"stopPhoneTimer"), object: nil)
         
         
         //TABLE RELATED
@@ -88,6 +97,11 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+//    NotificationCenter.default.addObserver(self, selector: #selector(resetTimerForPhone), name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
+    
+    
+    
+    
     // MARK: Timer
     
     // If a timer was started on the watch, the timer should represent that time.
@@ -106,32 +120,27 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             
             let project = try self.managedObjectContext!.fetch(fetchRequest)
             
-            for p in project {
-                
-                // if a project is returned
-                // we need to capture the time difference
-                let start_time = p.task_start_date!
-                let end_time = Date() as NSDate
-                //roudning the total time
-                let total_time = CFDateGetTimeIntervalSinceDate(end_time, start_time).rounded()
-                seconds = Int(total_time)
-                // start the timer from the time difference
-                watchTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-                // enable stop button and disable play button
-                playButton.isEnabled = false
-                stopButton.isEnabled = true
-                
-                
-                // if a user stops the timer on the watch
-                // send a notification from tableview to this detailed view
-                // reset the timer.
-                
-                
-                
-                
-                
-                print("YOU ARE in P loop \(total_time)")
-                print("\(String(describing: p.task_start_date))<<<<<<<")
+            if (project.count == 1) {
+                for p in project {
+                    
+                    // if a project is returned
+                    // we need to capture the time difference
+                    let start_time = p.task_start_date!
+                    let end_time = Date() as NSDate
+                    //roudning the total time
+                    let total_time = CFDateGetTimeIntervalSinceDate(end_time, start_time).rounded()
+                    seconds = Int(total_time)
+                    // start the timer from the time difference
+                    watchTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+                    // enable stop button and disable play button
+                    playButton.isEnabled = false
+                    
+                    // This needs to send a message to the watch so that 
+                    // we can stop the timer for that given project
+                    stopButton.isEnabled = true
+                    isTimerRunningOnWatch = true
+                }
+            
             }
         } catch let error as NSError {
             print("Error, not fetched the data from CoreData \(error.userInfo)")
@@ -179,43 +188,58 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func stopTimer(_ sender: UIButton) {
         
-        isRunning = false
-        timer.invalidate()
         
-        
-        
-        //find the existing item in the database which has a is_task_running for the given project
-        
-        let fetchRequest =
-            NSFetchRequest<Project>(entityName: "Project")
-        fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
-        
-        //3
-        do {
-            let project = try managedObjectContext!.fetch(fetchRequest)
-
-            // now set the task end date, is task running and total task time and then save the project
-            let task_end_date = Date()
-            project.first?.task_end_date = task_end_date as NSDate?
-            project.first?.is_task_running = false
-            project.first?.total_task_time = Double(seconds)
+        if (isTimerRunningOnWatch) {
             
+            // run this if the timer was started on the watch
+            // stop the timer and reset evertything on this page
+            stopTimerOnPhone()
             
+            // if the user decides to stop the watch timer on the phone
+            // send a notification to the app view controller
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue:"timerStoppedOnPhone"), object: nil)
+            // which can then inturn send a message to the apple watch
+            // that can reset the time on the watch
+            
+        } else {
+            
+            isRunning = false
+            timer.invalidate()
+            //find the existing item in the database which has a is_task_running for the given project
+            
+            let fetchRequest =
+                NSFetchRequest<Project>(entityName: "Project")
+            fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+            
+            //3
             do {
-                try managedObjectContext!.save()
-                updateTableView(name: project_name)
+                let project = try managedObjectContext!.fetch(fetchRequest)
+                
+                // now set the task end date, is task running and total task time and then save the project
+                let task_end_date = Date()
+                project.first?.task_end_date = task_end_date as NSDate?
+                project.first?.is_task_running = false
+                project.first?.total_task_time = Double(seconds)
+                
+                
+                do {
+                    try managedObjectContext!.save()
+                    updateTableView(name: project_name)
+                } catch let error as NSError {
+                    print("unable to save project. \(error)")
+                }
             } catch let error as NSError {
-                print("unable to save project. \(error)")
+                print("Could not fetch. \(error), \(error.userInfo)")
             }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            
+            seconds = 00
+            minutes = 00
+            secondsLabel.text = String(format: "%02d", seconds)
+            minutesLabel.text = String(format: "%02d", minutes)
+            playButton.isEnabled = true
+            
         }
-        
-        seconds = 00
-        minutes = 00
-        secondsLabel.text = String(format: "%02d", seconds)
-        minutesLabel.text = String(format: "%02d", minutes)
-        playButton.isEnabled = true
+
     }
     
     func updateTableView (name: String) {
@@ -240,6 +264,17 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         seconds += 1
         secondsLabel.text = String(format: "%02d", (seconds % 3600) % 60)
         minutesLabel.text = String(format: "%02d", (seconds % 3600) / 60)
+    }
+    
+    func stopTimerOnPhone () {
+        print("Timer stoped on the Watch")
+        watchTimer.invalidate()
+        seconds = 00
+        secondsLabel.text = String("00")
+        minutesLabel.text = String("00")
+        playButton.isEnabled = true
+        stopButton.isEnabled = false
+        isTimerRunningOnWatch = false
     }
     
     // TABLE VIEW 
