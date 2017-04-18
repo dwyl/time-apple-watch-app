@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.swift
 //  time
 //
-//  Created by Sohil Pandya on 27/03/2017.
+//  Created by Sohil Pandya on 18/04/2017.
 //  Copyright © 2017 dwyl. All rights reserved.
 //
 
@@ -13,11 +13,12 @@ import CoreData
 extension Project {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Project> {
-        return NSFetchRequest<Project>(entityName: "Project");
+        return NSFetchRequest<Project>(entityName: "Project")
     }
 
     @NSManaged public var blue: Double
     @NSManaged public var end_time: Int64
+    @NSManaged public var from_apple_watch: Bool
     @NSManaged public var green: Double
     @NSManaged public var id: Int16
     @NSManaged public var is_task_running: Bool
@@ -29,6 +30,6 @@ extension Project {
     @NSManaged public var task_name: String?
     @NSManaged public var task_start_date: NSDate?
     @NSManaged public var total_task_time: Double
-    @NSManaged public var from_apple_watch: Bool
+    @NSManaged public var ui_color: NSObject?
 
 }

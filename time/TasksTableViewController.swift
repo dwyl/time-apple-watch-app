@@ -218,7 +218,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             
             // for each unique project name add the total time and fetch the colors for them
             for task in projects {
-                if task.blue != 0.0 && task.red != 0.0 && task.green != 0.0 {
+                if (project_name == task.project_name && task.blue != 0.0 && task.red != 0.0 && task.green != 0.0) {
+                    print("\(task.red)RED for \(task.project_name)")
                     red = task.red
                     green = task.green
                     blue = task.blue
@@ -275,8 +276,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     // WATCH MESSAGE FUNCTIONS
     
     func sendDataToWatch() {
-        print("\(store)")
-        print("\(uniqueProjects)")
 
         session!.sendMessage(["project": self.store, "uniqueProjects": self.uniqueProjects],
                              replyHandler: { replyData in print("Got it?") } ,
@@ -328,14 +327,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             }
         }
         
-        cell.backgroundColor = UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
+        cell.backgroundColor = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1)
         cell.taskName.text = project_name
 
         secondsToHsMsSs(seconds: Int(total_time), result: {(hours, minutes, seconds) in
             cell.taskTime.text = "\(timeToText(s: hours))h\(timeToText(s: minutes))m\(timeToText(s: seconds))s"
         })
-        
-
 
         return cell
     }

@@ -81,7 +81,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         isTaskRunningOnWatch(project_name: project_name)
 
         task.text = project_name
-        taskBackground.backgroundColor = UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(1.0))
+        taskBackground.backgroundColor  = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1)
         
         secondsLabel.text = String(format: "%02d", seconds)
         minutesLabel.text = String(format: "%02d", minutes)
