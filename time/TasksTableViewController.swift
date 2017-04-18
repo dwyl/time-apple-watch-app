@@ -30,7 +30,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         setupStore()
         // create a listerner that will reload the list if a new project is added to the list
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
+
         
         
     }
@@ -235,6 +236,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         
     }
     
+    // MARK: Notification Center
+    
     func loadList(){
         //load data here
 
@@ -255,6 +258,19 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 //        if sender is segue then run this else do not run this. 
         sendDataToWatch()
         }
+    
+    
+    func timerStoppedOnPhone() {
+        
+        //when this message is received
+        // send a message to the watch
+        // the watch can then reset the interface
+        
+        session!.sendMessage(["timerStoppedOnPhone": true],  replyHandler: { replyData in print("message sent") }, errorHandler: { error in print("error in sending message to phone \(error)") })
+        
+        
+    }
+    
     
     // WATCH MESSAGE FUNCTIONS
     

@@ -190,16 +190,41 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         if (isTimerRunningOnWatch) {
-            
             // run this if the timer was started on the watch
-            // stop the timer and reset evertything on this page
-            stopTimerOnPhone()
+            // send the information over to the core database
+            let fetchRequest =
+                NSFetchRequest<Project>(entityName: "Project")
+            fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+            do {
+                let project = try managedObjectContext!.fetch(fetchRequest)
+                print("\(project)")
+                print("\(project.count)<<<<<<<<")
+                // now set the task end date, is task running and total task time and then save the project
+                let task_end_date = Date()
+                project.first?.task_end_date = task_end_date as NSDate?
+                project.first?.is_task_running = false
+                project.first?.total_task_time = Double(seconds)
+                
+                
+                do {
+                    try managedObjectContext!.save()
+                    updateTableView(name: project_name)
+                } catch let error as NSError {
+                    print("unable to save project. \(error)")
+                }
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
+
             
             // if the user decides to stop the watch timer on the phone
             // send a notification to the app view controller
             NotificationCenter.default.post(name: NSNotification.Name(rawValue:"timerStoppedOnPhone"), object: nil)
             // which can then inturn send a message to the apple watch
             // that can reset the time on the watch
+            
+            // stop the timer and reset evertything on this page
+            stopTimerOnPhone()
             
         } else {
             

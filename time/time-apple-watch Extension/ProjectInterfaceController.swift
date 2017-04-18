@@ -94,7 +94,10 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                     replyHandler(["set": true])
                 }
             }
-            
+            if (message["timerStoppedOnPhone"]) != nil {
+                self.reloadData()
+                self.timerTotal.invalidate()
+            }
         }
     }
     
