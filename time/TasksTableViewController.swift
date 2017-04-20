@@ -30,6 +30,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         setupStore()
         // create a listerner that will reload the list if a new project is added to the list
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
+
+        
         
     }
 
@@ -99,6 +102,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 
                 if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.managedObjectContext!)  as? Project {
                     // setting from apple watch to true as this comes from the apple watch
+                    newTaskInProject.task_start_date = Date() as NSDate
                     newTaskInProject.from_apple_watch = true
                     newTaskInProject.project_name = message["startTimerFor"] as! String?
                     newTaskInProject.start_time = Int64(NSTimeIntervalSince1970)
@@ -115,6 +119,11 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 
             }
             if (message["stopTimerFor"] as? String) != nil {
+                
+                // send message to viewTaskViewController to stop the timer
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
+                
+                
                 
                 let project_name = message["stopTimerFor"] as! String?
                 let total_task_time = message["total_task_time"] as! Double
@@ -227,6 +236,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         
     }
     
+    // MARK: Notification Center
+    
     func loadList(){
         //load data here
 
@@ -247,6 +258,19 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 //        if sender is segue then run this else do not run this. 
         sendDataToWatch()
         }
+    
+    
+    func timerStoppedOnPhone() {
+        
+        //when this message is received
+        // send a message to the watch
+        // the watch can then reset the interface
+        
+        session!.sendMessage(["timerStoppedOnPhone": true],  replyHandler: { replyData in print("message sent") }, errorHandler: { error in print("error in sending message to phone \(error)") })
+        
+        
+    }
+    
     
     // WATCH MESSAGE FUNCTIONS
     
