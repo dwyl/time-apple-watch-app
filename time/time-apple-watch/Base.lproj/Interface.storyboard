@@ -14,18 +14,18 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="ProjectInterfaceController" customModule="time_apple_watch_Extension">
                     <items>
-                        <imageView width="48" height="37" alignment="center" image="dwyl-full-color" contentMode="scaleAspectFit" id="eLu-Gz-59K"/>
+                        <imageView width="29" height="15" alignment="center" image="dwyl-full-color" contentMode="scaleAspectFit" id="eLu-Gz-59K"/>
                         <label alignment="center" text="Time" id="7AJ-59-x2Y">
                             <color key="textColor" red="0.29411764709999999" green="0.75294117650000003" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                         </label>
                         <table alignment="left" id="I6n-kN-ee4">
                             <items>
                                 <tableRow identifier="ProjectName" id="fvy-Yh-0qa" customClass="ProjectRowController" customModule="time_apple_watch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="uGG-7H-AgU">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" spacing="2" id="uGG-7H-AgU">
                                         <items>
-                                            <group alignment="left" verticalAlignment="center" layout="vertical" id="fgm-uT-COj">
+                                            <group alignment="left" verticalAlignment="center" layout="vertical" spacing="5" id="fgm-uT-COj">
                                                 <items>
-                                                    <group width="1" alignment="left" id="hWW-Dh-kmb">
+                                                    <group width="1" widthAdjustment="1" alignment="left" id="hWW-Dh-kmb">
                                                         <items>
                                                             <label width="100" alignment="left" verticalAlignment="center" text="Project Name" id="Sjn-gw-ds4">
                                                                 <fontDescription key="font" type="system" pointSize="18"/>
@@ -41,9 +41,11 @@
                                                 </items>
                                             </group>
                                         </items>
+                                        <edgeInsets key="margins" left="5" right="5" top="10" bottom="10"/>
                                     </group>
                                     <connections>
                                         <outlet property="ProjectName" destination="Sjn-gw-ds4" id="4jE-ua-Gl8"/>
+                                        <outlet property="projectGroup" destination="uGG-7H-AgU" id="ykZ-eh-utZ"/>
                                         <outlet property="startTimer" destination="ibS-2H-JAl" id="k0u-bN-Rji"/>
                                         <outlet property="timer" destination="omb-hm-9yk" id="l4Y-kw-veB"/>
                                         <outlet property="timerGroup" destination="xVg-Ah-Npx" id="SCY-4a-ZhL"/>
@@ -57,7 +59,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="319"/>
+            <point key="canvasLocation" x="386" y="224"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

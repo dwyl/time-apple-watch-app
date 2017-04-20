@@ -54,6 +54,11 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         for i in 0..<projectTable.numberOfRows {
             if let controller = projectTable.rowController(at: i) as? ProjectRowController {
                 controller.ProjectName.setText(uniqueProjects[i])
+                let red = store[uniqueProjects[i]]?["red"]
+                let green = store[uniqueProjects[i]]?["green"]
+                let blue = store[uniqueProjects[i]]?["blue"]
+                
+                controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
             }
         }
     }
@@ -121,6 +126,9 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         
         // if the user selects a given row what should happen next?
         if let cell = projectTable.rowController(at: rowIndex) as? ProjectRowController {
+            
+
+
             //currently not much apart from changing the background color but this is where a lot of work will need to take place.
             // if timer is not running then start the timer
             if !isTimerRunning {

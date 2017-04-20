@@ -15,9 +15,11 @@ class ProjectRowController: NSObject {
     @IBOutlet var ProjectName: WKInterfaceLabel!
     @IBOutlet var startTimer: WKInterfaceImage!
     @IBOutlet var timer: WKInterfaceTimer!
+    @IBOutlet var projectGroup: WKInterfaceGroup!
     var isTimerRunning = false
     let startImage = UIImage(named: "fa-start")
     let stopImage = UIImage(named: "fa-stop")
+    
     
     func startTimerForRow() {
         timerGroup.setHidden(false)
