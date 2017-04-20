@@ -1,17 +1,14 @@
 //
-//  timeTests.swift
-//  timeTests
+//  formatTimeTest.swift
+//  time
 //
-//  Created by Sohil Pandya on 06/03/2017.
+//  Created by Sohil Pandya on 11/04/2017.
 //  Copyright © 2017 dwyl. All rights reserved.
 //
 
 import XCTest
-@testable import time
 
-
-class timeTests: XCTestCase {
-    
+class formatTimeTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -24,12 +21,15 @@ class timeTests: XCTestCase {
     }
     
     func testExample() {
-        
-        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
-        let tableViewController = navigationController.viewControllers[0] as! TasksTableViewController
-        
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testPerformanceExample() {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
+    }
     
 }

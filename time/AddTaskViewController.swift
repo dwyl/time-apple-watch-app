@@ -14,6 +14,8 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +23,8 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         taskName.delegate = self
         updateSaveButtonState()
         
-        let image : UIImage = UIImage(named: "dwyl-heart-logo")!
-        
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = image
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        
-        view.addSubview(imageView)
-        
+        let view = setNavbarLogo()
         self.navigationItem.titleView = view
-        // Do any additional setup after loading the view.
     }
 
     
@@ -43,7 +34,6 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
-        print("KKKKKK")
         let name = taskName.text ?? ""
                 let time = 12345667
                 let red = 123.0
@@ -58,45 +48,16 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
     func save(name: String, time: Double, red: Double, green: Double, blue: Double) {
-        print("dsadasd")
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
         
-        // 1
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        print("\(managedContext), CONTEXT")
-        // 2
-        
-        if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedContext) as? Project {
-            
+        if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext!) as? Project {
             project.project_name = name
             project.red = red
             project.green = green
             project.blue = blue
         }
-//        
-//        let entity =
-//            NSEntityDescription.entity(forEntityName: "Project",
-//                                       in: managedContext)!
-//        print("\(entity), ENTITY")
-//        let project = NSManagedObject(entity: entity,
-//                                     insertInto: managedContext)
-//        
-//        // 3
-//        project.setValue(name, forKeyPath: "name")
-//        project.setValue(time, forKeyPath: "time")
-//        project.setValue(red, forKeyPath: "red")
-//        project.setValue(green, forKeyPath: "green")
-//        project.setValue(blue, forKeyPath: "blue")
-        
-        // 4
         do {
-            try managedContext.save()
+            try managedObjectContext!.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
@@ -129,15 +90,5 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         //potentially select the save button??
         return true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

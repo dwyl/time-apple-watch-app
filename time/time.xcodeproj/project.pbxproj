@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D11C46D1E96564F00689D48 /* TaskTableViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11C46C1E96564F00689D48 /* TaskTableViewControllerTest.swift */; };
+		0D11C4721E96A15200689D48 /* setNavbarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11C4711E96A15200689D48 /* setNavbarLogo.swift */; };
+		0D11C4741E96A37E00689D48 /* fetchProjectNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11C4731E96A37E00689D48 /* fetchProjectNames.swift */; };
+		0D11C4761E96A68600689D48 /* setupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11C4751E96A68600689D48 /* setupStore.swift */; };
 		0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */; };
 		0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */; };
 		0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */; };
@@ -27,13 +31,14 @@
 		0DC628C11E7C3F7C00B47419 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628BF1E7C3F7C00B47419 /* Interface.storyboard */; };
 		0DC628C31E7C3F7C00B47419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628C21E7C3F7C00B47419 /* Assets.xcassets */; };
 		0DC628CA1E7C3F7C00B47419 /* time-apple-watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0DC628D11E7C3F7C00B47419 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D01E7C3F7C00B47419 /* InterfaceController.swift */; };
 		0DC628D31E7C3F7C00B47419 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */; };
 		0DC628D51E7C3F7C00B47419 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D41E7C3F7C00B47419 /* NotificationController.swift */; };
 		0DC628D71E7C3F7C00B47419 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */; };
 		0DC628DD1E7C3F7C00B47419 /* time-apple-watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */; };
 		0DC628E71E7D266C00B47419 /* ProjectInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */; };
 		0DC628E91E80078B00B47419 /* ProjectRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628E81E80078B00B47419 /* ProjectRowController.swift */; };
+		0DCC075C1E9BA9C400868547 /* formatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCC075B1E9BA9C400868547 /* formatTime.swift */; };
+		0DE5E09C1E92B39F00F676DD /* testingAddFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE5E09B1E92B39F00F676DD /* testingAddFunc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +98,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D11C46C1E96564F00689D48 /* TaskTableViewControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewControllerTest.swift; sourceTree = "<group>"; };
+		0D11C4711E96A15200689D48 /* setNavbarLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setNavbarLogo.swift; sourceTree = "<group>"; };
+		0D11C4731E96A37E00689D48 /* fetchProjectNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchProjectNames.swift; sourceTree = "<group>"; };
+		0D11C4751E96A68600689D48 /* setupStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setupStore.swift; sourceTree = "<group>"; };
 		0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTaskViewController.swift; sourceTree = "<group>"; };
 		0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -122,13 +131,14 @@
 		0DC628C41E7C3F7C00B47419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "time-apple-watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC628CF1E7C3F7C00B47419 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		0DC628D01E7C3F7C00B47419 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		0DC628D41E7C3F7C00B47419 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		0DC628DA1E7C3F7C00B47419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectInterfaceController.swift; sourceTree = "<group>"; };
 		0DC628E81E80078B00B47419 /* ProjectRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRowController.swift; sourceTree = "<group>"; };
+		0DCC075B1E9BA9C400868547 /* formatTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = formatTime.swift; sourceTree = "<group>"; };
+		0DE5E09B1E92B39F00F676DD /* testingAddFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = testingAddFunc.swift; path = ../testingAddFunc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,12 +173,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D11C4701E96A13300689D48 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0D11C4711E96A15200689D48 /* setNavbarLogo.swift */,
+				0DCC075B1E9BA9C400868547 /* formatTime.swift */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
 		0D1D19341E7956F4003C9B39 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
 				0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */,
 				0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */,
 				0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */,
+				0D11C4731E96A37E00689D48 /* fetchProjectNames.swift */,
+				0D11C4751E96A68600689D48 /* setupStore.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -200,6 +221,7 @@
 		0D2038071E6D82FD008CB3F4 /* time */ = {
 			isa = PBXGroup;
 			children = (
+				0D11C4701E96A13300689D48 /* lib */,
 				0D1D19341E7956F4003C9B39 /* Core Data */,
 				0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */,
 				0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */,
@@ -213,6 +235,7 @@
 				0D2038141E6D82FD008CB3F4 /* LaunchScreen.storyboard */,
 				0D2038171E6D82FD008CB3F4 /* Info.plist */,
 				0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */,
+				0DE5E09B1E92B39F00F676DD /* testingAddFunc.swift */,
 			);
 			path = time;
 			sourceTree = "<group>";
@@ -222,6 +245,7 @@
 			children = (
 				0D2038201E6D82FD008CB3F4 /* timeTests.swift */,
 				0D2038221E6D82FD008CB3F4 /* Info.plist */,
+				0D11C46C1E96564F00689D48 /* TaskTableViewControllerTest.swift */,
 			);
 			path = timeTests;
 			sourceTree = "<group>";
@@ -249,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */,
-				0DC628D01E7C3F7C00B47419 /* InterfaceController.swift */,
 				0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */,
 				0DC628D41E7C3F7C00B47419 /* NotificationController.swift */,
 				0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */,
@@ -472,13 +495,18 @@
 				0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */,
 				0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */,
 				0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */,
+				0DCC075C1E9BA9C400868547 /* formatTime.swift in Sources */,
 				0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */,
 				0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */,
+				0D11C4761E96A68600689D48 /* setupStore.swift in Sources */,
+				0D11C4721E96A15200689D48 /* setNavbarLogo.swift in Sources */,
 				0D1D193A1E796B36003C9B39 /* TaskListTableViewCell.swift in Sources */,
 				0D2038091E6D82FD008CB3F4 /* AppDelegate.swift in Sources */,
 				0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */,
 				0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */,
 				0D662CE21E70537900AFDE32 /* Task.swift in Sources */,
+				0D11C4741E96A37E00689D48 /* fetchProjectNames.swift in Sources */,
+				0DE5E09C1E92B39F00F676DD /* testingAddFunc.swift in Sources */,
 				0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D11C46D1E96564F00689D48 /* TaskTableViewControllerTest.swift in Sources */,
 				0D2038211E6D82FD008CB3F4 /* timeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,7 +537,6 @@
 				0DC628D71E7C3F7C00B47419 /* ComplicationController.swift in Sources */,
 				0DC628D31E7C3F7C00B47419 /* ExtensionDelegate.swift in Sources */,
 				0DC628E91E80078B00B47419 /* ProjectRowController.swift in Sources */,
-				0DC628D11E7C3F7C00B47419 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
