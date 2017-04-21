@@ -36,9 +36,9 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let name = taskName.text ?? ""
                 let time = 12345667
-                let red = 123.0
-                let green = 223.0
-                let blue = 34.0
+                let red = drand48()
+                let green = drand48()
+                let blue = drand48()
         
         
         self.save(name: name, time: Double(time), red: red, green: green, blue: blue)
