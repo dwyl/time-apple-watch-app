@@ -23,6 +23,7 @@
 		0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */; };
 		0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */; };
 		0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */; };
+		0D243CD21EAE192700053265 /* materialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D243CD11EAE192700053265 /* materialColors.swift */; };
 		0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */; };
 		0D662CE21E70537900AFDE32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D662CE11E70537900AFDE32 /* Task.swift */; };
 		0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */; };
@@ -119,6 +120,7 @@
 		0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksTableViewController.swift; path = ../TasksTableViewController.swift; sourceTree = "<group>"; };
 		0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddTaskViewController.swift; path = ../AddTaskViewController.swift; sourceTree = "<group>"; };
+		0D243CD11EAE192700053265 /* materialColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = materialColors.swift; sourceTree = "<group>"; };
 		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
 		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				0D11C4711E96A15200689D48 /* setNavbarLogo.swift */,
 				0DCC075B1E9BA9C400868547 /* formatTime.swift */,
+				0D243CD11EAE192700053265 /* materialColors.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */,
 				0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */,
 				0D11C4721E96A15200689D48 /* setNavbarLogo.swift in Sources */,
+				0D243CD21EAE192700053265 /* materialColors.swift in Sources */,
 				0D1D193A1E796B36003C9B39 /* TaskListTableViewCell.swift in Sources */,
 				0D2038091E6D82FD008CB3F4 /* AppDelegate.swift in Sources */,
 				0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */,
