@@ -15,9 +15,33 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-
+    var randomColors = [materialColors]()
     
     override func viewDidLoad() {
+        
+        
+        let color1 = materialColors(red: 244.0/255.0, green: 67.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+        let color2 = materialColors(red: 233.0/255.0, green: 30.0/255.0, blue: 99.0/255.0, alpha: 1.0)
+        let color3 = materialColors(red: 156.0/255.0, green: 39.0/255.0, blue: 176.0/255.0, alpha: 1.0)
+        let color4 = materialColors(red: 103.0/255.0, green: 58.0/255.0, blue: 183.0/255.0, alpha: 1.0)
+        let color5 = materialColors(red: 63.0/255.0, green: 81.0/255.0, blue: 181.0/255.0, alpha: 1.0)
+        let color6 = materialColors(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0)
+        let color7 = materialColors(red: 3.0/255.0, green: 169.0/255.0, blue: 244.0/255.0, alpha: 1.0)
+        let color8 = materialColors(red: 0.0/255.0, green: 188.0/255.0, blue: 212.0/255.0, alpha: 1.0)
+        let color9 = materialColors(red: 0.0/255.0, green: 150.0/255.0, blue: 136.0/255.0, alpha: 1.0)
+        let color10 = materialColors(red: 76.0/255.0, green: 175.0/255.0, blue: 80.0/255.0, alpha: 1.0)
+        let color11 = materialColors(red: 139.0/255.0, green: 195.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        let color12 = materialColors(red: 205.0/255.0, green: 220.0/255.0, blue: 57.0/255.0, alpha: 1.0)
+        let color13 = materialColors(red: 255.0/255.0, green: 235.0/255.0, blue: 59.0/255.0, alpha: 1.0)
+        let color14 = materialColors(red: 255.0/255.0, green: 193.0/255.0, blue: 7.0/255.0, alpha: 1.0)
+        let color15 = materialColors(red: 255.0/255.0, green: 152.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        let color16 = materialColors(red: 255.0/255.0, green: 87.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        let color17 = materialColors(red: 121.0/255.0, green: 85.0/255.0, blue: 72.0/255.0, alpha: 1.0)
+        let color18 = materialColors(red: 158.0/255.0, green: 158.0/255.0, blue: 158.0/255.0, alpha: 1.0)
+        let color19 = materialColors(red: 96.0/255.0, green: 125.0/255.0, blue: 139.0/255.0, alpha: 1.0)
+        
+        randomColors =  [color1, color2, color3, color4, color5, color6, color7, color8, color9, color10, color11, color12, color13, color14, color15, color16, color17, color18, color19]
+            
         super.viewDidLoad()
         
         taskName.delegate = self
@@ -35,11 +59,13 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let name = taskName.text ?? ""
-                let time = 12345667
-                let red = drand48()
-                let green = drand48()
-                let blue = drand48()
+        let time = 12345667
+        let rng = Int(arc4random_uniform(UInt32(18)))
+        let red = randomColors[rng].red!
+        let green = randomColors[rng].green!
+        let blue = randomColors[rng].blue!
         
+        print("\(red), \(green), \(blue)")
         
         self.save(name: name, time: Double(time), red: red, green: green, blue: blue)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)

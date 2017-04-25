@@ -320,7 +320,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskListTableViewCell
         
         let task = projects[indexPath.row]
-        
         cell.taskName.text = task.task_name ?? task.project_name
         secondsToHsMsSs(seconds: Int(task.total_task_time), result: {(hours, minutes, seconds) in
             cell.totalTaskTime.text = "\(timeToText(s: hours))h\(timeToText(s: minutes))m\(timeToText(s: seconds))s"
