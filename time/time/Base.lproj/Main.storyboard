@@ -33,21 +33,48 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5J-Sw-3Nd">
-                                            <rect key="frame" x="287" y="71.666666666666671" width="119" height="22"/>
+                                            <rect key="frame" x="287" y="72" width="119" height="22"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAn-jT-S98">
+                                            <rect key="frame" x="40" y="72" width="24" height="22"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWg-Ni-Wnf">
+                                            <rect key="frame" x="33" y="71" width="6" height="22"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-6C-5QM">
+                                            <rect key="frame" x="8" y="72" width="24" height="22"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="sAn-jT-S98" firstAttribute="leading" secondItem="cWg-Ni-Wnf" secondAttribute="trailing" constant="1" id="6eo-EI-Ak0"/>
+                                        <constraint firstItem="yiF-6C-5QM" firstAttribute="leading" secondItem="ylN-dr-3gf" secondAttribute="leadingMargin" id="7Oe-Ir-M3G"/>
                                         <constraint firstItem="rE2-nl-yWf" firstAttribute="top" secondItem="ylN-dr-3gf" secondAttribute="topMargin" id="Ewp-hH-OwG"/>
+                                        <constraint firstItem="yiF-6C-5QM" firstAttribute="top" secondItem="rE2-nl-yWf" secondAttribute="bottom" constant="34" id="Ite-SA-dLV"/>
+                                        <constraint firstItem="cWg-Ni-Wnf" firstAttribute="top" secondItem="rE2-nl-yWf" secondAttribute="bottom" constant="33" id="Kke-vh-084"/>
                                         <constraint firstItem="b5J-Sw-3Nd" firstAttribute="bottom" secondItem="ylN-dr-3gf" secondAttribute="bottomMargin" id="cjq-22-A0s"/>
                                         <constraint firstItem="rE2-nl-yWf" firstAttribute="leading" secondItem="ylN-dr-3gf" secondAttribute="leadingMargin" id="d50-Vb-UeW"/>
                                         <constraint firstItem="b5J-Sw-3Nd" firstAttribute="trailing" secondItem="ylN-dr-3gf" secondAttribute="trailingMargin" id="dnW-OQ-5wV"/>
+                                        <constraint firstItem="sAn-jT-S98" firstAttribute="top" secondItem="rE2-nl-yWf" secondAttribute="bottom" constant="34" id="fXc-5V-mF3"/>
+                                        <constraint firstItem="cWg-Ni-Wnf" firstAttribute="leading" secondItem="yiF-6C-5QM" secondAttribute="trailing" constant="1" id="hYa-Uf-nWQ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.76993815104166663" green="0.79210194850000004" blue="0.21687825520833334" alpha="0.52841395547945202" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
+                                    <outlet property="liveTimerMinutes" destination="yiF-6C-5QM" id="hgZ-rr-LM0"/>
+                                    <outlet property="liveTimerSeconds" destination="sAn-jT-S98" id="PL9-L7-ZrC"/>
+                                    <outlet property="separator" destination="cWg-Ni-Wnf" id="nhd-EQ-2se"/>
                                     <outlet property="taskName" destination="rE2-nl-yWf" id="KFS-Pd-vWb"/>
                                     <outlet property="taskTime" destination="b5J-Sw-3Nd" id="95L-Wp-hgs"/>
                                 </connections>
@@ -72,7 +99,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afd-Fb-ebW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887.20000000000005" y="-30.134932533733135"/>
+            <point key="canvasLocation" x="886.95652173913049" y="-30.163043478260871"/>
         </scene>
         <!--Add Task View Controller-->
         <scene sceneID="Sd6-eH-PBY">
