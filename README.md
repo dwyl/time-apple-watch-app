@@ -1,6 +1,6 @@
 # time-apple-watch-app
-
-The app on your wrist that _keeps you on track_!
+### The app on your wrist that _keeps you on track_!
+#### [Release Notes](/release-notes.md)
 
 ## _Why_?
 
