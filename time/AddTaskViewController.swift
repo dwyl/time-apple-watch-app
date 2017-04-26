@@ -66,27 +66,90 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         let blue = randomColors[rng].blue!
         
         print("\(red), \(green), \(blue)")
+        let projectExists = doesProjectExist(name: name)
         
-        self.save(name: name, time: Double(time), red: red, green: green, blue: blue)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+        if (projectExists) {
+            // alert user that the name aleready exists
+            print("YOU HAVE THE SAME NAME AS AN EXISTING PROJECT NAME")
+            let alert = UIAlertController(title: "Name exists", message: "Oops! the project name already exists, please pick a new name", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            self.save(name: name, time: Double(time), red: red, green: green, blue: blue)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+            dismiss(animated: true, completion: nil)
+        }
+        
 
-        dismiss(animated: true, completion: nil)
         
+    }
+    
+    func doesProjectExist (name: String) -> Bool {
+        let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+        
+        do {
+            let projects = try managedObjectContext!.fetch(fetchRequest)
+            var projectNameComparison = false
+            
+            for project in projects {
+                if (project.project_name?.lowercased() == name.lowercased()) {
+                    projectNameComparison = true
+                }
+            }
+            return projectNameComparison
+        } catch let error as NSError {
+            print("unable to fetch. \(error)")
+            return false
+        }
     }
     
     func save(name: String, time: Double, red: Double, green: Double, blue: Double) {
         
-        if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext!) as? Project {
-            project.project_name = name
-            project.red = red
-            project.green = green
-            project.blue = blue
-        }
+        // if the task name already exists 
+        // then alert user to change the name
+        // otherwise continue with saving the new name. 
+        // lowercase all the names when saving.
+        let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+        
         do {
-            try managedObjectContext!.save()
+            let projects = try managedObjectContext!.fetch(fetchRequest)
+            
+            var doesProjectExist = false
+            
+            for project in projects {
+                if (project.project_name?.lowercased() == name.lowercased()) {
+                    doesProjectExist = true
+                }
+            }
+            
+            if doesProjectExist {
+                // alert user that the name aleready exists
+                print("YOU HAVE THE SAME NAME AS AN EXISTING PROJECT NAME")
+                let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                print("YOU HAVE ENTERED A NEW NAME")
+                if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext!) as? Project {
+                    project.project_name = name
+                    project.red = red
+                    project.green = green
+                    project.blue = blue
+                }
+                do {
+                    try managedObjectContext!.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+            }
+            
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            print("unable to fetch. \(error)")
         }
+        
+
     }
 
     
