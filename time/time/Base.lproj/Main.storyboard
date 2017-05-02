@@ -13,13 +13,13 @@
         <!--Tasks Table View Controller-->
         <scene sceneID="2CK-Hp-eiJ">
             <objects>
-                <tableViewController id="N4H-fn-RGJ" customClass="TasksTableViewController" customModule="time" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="N4H-fn-RGJ" customClass="TasksTableViewController" customModule="dwyl_time" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SFA-rL-1ml">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="102" id="MIY-oi-rfe" customClass="TasksTableViewCell" customModule="time" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="102" id="MIY-oi-rfe" customClass="TasksTableViewCell" customModule="dwyl_time" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MIY-oi-rfe" id="ylN-dr-3gf">
@@ -104,7 +104,7 @@
         <!--Add Task View Controller-->
         <scene sceneID="Sd6-eH-PBY">
             <objects>
-                <viewController id="epq-p4-vSg" customClass="AddTaskViewController" customModule="time" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="epq-p4-vSg" customClass="AddTaskViewController" customModule="dwyl_time" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SMM-Ks-IHC"/>
                         <viewControllerLayoutGuide type="bottom" id="TH5-ej-3gn"/>
@@ -162,7 +162,7 @@
         <!--View Task View Controller-->
         <scene sceneID="uoH-Bl-JAl">
             <objects>
-                <viewController id="YQT-9a-4qo" customClass="ViewTaskViewController" customModule="time" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YQT-9a-4qo" customClass="ViewTaskViewController" customModule="dwyl_time" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CBx-lT-Au3"/>
                         <viewControllerLayoutGuide type="bottom" id="tKZ-1V-w5I"/>
@@ -171,6 +171,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4X-7t-m09" userLabel="tableBackgroundView">
+                                <rect key="frame" x="0.0" y="258" width="414" height="478"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x61-sd-lqD">
                                 <rect key="frame" x="0.0" y="64" width="414" height="110"/>
                                 <subviews>
@@ -192,31 +196,33 @@
                                     <action selector="startTimer:" destination="YQT-9a-4qo" eventType="touchUpInside" id="E8z-OB-BT7"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tl8-0I-8Jw">
-                                <rect key="frame" x="0.0" y="309" width="414" height="427"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tl8-0I-8Jw">
+                                <rect key="frame" x="0.0" y="259" width="414" height="477"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="70" id="p0G-LG-nm4" customClass="TaskListTableViewCell" customModule="time" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="70" id="p0G-LG-nm4" customClass="TaskListTableViewCell" customModule="dwyl_time" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0G-LG-nm4" id="ddm-Wr-99F">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="task_name/project_name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZm-BI-0fs">
-                                                    <rect key="frame" x="19" y="24" width="191" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="task_name/project_name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZm-BI-0fs">
+                                                    <rect key="frame" x="19" y="24" width="240" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-vI-Yxl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-vI-Yxl">
                                                     <rect key="frame" x="352" y="24" width="46" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.6056426842" green="0.63457334840000001" blue="0.62339721749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="qZm-BI-0fs" firstAttribute="baseline" secondItem="fBD-vI-Yxl" secondAttribute="baseline" id="ExK-9o-AyQ"/>
                                                 <constraint firstItem="fBD-vI-Yxl" firstAttribute="leading" secondItem="qZm-BI-0fs" secondAttribute="trailing" constant="93" id="GdC-xp-3YD"/>
@@ -225,6 +231,8 @@
                                                 <constraint firstItem="qZm-BI-0fs" firstAttribute="leading" secondItem="ddm-Wr-99F" secondAttribute="leadingMargin" constant="11" id="kMq-Sp-ePe"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="taskName" destination="qZm-BI-0fs" id="aV2-hO-eeY"/>
                                             <outlet property="totalTaskTime" destination="fBD-vI-Yxl" id="rbF-Fu-P8o"/>
@@ -268,11 +276,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="V7i-nG-OKM" firstAttribute="top" secondItem="x61-sd-lqD" secondAttribute="bottom" constant="16" id="26T-a8-4QU"/>
+                            <constraint firstItem="tKZ-1V-w5I" firstAttribute="top" secondItem="d4X-7t-m09" secondAttribute="bottom" id="AVT-ES-A3C"/>
+                            <constraint firstItem="d4X-7t-m09" firstAttribute="top" secondItem="x61-sd-lqD" secondAttribute="bottom" constant="162" id="K3M-x4-0fo"/>
+                            <constraint firstAttribute="trailing" secondItem="d4X-7t-m09" secondAttribute="trailing" id="Kay-eG-oxp"/>
                             <constraint firstItem="CJe-Kr-LdX" firstAttribute="top" secondItem="x61-sd-lqD" secondAttribute="bottom" constant="27" id="L1t-hM-2o6"/>
                             <constraint firstItem="gmX-B7-YNf" firstAttribute="leading" secondItem="Tzw-wp-dt7" secondAttribute="trailing" constant="16" id="SWM-VH-DTB"/>
                             <constraint firstAttribute="trailing" secondItem="x61-sd-lqD" secondAttribute="trailing" id="UGc-ke-Ifk"/>
                             <constraint firstItem="x61-sd-lqD" firstAttribute="leading" secondItem="ybu-hg-S8e" secondAttribute="leading" id="VgT-ao-ErD"/>
                             <constraint firstItem="gmX-B7-YNf" firstAttribute="baseline" secondItem="Tzw-wp-dt7" secondAttribute="baseline" id="WA3-3n-y0v"/>
+                            <constraint firstItem="d4X-7t-m09" firstAttribute="leading" secondItem="ybu-hg-S8e" secondAttribute="leading" id="ZeN-h5-dqk"/>
                             <constraint firstItem="V7i-nG-OKM" firstAttribute="baseline" secondItem="RjP-5y-gTA" secondAttribute="baseline" id="c8G-5E-Hea"/>
                             <constraint firstItem="tl8-0I-8Jw" firstAttribute="leading" secondItem="ybu-hg-S8e" secondAttribute="leading" id="ffd-ug-eaD"/>
                             <constraint firstItem="RjP-5y-gTA" firstAttribute="leading" secondItem="gmX-B7-YNf" secondAttribute="trailing" constant="63" id="iIb-oq-gzP"/>
@@ -289,6 +301,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5B5-dG-vsr"/>
                     <connections>
+                        <outlet property="backgroundView" destination="d4X-7t-m09" id="Q0F-a8-BrM"/>
                         <outlet property="listOfTasks" destination="tl8-0I-8Jw" id="HAe-0L-ISS"/>
                         <outlet property="minutesLabel" destination="Tzw-wp-dt7" id="wIk-PD-NWA"/>
                         <outlet property="playButton" destination="RjP-5y-gTA" id="0Yo-iJ-msR"/>
