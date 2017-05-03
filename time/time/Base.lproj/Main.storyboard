@@ -171,10 +171,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4X-7t-m09" userLabel="tableBackgroundView">
-                                <rect key="frame" x="0.0" y="258" width="414" height="478"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x61-sd-lqD">
                                 <rect key="frame" x="0.0" y="64" width="414" height="110"/>
                                 <subviews>
@@ -205,7 +201,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0G-LG-nm4" id="ddm-Wr-99F">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="task_name/project_name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZm-BI-0fs">
@@ -276,15 +272,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="V7i-nG-OKM" firstAttribute="top" secondItem="x61-sd-lqD" secondAttribute="bottom" constant="16" id="26T-a8-4QU"/>
-                            <constraint firstItem="tKZ-1V-w5I" firstAttribute="top" secondItem="d4X-7t-m09" secondAttribute="bottom" id="AVT-ES-A3C"/>
-                            <constraint firstItem="d4X-7t-m09" firstAttribute="top" secondItem="x61-sd-lqD" secondAttribute="bottom" constant="162" id="K3M-x4-0fo"/>
-                            <constraint firstAttribute="trailing" secondItem="d4X-7t-m09" secondAttribute="trailing" id="Kay-eG-oxp"/>
                             <constraint firstItem="CJe-Kr-LdX" firstAttribute="top" secondItem="x61-sd-lqD" secondAttribute="bottom" constant="27" id="L1t-hM-2o6"/>
                             <constraint firstItem="gmX-B7-YNf" firstAttribute="leading" secondItem="Tzw-wp-dt7" secondAttribute="trailing" constant="16" id="SWM-VH-DTB"/>
                             <constraint firstAttribute="trailing" secondItem="x61-sd-lqD" secondAttribute="trailing" id="UGc-ke-Ifk"/>
                             <constraint firstItem="x61-sd-lqD" firstAttribute="leading" secondItem="ybu-hg-S8e" secondAttribute="leading" id="VgT-ao-ErD"/>
                             <constraint firstItem="gmX-B7-YNf" firstAttribute="baseline" secondItem="Tzw-wp-dt7" secondAttribute="baseline" id="WA3-3n-y0v"/>
-                            <constraint firstItem="d4X-7t-m09" firstAttribute="leading" secondItem="ybu-hg-S8e" secondAttribute="leading" id="ZeN-h5-dqk"/>
                             <constraint firstItem="V7i-nG-OKM" firstAttribute="baseline" secondItem="RjP-5y-gTA" secondAttribute="baseline" id="c8G-5E-Hea"/>
                             <constraint firstItem="tl8-0I-8Jw" firstAttribute="leading" secondItem="ybu-hg-S8e" secondAttribute="leading" id="ffd-ug-eaD"/>
                             <constraint firstItem="RjP-5y-gTA" firstAttribute="leading" secondItem="gmX-B7-YNf" secondAttribute="trailing" constant="63" id="iIb-oq-gzP"/>
@@ -301,7 +293,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="5B5-dG-vsr"/>
                     <connections>
-                        <outlet property="backgroundView" destination="d4X-7t-m09" id="Q0F-a8-BrM"/>
                         <outlet property="listOfTasks" destination="tl8-0I-8Jw" id="HAe-0L-ISS"/>
                         <outlet property="minutesLabel" destination="Tzw-wp-dt7" id="wIk-PD-NWA"/>
                         <outlet property="playButton" destination="RjP-5y-gTA" id="0Yo-iJ-msR"/>
