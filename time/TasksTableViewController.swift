@@ -158,11 +158,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     fetchRequest.predicate = predicateCompound
                     
                     let project = try self.managedObjectContext!.fetch(fetchRequest)
-                    for p in project {
-                        print("\(p.total_task_time)")
-                    }
-                    
-                    print("\(project)<<<< THIS IS THE PROJECT FETCHED FROM COREDATA")
                     // now set the task end date, is task running and total task time and then save the project
                     let task_end_date = Date()
                     project.first?.task_end_date = task_end_date as NSDate?
@@ -246,7 +241,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             // for each unique project name add the total time and fetch the colors for them
             for task in projects {
                 if (project_name == task.project_name && task.blue != 0.0 && task.red != 0.0 && task.green != 0.0) {
-                    print("\(task.red)RED for \(task.project_name)")
                     red = task.red
                     green = task.green
                     blue = task.blue
@@ -290,12 +284,15 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     func timerStoppedOnPhone() {
         
+        
+        // unwrapping the session so that if it is nil then it won't call this code.
+        if let watchSession = session {
+            watchSession.sendMessage(["timerStoppedOnPhone": true],  replyHandler: { replyData in print("message sent") }, errorHandler: { error in print("error in sending message to phone \(error)") })
+        }
         //when this message is received
         // send a message to the watch
         // the watch can then reset the interface
-        
-        session!.sendMessage(["timerStoppedOnPhone": true],  replyHandler: { replyData in print("message sent") }, errorHandler: { error in print("error in sending message to phone \(error)") })
-        
+
         
     }
     
@@ -303,11 +300,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     // WATCH MESSAGE FUNCTIONS
     
     func sendDataToWatch() {
-
-        session!.sendMessage(["project": self.store, "uniqueProjects": self.uniqueProjects],
-                             replyHandler: { replyData in print("Got it?") } ,
-                             errorHandler: { error in print("error in sending new data to watch \(error)") })
-  
+        // unwrapping the session so that if it is nil then it won't call this code.
+        if let watchsession = session {
+            watchsession.sendMessage(["project": self.store, "uniqueProjects": self.uniqueProjects],
+                                 replyHandler: { replyData in print("Got it?") } ,
+                                 errorHandler: { error in print("error in sending new data to watch \(error)") })
+        }
     }
     
     
