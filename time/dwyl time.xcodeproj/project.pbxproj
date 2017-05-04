@@ -29,11 +29,11 @@
 		0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */; };
 		0DC628C11E7C3F7C00B47419 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628BF1E7C3F7C00B47419 /* Interface.storyboard */; };
 		0DC628C31E7C3F7C00B47419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628C21E7C3F7C00B47419 /* Assets.xcassets */; };
-		0DC628CA1E7C3F7C00B47419 /* time-apple-watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0DC628CA1E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DC628C91E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0DC628D31E7C3F7C00B47419 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */; };
 		0DC628D51E7C3F7C00B47419 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D41E7C3F7C00B47419 /* NotificationController.swift */; };
 		0DC628D71E7C3F7C00B47419 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628D61E7C3F7C00B47419 /* ComplicationController.swift */; };
-		0DC628DD1E7C3F7C00B47419 /* time-apple-watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */; };
+		0DC628DD1E7C3F7C00B47419 /* dwyl time.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0DC628BD1E7C3F7C00B47419 /* dwyl time.app */; };
 		0DC628E71E7D266C00B47419 /* ProjectInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */; };
 		0DC628E91E80078B00B47419 /* ProjectRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC628E81E80078B00B47419 /* ProjectRowController.swift */; };
 		0DCC075C1E9BA9C400868547 /* formatTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCC075B1E9BA9C400868547 /* formatTime.swift */; };
@@ -79,7 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0DC628CA1E7C3F7C00B47419 /* time-apple-watch Extension.appex in Embed App Extensions */,
+				0DC628CA1E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +90,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				0DC628DD1E7C3F7C00B47419 /* time-apple-watch.app in Embed Watch Content */,
+				0DC628DD1E7C3F7C00B47419 /* dwyl time.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,17 +104,17 @@
 		0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0D1D19391E796B36003C9B39 /* TaskListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListTableViewCell.swift; sourceTree = "<group>"; };
-		0D2038051E6D82FD008CB3F4 /* time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = time.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2038051E6D82FD008CB3F4 /* dwyl time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dwyl time.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D20380D1E6D82FD008CB3F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D2038101E6D82FD008CB3F4 /* time.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = time.xcdatamodel; sourceTree = "<group>"; };
 		0D2038121E6D82FD008CB3F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D2038151E6D82FD008CB3F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D2038171E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D20381C1E6D82FD008CB3F4 /* timeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D20381C1E6D82FD008CB3F4 /* dwyl timeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dwyl timeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D2038201E6D82FD008CB3F4 /* timeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeTests.swift; sourceTree = "<group>"; };
 		0D2038221E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D2038271E6D82FD008CB3F4 /* timeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2038271E6D82FD008CB3F4 /* dwyl timeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dwyl timeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D20382B1E6D82FD008CB3F4 /* timeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeUITests.swift; sourceTree = "<group>"; };
 		0D20382D1E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksTableViewController.swift; path = ../TasksTableViewController.swift; sourceTree = "<group>"; };
@@ -124,11 +124,11 @@
 		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
 		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "time-apple-watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC628BD1E7C3F7C00B47419 /* dwyl time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dwyl time.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC628C01E7C3F7C00B47419 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0DC628C21E7C3F7C00B47419 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DC628C41E7C3F7C00B47419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "time-apple-watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC628C91E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "dwyl time-apple-watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC628CF1E7C3F7C00B47419 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		0DC628D41E7C3F7C00B47419 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
@@ -209,11 +209,11 @@
 		0D2038061E6D82FD008CB3F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0D2038051E6D82FD008CB3F4 /* time.app */,
-				0D20381C1E6D82FD008CB3F4 /* timeTests.xctest */,
-				0D2038271E6D82FD008CB3F4 /* timeUITests.xctest */,
-				0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */,
-				0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */,
+				0D2038051E6D82FD008CB3F4 /* dwyl time.app */,
+				0D20381C1E6D82FD008CB3F4 /* dwyl timeTests.xctest */,
+				0D2038271E6D82FD008CB3F4 /* dwyl timeUITests.xctest */,
+				0DC628BD1E7C3F7C00B47419 /* dwyl time.app */,
+				0DC628C91E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,9 +295,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0D2038041E6D82FD008CB3F4 /* time */ = {
+		0D2038041E6D82FD008CB3F4 /* dwyl time */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0D2038301E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "time" */;
+			buildConfigurationList = 0D2038301E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "dwyl time" */;
 			buildPhases = (
 				0D2038011E6D82FD008CB3F4 /* Sources */,
 				0D2038021E6D82FD008CB3F4 /* Frameworks */,
@@ -309,14 +309,14 @@
 			dependencies = (
 				0DC628DC1E7C3F7C00B47419 /* PBXTargetDependency */,
 			);
-			name = time;
+			name = "dwyl time";
 			productName = time;
-			productReference = 0D2038051E6D82FD008CB3F4 /* time.app */;
+			productReference = 0D2038051E6D82FD008CB3F4 /* dwyl time.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0D20381B1E6D82FD008CB3F4 /* timeTests */ = {
+		0D20381B1E6D82FD008CB3F4 /* dwyl timeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0D2038331E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "timeTests" */;
+			buildConfigurationList = 0D2038331E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "dwyl timeTests" */;
 			buildPhases = (
 				0D2038181E6D82FD008CB3F4 /* Sources */,
 				0D2038191E6D82FD008CB3F4 /* Frameworks */,
@@ -327,14 +327,14 @@
 			dependencies = (
 				0D20381E1E6D82FD008CB3F4 /* PBXTargetDependency */,
 			);
-			name = timeTests;
+			name = "dwyl timeTests";
 			productName = timeTests;
-			productReference = 0D20381C1E6D82FD008CB3F4 /* timeTests.xctest */;
+			productReference = 0D20381C1E6D82FD008CB3F4 /* dwyl timeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0D2038261E6D82FD008CB3F4 /* timeUITests */ = {
+		0D2038261E6D82FD008CB3F4 /* dwyl timeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0D2038361E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "timeUITests" */;
+			buildConfigurationList = 0D2038361E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "dwyl timeUITests" */;
 			buildPhases = (
 				0D2038231E6D82FD008CB3F4 /* Sources */,
 				0D2038241E6D82FD008CB3F4 /* Frameworks */,
@@ -345,14 +345,14 @@
 			dependencies = (
 				0D2038291E6D82FD008CB3F4 /* PBXTargetDependency */,
 			);
-			name = timeUITests;
+			name = "dwyl timeUITests";
 			productName = timeUITests;
-			productReference = 0D2038271E6D82FD008CB3F4 /* timeUITests.xctest */;
+			productReference = 0D2038271E6D82FD008CB3F4 /* dwyl timeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		0DC628BC1E7C3F7C00B47419 /* time-apple-watch */ = {
+		0DC628BC1E7C3F7C00B47419 /* dwyl time-apple-watch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0DC628E41E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch" */;
+			buildConfigurationList = 0DC628E41E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "dwyl time-apple-watch" */;
 			buildPhases = (
 				0DC628BB1E7C3F7C00B47419 /* Resources */,
 				0DC628E31E7C3F7C00B47419 /* Embed App Extensions */,
@@ -362,14 +362,14 @@
 			dependencies = (
 				0DC628CC1E7C3F7C00B47419 /* PBXTargetDependency */,
 			);
-			name = "time-apple-watch";
+			name = "dwyl time-apple-watch";
 			productName = "time-apple-watch";
-			productReference = 0DC628BD1E7C3F7C00B47419 /* time-apple-watch.app */;
+			productReference = 0DC628BD1E7C3F7C00B47419 /* dwyl time.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		0DC628C81E7C3F7C00B47419 /* time-apple-watch Extension */ = {
+		0DC628C81E7C3F7C00B47419 /* dwyl time-apple-watch Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0DC628E21E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch Extension" */;
+			buildConfigurationList = 0DC628E21E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "dwyl time-apple-watch Extension" */;
 			buildPhases = (
 				0DC628C51E7C3F7C00B47419 /* Sources */,
 				0DC628C61E7C3F7C00B47419 /* Frameworks */,
@@ -379,9 +379,9 @@
 			);
 			dependencies = (
 			);
-			name = "time-apple-watch Extension";
+			name = "dwyl time-apple-watch Extension";
 			productName = "time-apple-watch Extension";
-			productReference = 0DC628C91E7C3F7C00B47419 /* time-apple-watch Extension.appex */;
+			productReference = 0DC628C91E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
@@ -396,7 +396,7 @@
 				TargetAttributes = {
 					0D2038041E6D82FD008CB3F4 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = UA39PFNU5W;
+						DevelopmentTeam = 3T4BK2BXHV;
 						ProvisioningStyle = Automatic;
 					};
 					0D20381B1E6D82FD008CB3F4 = {
@@ -412,17 +412,17 @@
 					};
 					0DC628BC1E7C3F7C00B47419 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = UA39PFNU5W;
+						DevelopmentTeam = 3T4BK2BXHV;
 						ProvisioningStyle = Automatic;
 					};
 					0DC628C81E7C3F7C00B47419 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = UA39PFNU5W;
+						DevelopmentTeam = 3T4BK2BXHV;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 0D2038001E6D82FD008CB3F4 /* Build configuration list for PBXProject "time" */;
+			buildConfigurationList = 0D2038001E6D82FD008CB3F4 /* Build configuration list for PBXProject "dwyl time" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -435,11 +435,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0D2038041E6D82FD008CB3F4 /* time */,
-				0D20381B1E6D82FD008CB3F4 /* timeTests */,
-				0D2038261E6D82FD008CB3F4 /* timeUITests */,
-				0DC628BC1E7C3F7C00B47419 /* time-apple-watch */,
-				0DC628C81E7C3F7C00B47419 /* time-apple-watch Extension */,
+				0D2038041E6D82FD008CB3F4 /* dwyl time */,
+				0D20381B1E6D82FD008CB3F4 /* dwyl timeTests */,
+				0D2038261E6D82FD008CB3F4 /* dwyl timeUITests */,
+				0DC628BC1E7C3F7C00B47419 /* dwyl time-apple-watch */,
+				0DC628C81E7C3F7C00B47419 /* dwyl time-apple-watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -546,22 +546,22 @@
 /* Begin PBXTargetDependency section */
 		0D20381E1E6D82FD008CB3F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0D2038041E6D82FD008CB3F4 /* time */;
+			target = 0D2038041E6D82FD008CB3F4 /* dwyl time */;
 			targetProxy = 0D20381D1E6D82FD008CB3F4 /* PBXContainerItemProxy */;
 		};
 		0D2038291E6D82FD008CB3F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0D2038041E6D82FD008CB3F4 /* time */;
+			target = 0D2038041E6D82FD008CB3F4 /* dwyl time */;
 			targetProxy = 0D2038281E6D82FD008CB3F4 /* PBXContainerItemProxy */;
 		};
 		0DC628CC1E7C3F7C00B47419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0DC628C81E7C3F7C00B47419 /* time-apple-watch Extension */;
+			target = 0DC628C81E7C3F7C00B47419 /* dwyl time-apple-watch Extension */;
 			targetProxy = 0DC628CB1E7C3F7C00B47419 /* PBXContainerItemProxy */;
 		};
 		0DC628DC1E7C3F7C00B47419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0DC628BC1E7C3F7C00B47419 /* time-apple-watch */;
+			target = 0DC628BC1E7C3F7C00B47419 /* dwyl time-apple-watch */;
 			targetProxy = 0DC628DB1E7C3F7C00B47419 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -693,10 +693,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UA39PFNU5W;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = time/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwyl.time;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -708,10 +708,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UA39PFNU5W;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = time/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwyl.time;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -730,7 +730,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "timeTests/timeTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/time.app/time";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dwyl time.app/dwyl time";
 			};
 			name = Debug;
 		};
@@ -746,7 +746,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "timeTests/timeTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/time.app/time";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dwyl time.app/dwyl time";
 			};
 			name = Release;
 		};
@@ -781,11 +781,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UA39PFNU5W;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				IBSC_MODULE = time_apple_watch_Extension;
 				INFOPLIST_FILE = "time-apple-watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwyl.time.watchkitapp;
+				PRODUCT_NAME = "dwyl time";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -799,11 +799,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UA39PFNU5W;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				IBSC_MODULE = time_apple_watch_Extension;
 				INFOPLIST_FILE = "time-apple-watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwyl.time.watchkitapp;
+				PRODUCT_NAME = "dwyl time";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -816,10 +816,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = UA39PFNU5W;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = "time-apple-watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwyl.time.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -833,10 +833,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = UA39PFNU5W;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = "time-apple-watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dwyl.time.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dwyl.time.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -849,7 +849,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0D2038001E6D82FD008CB3F4 /* Build configuration list for PBXProject "time" */ = {
+		0D2038001E6D82FD008CB3F4 /* Build configuration list for PBXProject "dwyl time" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D20382E1E6D82FD008CB3F4 /* Debug */,
@@ -858,7 +858,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0D2038301E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "time" */ = {
+		0D2038301E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "dwyl time" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D2038311E6D82FD008CB3F4 /* Debug */,
@@ -867,7 +867,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0D2038331E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "timeTests" */ = {
+		0D2038331E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "dwyl timeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D2038341E6D82FD008CB3F4 /* Debug */,
@@ -876,7 +876,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0D2038361E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "timeUITests" */ = {
+		0D2038361E6D82FD008CB3F4 /* Build configuration list for PBXNativeTarget "dwyl timeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D2038371E6D82FD008CB3F4 /* Debug */,
@@ -885,7 +885,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0DC628E21E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch Extension" */ = {
+		0DC628E21E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "dwyl time-apple-watch Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0DC628E01E7C3F7C00B47419 /* Debug */,
@@ -894,7 +894,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0DC628E41E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "time-apple-watch" */ = {
+		0DC628E41E7C3F7C00B47419 /* Build configuration list for PBXNativeTarget "dwyl time-apple-watch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0DC628DE1E7C3F7C00B47419 /* Debug */,
