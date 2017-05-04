@@ -48,6 +48,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     var projectNames = [String]() // List of project names.
     var uniqueProjects = [String]() // List of unique project names
     var store = [String: Dictionary<String, Any>]() // Data structure that contains information about each individual project as shown in the example below
+    var liveTimerFromWatch = Timer()
+    var totalSecondsForLiveTimer = 0
+    var liveTimerForProject = String()
     /*
      This is how the localStore will look like.
      var store =
@@ -98,6 +101,18 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             }
             if (message["startTimerFor"] as? String) != nil {
                 
+                // user has started timer in watch
+                // we can start a timer here and send the data to the particular tableviewcell
+                self.liveTimerForProject = message["startTimerFor"] as! String
+                let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject)
+                let indexPath = IndexPath(row: rowForCell!, section: 0)
+                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                tableRow.liveTimerSeconds.isHidden = false
+                tableRow.separator.isHidden = false
+                tableRow.liveTimerMinutes.isHidden = false
+
+                self.liveTimerFromWatch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                
                 // save the given item to the coredata create a new field called fromAppleWatch which we have to set to true here.
                 
                 if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.managedObjectContext!)  as? Project {
@@ -122,8 +137,17 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 
                 // send message to viewTaskViewController to stop the timer
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
-                
-                
+
+                let rowForCell = self.uniqueProjects.index(of: message["stopTimerFor"] as! String)
+                let indexPath = IndexPath(row: rowForCell!, section: 0)
+                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                tableRow.liveTimerSeconds.isHidden = true
+                tableRow.liveTimerMinutes.isHidden = true
+                tableRow.separator.isHidden = true
+                tableRow.liveTimerSeconds.text = "00"
+                tableRow.liveTimerMinutes.text = "00"
+                self.liveTimerFromWatch.invalidate()
+                self.totalSecondsForLiveTimer = 0
                 
                 let project_name = message["stopTimerFor"] as! String?
                 let total_task_time = message["total_task_time"] as! Double
@@ -194,7 +218,15 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     }
     
 
-    
+    func updateTimer() {
+        totalSecondsForLiveTimer += 1
+        let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject)
+        let indexPath = IndexPath(row: rowForCell!, section: 0)
+        let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+        tableRow.liveTimerSeconds.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) % 60)
+        tableRow.liveTimerMinutes.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) / 60)
+
+    }
     func setupStore() {
 
         // SETTING UP THE STORE
