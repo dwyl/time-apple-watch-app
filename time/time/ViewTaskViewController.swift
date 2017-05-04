@@ -111,9 +111,8 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         print("You are in isTaskRunningOnWatch <<<<<< \(project_name)")
         let fetchRequest = NSFetchRequest<Project>(entityName:"Project")
         let predicate1 = NSPredicate(format: "project_name == %@", project_name)
-        let predicate2 = NSPredicate(format: "from_apple_watch == YES")
         let predicate3 = NSPredicate(format: "is_task_running == YES")
-        let predicateCompound = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate2, predicate3])
+        let predicateCompound = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate3])
         
         do {
             fetchRequest.predicate = predicateCompound
@@ -169,6 +168,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             newTaskInProject.project_name = project_name
             newTaskInProject.start_time = Int64(start_time)
             newTaskInProject.is_task_running = true
+            newTaskInProject.task_start_date = Date() as NSDate
         }
         
         do {
@@ -204,6 +204,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
                 project.first?.task_end_date = task_end_date as NSDate?
                 project.first?.is_task_running = false
                 project.first?.total_task_time = Double(seconds)
+                project.first?.task_end_date = Date() as NSDate
                 
                 
                 do {
