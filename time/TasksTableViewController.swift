@@ -19,10 +19,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        let view = setNavbarLogo()
-        self.navigationItem.titleView = view
+        let navView = setNavbarLogo()
+        self.navigationItem.titleView = navView
         
         configureWCSession() // activate the WCSession
         projects = fetchProjectNames(managedObjectContext: managedObjectContext!) // fetch the list of project names
@@ -67,9 +65,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         }
      }
      */
-    
-    
-    
     
     
     //WATCH
