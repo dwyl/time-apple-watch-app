@@ -28,6 +28,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var stopButton: UIButton!
     
     @IBOutlet weak var listOfTasks: UITableView!
+        
     var projects: [Project] = []
 
     var timer = Timer()
@@ -62,8 +63,10 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         //TABLE RELATED
+
         listOfTasks.delegate = self
         listOfTasks.dataSource = self
+        
         
         // NAVIGATION RELATED
         let image : UIImage = UIImage(named: "dwyl-heart-logo")!
@@ -98,9 +101,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
 //    NotificationCenter.default.addObserver(self, selector: #selector(resetTimerForPhone), name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
-    
-    
-    
     
     // MARK: Timer
     
@@ -303,7 +303,8 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         isTimerRunningOnWatch = false
     }
     
-    // TABLE VIEW 
+    // TABLE VIEW
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
@@ -320,6 +321,8 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskListTableViewCell
         
+        cell.contentView.backgroundColor = UIColor.white
+
         let task = projects[indexPath.row]
         cell.taskName.text = task.task_name ?? task.project_name
         secondsToHsMsSs(seconds: Int(task.total_task_time), result: {(hours, minutes, seconds) in

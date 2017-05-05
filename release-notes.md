@@ -2,7 +2,22 @@
 
 We'll be updating this document along with each update that is merged into master.
 
-## Version 1.0.0
+We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
+
+## Version 1.1 (Build 5) _Current_
+
+**Debugging**
+- Added [Crashlytics](https://fabric.io/kits/ios/crashlytics/summary) for the app.
+
+**iPhone**
+- Live Timer shows on the Home screen if running.
+
+| **iPhone Home** | **iPhone + Watch** |
+| --- | --- |
+| ![](https://cloud.githubusercontent.com/assets/2305591/25747783/a7c2ff26-31a0-11e7-9837-28a784bff199.png) | ![](https://cloud.githubusercontent.com/assets/2305591/25747712/5413b4f6-31a0-11e7-960b-ba57f1b65251.png) |
+
+
+## Version 1.0.(Build 1)
 
 **iPhone**
 - Users can view a list of projects
