@@ -65,12 +65,10 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
         let green = randomColors[rng].green!
         let blue = randomColors[rng].blue!
         
-        print("\(red), \(green), \(blue)")
         let projectExists = doesProjectExist(name: name)
         
         if (projectExists) {
             // alert user that the name aleready exists
-            print("YOU HAVE THE SAME NAME AS AN EXISTING PROJECT NAME")
             let alert = UIAlertController(title: "Name exists", message: "Oops! the project name already exists, please pick a new name", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -125,13 +123,11 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
             
             if doesProjectExist {
                 // alert user that the name aleready exists
-                print("YOU HAVE THE SAME NAME AS AN EXISTING PROJECT NAME")
                 let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             else {
-                print("YOU HAVE ENTERED A NEW NAME")
                 if let project = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext!) as? Project {
                     project.project_name = name
                     project.red = red
@@ -156,7 +152,6 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         //method to dismiss the view
         dismiss(animated: true, completion: nil)
-        print(taskName.text!)
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {

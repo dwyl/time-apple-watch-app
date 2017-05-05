@@ -94,7 +94,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                 } else {
                     self.store = message["project"] as! [String : Dictionary<String, Any>]
                     self.uniqueProjects = message["uniqueProjects"] as! [String]
-                    print("store \(self.uniqueProjects)>>>>>>>>>>>>")
                     self.reloadData()
                     replyHandler(["set": true])
                 }
@@ -189,7 +188,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func stopTimer(forProject project:String, totalTime time:Double) {
-        print("Stopped the timer at \(totalTime)")
         self.timerTotal.invalidate()
         
         // send a message to the phone which will update the existing project with the total time
@@ -205,7 +203,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func updateTimerOnWatch() {
         totalTime += 1.0
-        print("You are in here")
         if totalTime == 1500 {
             WKInterfaceDevice.current().play(.notification)
             let titleOfAlert = "Take a break?"

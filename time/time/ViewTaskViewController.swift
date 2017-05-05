@@ -48,7 +48,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         
         for project in receivedData {
-            print("in for loop\(project.value["project_name"])")
             project_name = project.value["project_name"] as! String
             red = project.value["red"] as! Double
             green = project.value["green"] as! Double
@@ -80,7 +79,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // UPDATE VIEW
 
-        print("\(project_name)")
         isTaskRunningOnWatch(project_name: project_name)
 
         task.text = project_name
@@ -108,7 +106,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // fetch the list of tasks that are currently running on the watch for this given project.
     func isTaskRunningOnWatch (project_name: String) {
-        print("You are in isTaskRunningOnWatch <<<<<< \(project_name)")
         let fetchRequest = NSFetchRequest<Project>(entityName:"Project")
         let predicate1 = NSPredicate(format: "project_name == %@", project_name)
         let predicate3 = NSPredicate(format: "is_task_running == YES")
@@ -197,8 +194,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
             do {
                 let project = try managedObjectContext!.fetch(fetchRequest)
-                print("\(project)")
-                print("\(project.count)<<<<<<<<")
                 // now set the task end date, is task running and total task time and then save the project
                 let task_end_date = Date()
                 project.first?.task_end_date = task_end_date as NSDate?
@@ -293,7 +288,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func stopTimerOnPhone () {
-        print("Timer stoped on the Watch")
         watchTimer.invalidate()
         seconds = 00
         secondsLabel.text = String("00")
