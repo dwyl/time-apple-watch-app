@@ -101,12 +101,14 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 // we can start a timer here and send the data to the particular tableviewcell
                 self.isTimerRunningOnWatch = true
                 self.liveTimerForProject = message["startTimerFor"] as! String
-                let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject)
-                let indexPath = IndexPath(row: rowForCell!, section: 0)
-                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                tableRow.liveTimerSeconds.isHidden = false
-                tableRow.separator.isHidden = false
-                tableRow.liveTimerMinutes.isHidden = false
+                if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
+                    let indexPath = IndexPath(row: rowForCell, section: 0)
+                    let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                    tableRow.liveTimerSeconds.isHidden = false
+                    tableRow.separator.isHidden = false
+                    tableRow.liveTimerMinutes.isHidden = false
+                }
+                
 
                 self.liveTimerFromWatch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
                 
@@ -136,14 +138,15 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 self.isTimerRunningOnWatch = false
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
 
-                let rowForCell = self.uniqueProjects.index(of: message["stopTimerFor"] as! String)
-                let indexPath = IndexPath(row: rowForCell!, section: 0)
-                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                tableRow.liveTimerSeconds.isHidden = true
-                tableRow.liveTimerMinutes.isHidden = true
-                tableRow.separator.isHidden = true
-                tableRow.liveTimerSeconds.text = "00"
-                tableRow.liveTimerMinutes.text = "00"
+                if let rowForCell = self.uniqueProjects.index(of: message["stopTimerFor"] as! String) {
+                    let indexPath = IndexPath(row: rowForCell, section: 0)
+                    let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                    tableRow.liveTimerSeconds.isHidden = true
+                    tableRow.liveTimerMinutes.isHidden = true
+                    tableRow.separator.isHidden = true
+                    tableRow.liveTimerSeconds.text = "00"
+                    tableRow.liveTimerMinutes.text = "00"
+                }
                 self.liveTimerFromWatch.invalidate()
                 self.totalSecondsForLiveTimer = 0
                 
@@ -213,12 +216,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 
     func updateTimer() {
         totalSecondsForLiveTimer += 1
-        let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject)
-        let indexPath = IndexPath(row: rowForCell!, section: 0)
-        let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-        tableRow.liveTimerSeconds.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) % 60)
-        tableRow.liveTimerMinutes.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) / 60)
-
+        if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
+            let indexPath = IndexPath(row: rowForCell, section: 0)
+            let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+            tableRow.liveTimerSeconds.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) % 60)
+            tableRow.liveTimerMinutes.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) / 60)
+        }
     }
     func setupStore() {
 
@@ -297,12 +300,14 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         self.tableView.reloadData()
         
         if runningTask.count != 0 {
-            let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject)
-            let indexPath = IndexPath(row: rowForCell!, section: 0)
-            let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-            tableRow.liveTimerSeconds.isHidden = false
-            tableRow.separator.isHidden = false
-            tableRow.liveTimerMinutes.isHidden = false
+            if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
+                let indexPath = IndexPath(row: rowForCell, section: 0)
+                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                tableRow.liveTimerSeconds.isHidden = false
+                tableRow.separator.isHidden = false
+                tableRow.liveTimerMinutes.isHidden = false
+            }
+            
         }
         
         }
