@@ -284,9 +284,21 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        
+        print("\(totalSecondsForLiveTimer)111111111")
         setupStore()
         self.tableView.reloadData()
+        
+        if runningTask.count != 0 {
+            let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject)
+            let indexPath = IndexPath(row: rowForCell!, section: 0)
+            let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+            tableRow.liveTimerSeconds.isHidden = false
+            tableRow.separator.isHidden = false
+            tableRow.liveTimerMinutes.isHidden = false
+        }
+        
+
+        print("\(totalSecondsForLiveTimer)<<<<<<<<<")
         
         // As this happens when the user saves a new project, we also need to let the watch know that the data has changed.
         // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
