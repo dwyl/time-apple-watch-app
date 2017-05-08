@@ -260,14 +260,27 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     // MARK: Notification Center
     
-    func loadList(){
+    func loadList() {
         //load data here
-
+        var runningTask = [Project]();
         let fetchRequest =
             NSFetchRequest<Project>(entityName: "Project")
         
         do {
             projects = try managedObjectContext!.fetch(fetchRequest)
+            
+            let fetchRunningTaskRequest = NSFetchRequest<Project>(entityName: "Project")
+            fetchRunningTaskRequest.predicate = NSPredicate(format: "is_task_running == YES")
+
+            do {
+                runningTask = try managedObjectContext!.fetch(fetchRunningTaskRequest)
+                
+                if runningTask.count == 0 {
+                    sendDataToWatch()
+                }
+            } catch let error as NSError {
+                print("Could not fetch any running tasks. \(error), \(error.userInfo)")
+            }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -275,10 +288,13 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         setupStore()
         self.tableView.reloadData()
         
-        //As this happens when the user saves a new project, we also need to let the watch know that the data has changed.
+        // As this happens when the user saves a new project, we also need to let the watch know that the data has changed.
         // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
-//        if sender is segue then run this else do not run this. 
-        sendDataToWatch()
+        // if sender is segue then run this else do not run this.
+        
+        
+        // but if a timer is running already, then do not send data to watch.
+//        sendDataToWatch()
         }
     
     
