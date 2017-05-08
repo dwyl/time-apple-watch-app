@@ -279,6 +279,10 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 runningTask = try managedObjectContext!.fetch(fetchRunningTaskRequest)
                 
                 if runningTask.count == 0 {
+                    // As this happens when the user saves a new project, we also need to let the watch know that the data has changed.
+                    // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
+                    // if sender is segue then run this else do not run this.
+                    // but if a timer is running already, then do not send data to watch.
                     sendDataToWatch()
                 } else {
                     isTimerRunningOnWatch = true
@@ -289,7 +293,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        print("\(totalSecondsForLiveTimer)111111111")
         setupStore()
         self.tableView.reloadData()
         
@@ -302,16 +305,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             tableRow.liveTimerMinutes.isHidden = false
         }
         
-
-        print("\(totalSecondsForLiveTimer)<<<<<<<<<")
-        
-        // As this happens when the user saves a new project, we also need to let the watch know that the data has changed.
-        // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
-        // if sender is segue then run this else do not run this.
-        
-        
-        // but if a timer is running already, then do not send data to watch.
-//        sendDataToWatch()
         }
     
     
@@ -336,7 +329,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         // unwrapping the session so that if it is nil then it won't call this code.
         if let watchsession = session {
             watchsession.sendMessage(["project": self.store, "uniqueProjects": self.uniqueProjects],
-                                 replyHandler: { replyData in print("Got it?") } ,
+                                 replyHandler: { replyData in print("Information has been received by the watch") } ,
                                  errorHandler: { error in print("error in sending new data to watch \(error)") })
         }
     }

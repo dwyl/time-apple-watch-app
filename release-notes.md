@@ -4,7 +4,17 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (Build 5) _Current_
+## Version 1.1 (Build 7) _Current_
+
+**Bug Fixes**
+- [Issue 53](https://github.com/dwyl/time-apple-watch-app/issues/53) user can now add a project and not lose track of the timer on the apple watch. They can also delete a task without losing track of the timer on the watch.
+
+## Version 1.1 (Build 6)
+
+**Bug Fixes**
+- [Issue 54](https://github.com/dwyl/time-apple-watch-app/issues/54) display issues have now been fixed for users of iPhone 5. 
+
+## Version 1.1 (Build 5)
 
 **Debugging**
 - Added [Crashlytics](https://fabric.io/kits/ios/crashlytics/summary) for the app.
