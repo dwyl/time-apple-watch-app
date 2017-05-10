@@ -4,7 +4,7 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (Build 9) _Current_
+## Version 1.1 (Build 10) _Current_
 
 **Bug Fixes**
 - [Issue 61](https://github.com/dwyl/time-apple-watch-app/issues/61) Fixed issue where the user was unable to start the timer.
@@ -15,6 +15,10 @@ We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to 
 | **iPhone** | **Watch** |
 | --- | --- |
 | ![phone-logo-v2](https://cloud.githubusercontent.com/assets/2305591/25895607/7e73ebc2-3578-11e7-869d-360dd6cf2dea.png) | ![watch-logo-v3](https://cloud.githubusercontent.com/assets/2305591/25895608/7e8bbd7e-3578-11e7-961b-c871d2bbd1f0.png) |
+
+## Version 1.1 (Build 9) _Failed_
+
+- Apple watch icons contained an alpha channel hence the build was failed on iTunes Connect
 
 ## Version 1.1 (Build 8)
 
