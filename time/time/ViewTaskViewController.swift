@@ -22,10 +22,10 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var task: UILabel!
     @IBOutlet weak var taskBackground: UIView!
-    @IBOutlet weak var minutesLabel: UILabel!
-    @IBOutlet weak var secondsLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
+    @IBOutlet weak var totalTimer: UILabel!
     
     @IBOutlet weak var listOfTasks: UITableView!
         
@@ -33,7 +33,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
 
     var timer = Timer()
     var seconds = 00
-    var minutes = 00
     var isRunning = false
     var isTimerRunningOnWatch = false
     
@@ -84,8 +83,9 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         task.text = project_name
         taskBackground.backgroundColor  = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1)
         
-        secondsLabel.text = String(format: "%02d", seconds)
-        minutesLabel.text = String(format: "%02d", minutes)
+        secondsToHsMsSs(seconds: seconds) { (hours, minutes, seconds) in
+            self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+        }
         playButton.isEnabled = true
         isRunning = false
       
@@ -254,9 +254,9 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             seconds = 00
-            minutes = 00
-            secondsLabel.text = String(format: "%02d", seconds)
-            minutesLabel.text = String(format: "%02d", minutes)
+            secondsToHsMsSs(seconds: seconds) { (hours, minutes, seconds) in
+                self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+            }
             playButton.isEnabled = true
             
         }
@@ -283,15 +283,15 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func updateTimer () {
         seconds += 1
-        secondsLabel.text = String(format: "%02d", (seconds % 3600) % 60)
-        minutesLabel.text = String(format: "%02d", (seconds % 3600) / 60)
+        secondsToHsMsSs(seconds: seconds) { (hours, minutes, seconds) in
+            self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+        }
     }
     
     func stopTimerOnPhone () {
         watchTimer.invalidate()
         seconds = 00
-        secondsLabel.text = String("00")
-        minutesLabel.text = String("00")
+        totalTimer.text = "00:00:00"
         playButton.isEnabled = true
         stopButton.isEnabled = false
         isTimerRunningOnWatch = false
