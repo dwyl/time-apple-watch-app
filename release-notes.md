@@ -4,6 +4,15 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
+## Version 1.1 (WUP Build XX) _Future_
+
+**Bug Fixes**
+- Updated UI on phone so that the live timers now show hours minutes and seconds.
+
+| **iPhone Home** | **iPhone Project Detail** |
+| --- | --- |
+| ![phone-logo-v2](https://cloud.githubusercontent.com/assets/2305591/25908757/ef359782-35a2-11e7-84fd-d2941f8f3bfb.png) | ![watch-logo-v3](https://cloud.githubusercontent.com/assets/2305591/25908758/ef36ae7e-35a2-11e7-9181-d3ddde4f7295.png) |
+
 ## Version 1.1 (Build 10) _Current_
 
 **Bug Fixes**
