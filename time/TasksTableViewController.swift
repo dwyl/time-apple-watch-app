@@ -104,9 +104,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
                     let indexPath = IndexPath(row: rowForCell, section: 0)
                     let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                    tableRow.liveTimerSeconds.isHidden = false
-                    tableRow.separator.isHidden = false
-                    tableRow.liveTimerMinutes.isHidden = false
+                    tableRow.liveTimer.isHidden = false
                 }
                 
 
@@ -141,11 +139,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 if let rowForCell = self.uniqueProjects.index(of: message["stopTimerFor"] as! String) {
                     let indexPath = IndexPath(row: rowForCell, section: 0)
                     let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                    tableRow.liveTimerSeconds.isHidden = true
-                    tableRow.liveTimerMinutes.isHidden = true
-                    tableRow.separator.isHidden = true
-                    tableRow.liveTimerSeconds.text = "00"
-                    tableRow.liveTimerMinutes.text = "00"
+                    tableRow.liveTimer.isHidden = true
+                    tableRow.liveTimer.text = "00:00:00"
                 }
                 self.liveTimerFromWatch.invalidate()
                 self.totalSecondsForLiveTimer = 0
@@ -219,8 +214,10 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
             let indexPath = IndexPath(row: rowForCell, section: 0)
             let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-            tableRow.liveTimerSeconds.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) % 60)
-            tableRow.liveTimerMinutes.text = String(format: "%02d", (totalSecondsForLiveTimer % 3600) / 60)
+            secondsToHsMsSs(seconds: Int(totalSecondsForLiveTimer), result: {(hours, minutes, seconds) in
+                tableRow.liveTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+            })
+            
         }
     }
     func setupStore() {
@@ -303,9 +300,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
                 let indexPath = IndexPath(row: rowForCell, section: 0)
                 let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                tableRow.liveTimerSeconds.isHidden = false
-                tableRow.separator.isHidden = false
-                tableRow.liveTimerMinutes.isHidden = false
+                tableRow.liveTimer.isHidden = false
+
             }
             
         }
@@ -391,13 +387,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         if isTimerRunningOnWatch {
             
             if liveTimerForProject == project_name {
-                cell.liveTimerSeconds.isHidden = false
-                cell.separator.isHidden = false
-                cell.liveTimerMinutes.isHidden = false
+                cell.liveTimer.isHidden = false
             } else {
-                cell.liveTimerSeconds.isHidden = true
-                cell.separator.isHidden = true
-                cell.liveTimerMinutes.isHidden = true
+                cell.liveTimer.isHidden = true
             }
             
         }
