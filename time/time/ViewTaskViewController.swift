@@ -195,10 +195,13 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             do {
                 let project = try managedObjectContext!.fetch(fetchRequest)
                 // now set the task end date, is task running and total task time and then save the project
+                let task_start_date = project.first?.task_start_date
                 let task_end_date = Date()
+                let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
                 project.first?.task_end_date = task_end_date as NSDate?
                 project.first?.is_task_running = false
-                project.first?.total_task_time = Double(seconds)
+                print(total_task_time)
+                project.first?.total_task_time = Double(total_task_time)
                 project.first?.task_end_date = Date() as NSDate
                 
                 
@@ -237,10 +240,13 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
                 let project = try managedObjectContext!.fetch(fetchRequest)
                 
                 // now set the task end date, is task running and total task time and then save the project
+                let task_start_date = project.first?.task_start_date
                 let task_end_date = Date()
+                let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
                 project.first?.task_end_date = task_end_date as NSDate?
                 project.first?.is_task_running = false
-                project.first?.total_task_time = Double(seconds)
+                print(total_task_time)
+                project.first?.total_task_time = Double(total_task_time)
                 
                 
                 do {

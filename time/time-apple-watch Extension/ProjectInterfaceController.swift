@@ -177,7 +177,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         // start the timer
         currentTimerForProjectName = project
         // send a message to the phone which will save this data into the core data
-        session?.sendMessage(["startTimerFor": project], replyHandler: {
+        session?.sendMessage(["startTimerFor": project, "task_start_date": Date()], replyHandler: {
             replyData in
             print("You have sent the message!!! \(replyData)")
         }, errorHandler: { error in
@@ -189,9 +189,9 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func stopTimer(forProject project:String, totalTime time:Double) {
         self.timerTotal.invalidate()
-        
+        print("totaltime at end when sending \(totalTime)")
         // send a message to the phone which will update the existing project with the total time
-        session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "total_task_time": totalTime], replyHandler: {
+        session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "task_end_date": Date(), "total_task_time": totalTime], replyHandler: {
             replyData in
             // if the data is set then we can reset the totalTime to 0
                 self.totalTime = 0.0
@@ -203,6 +203,8 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func updateTimerOnWatch() {
         totalTime += 1.0
+        print("totaltime every seccond \(totalTime)")
+
         if totalTime == 1500 {
             WKInterfaceDevice.current().play(.notification)
             let titleOfAlert = "Take a break?"
