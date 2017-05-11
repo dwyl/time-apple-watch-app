@@ -191,7 +191,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         self.timerTotal.invalidate()
         print("totaltime at end when sending \(totalTime)")
         // send a message to the phone which will update the existing project with the total time
-        session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "task_end_date": Date(), "total_task_time": totalTime], replyHandler: {
+        session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "task_end_date": Date()], replyHandler: {
             replyData in
             // if the data is set then we can reset the totalTime to 0
                 self.totalTime = 0.0

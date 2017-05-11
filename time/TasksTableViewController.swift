@@ -145,8 +145,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 self.totalSecondsForLiveTimer = 0
                 
                 let project_name = message["stopTimerFor"] as! String?
-                let total_task_time = message["total_task_time"] as! Double
-                print(total_task_time)
                 let fetchRequest =  NSFetchRequest<Project>(entityName: "Project")
                 //        let predicate = NSPredicate(format: "any project_name = %@", name)
                 let predicate1 = NSPredicate(format: "project_name == %@", project_name!)
@@ -165,7 +163,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     
                     // time is now calculated using the difference in two dates.
                     let total_task_time = task_end_date?.timeIntervalSince((task_start_date! as Date))
-                    print(Double(total_task_time!))
                     project.first?.task_end_date = message["task_end_date"] as? NSDate
                     project.first?.is_task_running = false
                     project.first?.total_task_time = Double(total_task_time!)

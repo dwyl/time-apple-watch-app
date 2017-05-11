@@ -200,7 +200,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
                 let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
                 project.first?.task_end_date = task_end_date as NSDate?
                 project.first?.is_task_running = false
-                print(total_task_time)
                 project.first?.total_task_time = Double(total_task_time)
                 project.first?.task_end_date = Date() as NSDate
                 
@@ -245,7 +244,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
                 let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
                 project.first?.task_end_date = task_end_date as NSDate?
                 project.first?.is_task_running = false
-                print(total_task_time)
                 project.first?.total_task_time = Double(total_task_time)
                 
                 
