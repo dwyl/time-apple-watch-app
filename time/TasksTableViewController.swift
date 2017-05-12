@@ -29,6 +29,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        print("DEINIT")
     }
     
     
@@ -91,12 +92,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
      */
     
     
+    
     //WATCH
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         configureWCSession()
     }
     

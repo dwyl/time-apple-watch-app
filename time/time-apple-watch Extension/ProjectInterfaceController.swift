@@ -189,7 +189,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func stopTimer(forProject project:String, totalTime time:Double) {
         self.timerTotal.invalidate()
-        print("totaltime at end when sending \(totalTime)")
         // send a message to the phone which will update the existing project with the total time
         session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "task_end_date": Date()], replyHandler: {
             replyData in
@@ -203,7 +202,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func updateTimerOnWatch() {
         totalTime += 1.0
-        print("totaltime every seccond \(totalTime)")
 
         if totalTime == 1500 {
             WKInterfaceDevice.current().play(.notification)
