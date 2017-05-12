@@ -18,7 +18,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        subscribeToNotifications()
+
         let navView = setNavbarLogo()
         self.navigationItem.titleView = navView
         
@@ -29,10 +30,39 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         // create a listerner that will reload the list if a new project is added to the list
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
-
-        
-        
+   
     }
+    
+    
+    // MARK: NOTIFICATIONS
+    
+    func subscribeToNotifications() {
+        let notification = NotificationCenter.default
+        notification.addObserver(forName: Notification.Name(rawValue: "TimerUpdated"), object: nil, queue: nil, using: handleUpdateTimer)
+
+        print("Subscribed to NotificationCenter in TasksTableViewController")
+    }
+    
+    func handleUpdateTimer(notification:Notification) -> Void {
+        
+        if let userInfo = notification.userInfo, let timeInSeconds = userInfo["timeInSeconds"] as? Int {
+            // user has started timer in watch
+            // we can start a timer here and send the data to the particular tableviewcell
+            self.liveTimerForProject = ProjectTimer.sharedInstance.projectName
+
+            if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
+                let indexPath = IndexPath(row: rowForCell, section: 0)
+                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                tableRow.liveTimer.isHidden = false
+                print("We got timeeeeee \(timeInSeconds)")
+                secondsToHsMsSs(seconds: timeInSeconds) { (hours, minutes, seconds) in
+                    tableRow.liveTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+                }
+            }
+        }
+    }
+    
+
 
     // MARK: SETUP
     // Here you'll find all the initialising for this particular view controller (Home Page Table View)
@@ -311,9 +341,17 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         }
     
     
-    func timerStoppedOnPhone() {
-        
-        
+    func timerStoppedOnPhone(notification: Notification) {
+        if let userInfo = notification.userInfo, let project_name = userInfo["project_name"] as? String {
+            
+            if let rowForCell = self.uniqueProjects.index(of: project_name) {
+                let indexPath = IndexPath(row: rowForCell, section: 0)
+                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                tableRow.liveTimer.isHidden = true
+
+                tableRow.liveTimer.text = "00:00:00"
+            }
+        }
         // unwrapping the session so that if it is nil then it won't call this code.
         if let watchSession = session {
             watchSession.sendMessage(["timerStoppedOnPhone": true],  replyHandler: { replyData in print("message sent") }, errorHandler: { error in print("error in sending message to phone \(error)") })
@@ -393,7 +431,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             } else {
                 cell.liveTimer.isHidden = true
             }
-            
         }
 
         secondsToHsMsSs(seconds: Int(total_time), result: {(hours, minutes, seconds) in

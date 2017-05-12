@@ -41,11 +41,18 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
 
     //initialise managecontextobject
     var managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-
+    
+    
+//    required init(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)!
+////        subscribeToNotifications()
+//
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        subscribeToNotifications()
         for project in receivedData {
             project_name = project.value["project_name"] as! String
             red = project.value["red"] as! Double
@@ -78,7 +85,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // UPDATE VIEW
 
-        isTaskRunningOnWatch(project_name: project_name)
+//        isTaskRunningOnWatch(project_name: project_name)
 
         task.text = project_name
         taskBackground.backgroundColor  = UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1)
@@ -96,6 +103,16 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("TUFU TUFU TUFU")
+        NotificationCenter.default.removeObserver(self)        
+    }
+    
+    deinit {
+        print("DENINT")
     }
     
 //    NotificationCenter.default.addObserver(self, selector: #selector(resetTimerForPhone), name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
@@ -143,21 +160,50 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    @IBAction func startTimer(_ sender: UIButton) {
-        
-        let start_time = NSTimeIntervalSince1970
-        let project_name = self.project_name
-        //When the user select start
-        // create an item in the database and set the start_time to timeIntervalSince1970, project name and is_task_running to true
-        createTask(project_name: project_name, start_time: start_time)
-        
-        if !isRunning {
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewTaskViewController.updateTimer), userInfo: nil, repeats: true)
+    //MARK: NOTIFICATIONS
+    
+    func subscribeToNotifications() {
+        let notification = NotificationCenter.default
+        notification.addObserver(forName: Notification.Name(rawValue: "TimerUpdated"), object: nil, queue: nil, using: handleUpdateTimer)
+        print("Subscribed to NotificationCenter in ViewTaskViewController")
+    }
+    
+    func unsubscribeFromNotifications() {
+        let notification = NotificationCenter.default
+        notification.removeObserver(self, name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
+        print("Unsubscribed from NotificationCenter in ViewTaskViewController")
+    }
+    
+    @objc func handleUpdateTimer(notification: Notification) {
+        if let userInfo = notification.userInfo, let timeInSeconds = userInfo["timeInSeconds"] as? Int {
             
-            playButton.isEnabled = false
-            isRunning = true
+
+            withUnsafePointer(to: &self.view) {
+                print("We got timeeeeee \(timeInSeconds) \($0)")
+            }
+            
+            secondsToHsMsSs(seconds: timeInSeconds) { (hours, minutes, seconds) in
+                self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+            }
         }
     }
+    
+    @IBAction func startTimer(_ sender: UIButton) {
+        
+        if ProjectTimer.sharedInstance.isTimerRunning() {
+            print("cant start timer, another one is already running in \(ProjectTimer.sharedInstance.projectName)")
+        } else {
+            //When the user select start
+            // create an item in the database and set the start_time to timeIntervalSince1970, project name and is_task_running to true
+            let start_time = NSTimeIntervalSince1970
+            let project_name = self.project_name
+            
+            ProjectTimer.sharedInstance.startTimer()
+            playButton.isEnabled = false
+            ProjectTimer.sharedInstance.projectName = project_name
+            createTask(project_name: project_name, start_time: start_time)
+        }
+      }
 
     func createTask(project_name: String, start_time: Double) {
         // create item in database where we set the name and start time
@@ -174,97 +220,53 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             print("could not save newTaskInProject. \(error)")
         }
     }
-    
-    
-    @IBAction func pauseTimer(_ sender: UIButton) {
-        
-        playButton.isEnabled = true
-        timer.invalidate()
-        isRunning = false
+
+    @IBAction func stopTimer(_ sender: UIButton) {
+
+            if ProjectTimer.sharedInstance.isTimerRunning() {
+                //stop the timer
+                ProjectTimer.sharedInstance.stopTimer()
+                //save the information to db
+                saveTask()
+                //reset text in view
+                self.totalTimer.text = "00:00:00"
+                playButton.isEnabled = true
+//                NotificationCenter.default.post(name: NSNotification.Name(rawValue:"timerStoppedOnPhone"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue:"timerStoppedOnPhone"), object: nil, userInfo: ["project_name": project_name])
+
+            } else {
+                print("you need to start a timer before stopping it!")
+            }
     }
     
-    @IBAction func stopTimer(_ sender: UIButton) {
+    
+    func saveTask() {
+        let fetchRequest =
+            NSFetchRequest<Project>(entityName: "Project")
+        fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
         
-        
-        if (isTimerRunningOnWatch) {
-            // run this if the timer was started on the watch
-            // send the information over to the core database
-            let fetchRequest =
-                NSFetchRequest<Project>(entityName: "Project")
-            fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+        //3
+        do {
+            let project = try managedObjectContext!.fetch(fetchRequest)
+            
+            // now set the task end date, is task running and total task time and then save the project
+            let task_start_date = project.first?.task_start_date
+            let task_end_date = Date()
+            let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
+            project.first?.task_end_date = task_end_date as NSDate?
+            project.first?.is_task_running = false
+            project.first?.total_task_time = Double(total_task_time)
+            
+            
             do {
-                let project = try managedObjectContext!.fetch(fetchRequest)
-                // now set the task end date, is task running and total task time and then save the project
-                let task_start_date = project.first?.task_start_date
-                let task_end_date = Date()
-                let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
-                project.first?.task_end_date = task_end_date as NSDate?
-                project.first?.is_task_running = false
-                project.first?.total_task_time = Double(total_task_time)
-                project.first?.task_end_date = Date() as NSDate
-                
-                
-                do {
-                    try managedObjectContext!.save()
-                    updateTableView(name: project_name)
-                } catch let error as NSError {
-                    print("unable to save project. \(error)")
-                }
+                try managedObjectContext!.save()
+                updateTableView(name: project_name)
             } catch let error as NSError {
-                print("Could not fetch. \(error), \(error.userInfo)")
+                print("unable to save project. \(error)")
             }
-
-            
-            // if the user decides to stop the watch timer on the phone
-            // send a notification to the app view controller
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue:"timerStoppedOnPhone"), object: nil)
-            // which can then inturn send a message to the apple watch
-            // that can reset the time on the watch
-            
-            // stop the timer and reset evertything on this page
-            stopTimerOnPhone()
-            
-        } else {
-            
-            isRunning = false
-            timer.invalidate()
-            //find the existing item in the database which has a is_task_running for the given project
-            
-            let fetchRequest =
-                NSFetchRequest<Project>(entityName: "Project")
-            fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
-            
-            //3
-            do {
-                let project = try managedObjectContext!.fetch(fetchRequest)
-                
-                // now set the task end date, is task running and total task time and then save the project
-                let task_start_date = project.first?.task_start_date
-                let task_end_date = Date()
-                let total_task_time = task_end_date.timeIntervalSince(task_start_date! as Date)
-                project.first?.task_end_date = task_end_date as NSDate?
-                project.first?.is_task_running = false
-                project.first?.total_task_time = Double(total_task_time)
-                
-                
-                do {
-                    try managedObjectContext!.save()
-                    updateTableView(name: project_name)
-                } catch let error as NSError {
-                    print("unable to save project. \(error)")
-                }
-            } catch let error as NSError {
-                print("Could not fetch. \(error), \(error.userInfo)")
-            }
-            
-            seconds = 00
-            secondsToHsMsSs(seconds: seconds) { (hours, minutes, seconds) in
-                self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
-            }
-            playButton.isEnabled = true
-            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
-
     }
     
     func updateTableView (name: String) {

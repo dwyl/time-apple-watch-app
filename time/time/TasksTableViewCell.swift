@@ -18,7 +18,6 @@ class TasksTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         liveTimer.isHidden = true
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,5 +25,7 @@ class TasksTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
+    
 
 }
