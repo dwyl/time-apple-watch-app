@@ -30,10 +30,16 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
 
-        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let (isTaskRunning, taskName) = startLiveTimerOnScreenIfRunning(managedObjectContext: managedObjectContext!)
+        print("task is running? \(isTaskRunning) and for this project \(taskName) ")
         
     }
 
+    
     // MARK: SETUP
     // Here you'll find all the initialising for this particular view controller (Home Page Table View)
     
