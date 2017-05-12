@@ -62,7 +62,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("DENINT ViewTaskViewController")
     }
     
     //MARK: NOTIFICATIONS
@@ -70,24 +69,10 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     func subscribeToNotifications() {
         let notification = NotificationCenter.default
         notification.addObserver(self, selector:#selector(self.handleUpdateTimer), name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
-        print("Subscribed to NotificationCenter in ViewTaskViewController")
-    }
-    
-    func unsubscribeFromNotifications() {
-        let notification = NotificationCenter.default
-        notification.removeObserver(self, name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
-        print("Unsubscribed from NotificationCenter in ViewTaskViewController")
     }
 
-    
     @objc func handleUpdateTimer(notification: Notification) {
         if let userInfo = notification.userInfo, let timeInSeconds = userInfo["timeInSeconds"] as? Int {
-            
-
-            withUnsafePointer(to: &self.view) {
-                print("We got timeeeeee \(timeInSeconds) \($0)")
-            }
-            
             if project_name == ProjectTimer.sharedInstance.projectName {
                 secondsToHsMsSs(seconds: timeInSeconds) { (hours, minutes, seconds) in
                     self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
@@ -102,7 +87,6 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func startTimer(_ sender: UIButton) {
         
         if ProjectTimer.sharedInstance.isTimerRunning() {
-            print("cant start timer, another one is already running in \(ProjectTimer.sharedInstance.projectName)")
             let alert = UIAlertController(title: "Time is already running", message: "Oops! A timer is already running in \(ProjectTimer.sharedInstance.projectName), you can only have one timer running at a given time", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)

@@ -29,7 +29,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("DENINT TaskTableViewController")
     }
     
     
@@ -40,7 +39,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         notification.addObserver(self, selector:#selector(self.handleUpdateTimer), name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
         notification.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         notification.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
-        print("Subscribed to NotificationCenter in TasksTableViewController")
     }
     
     func handleUpdateTimer(notification:Notification) -> Void {
@@ -54,7 +52,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 let indexPath = IndexPath(row: rowForCell, section: 0)
                 let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
                 tableRow.liveTimer.isHidden = false
-                print("We got timeeeeee \(timeInSeconds)")
                 secondsToHsMsSs(seconds: timeInSeconds) { (hours, minutes, seconds) in
                     tableRow.liveTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
                 }

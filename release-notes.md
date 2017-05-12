@@ -4,7 +4,18 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (WUP Build XX) _Future_
+## Version 1.1 (WIP Build 11) _Current_
+
+**Additions**
+- If a user tries to start a new timer whilst another one is running then they will be prompted with an alert
+
+| **iPhone Home** |
+| --- |
+| ![phone-logo-v2](https://cloud.githubusercontent.com/assets/2305591/26006188/67a9ce9a-3733-11e7-8434-e479d9da1085.png) |
+
+**Code Change**
+- iPhone now has a singleton timer
+- refactored and removed all the other timers that were running in multiple view controllers
 
 **Bug Fixes**
 - Updated UI on phone so that the live timers now show hours minutes and seconds.
@@ -13,7 +24,7 @@ We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to 
 | --- | --- |
 | ![phone-logo-v2](https://cloud.githubusercontent.com/assets/2305591/25908757/ef359782-35a2-11e7-84fd-d2941f8f3bfb.png) | ![watch-logo-v3](https://cloud.githubusercontent.com/assets/2305591/25908758/ef36ae7e-35a2-11e7-9181-d3ddde4f7295.png) |
 
-## Version 1.1 (Build 10) _Current_
+## Version 1.1 (Build 10)
 
 **Bug Fixes**
 - [Issue 61](https://github.com/dwyl/time-apple-watch-app/issues/61) Fixed issue where the user was unable to start the timer.
