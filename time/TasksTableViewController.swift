@@ -14,11 +14,10 @@ import WatchConnectivity
 
 class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        subscribeToNotifications()
+
         let navView = setNavbarLogo()
         self.navigationItem.titleView = navView
         
@@ -26,13 +25,42 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         projects = fetchProjectNames(managedObjectContext: managedObjectContext!) // fetch the list of project names
         // SETTING UP THE STORE
         setupStore()
-        // create a listerner that will reload the list if a new project is added to the list
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
-
-        
-        
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("DEINIT")
+    }
+    
+    
+    // MARK: NOTIFICATIONS
+    
+    func subscribeToNotifications() {
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector:#selector(self.handleUpdateTimer), name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
+        notification.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        notification.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
+    }
+    
+    func handleUpdateTimer(notification:Notification) -> Void {
+        
+        if let userInfo = notification.userInfo, let timeInSeconds = userInfo["timeInSeconds"] as? Int {
+            // user has started timer in watch
+            // we can start a timer here and send the data to the particular tableviewcell
+            let projectName = ProjectTimer.sharedInstance.projectName
+
+            if let rowForCell = self.uniqueProjects.index(of: projectName) {
+                let indexPath = IndexPath(row: rowForCell, section: 0)
+                let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
+                tableRow.liveTimer.isHidden = false
+                secondsToHsMsSs(seconds: timeInSeconds) { (hours, minutes, seconds) in
+                    tableRow.liveTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
+                }
+            }
+        }
+    }
+    
+
 
     // MARK: SETUP
     // Here you'll find all the initialising for this particular view controller (Home Page Table View)
@@ -46,10 +74,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     var projectNames = [String]() // List of project names.
     var uniqueProjects = [String]() // List of unique project names
     var store = [String: Dictionary<String, Any>]() // Data structure that contains information about each individual project as shown in the example below
-    var liveTimerFromWatch = Timer()
-    var totalSecondsForLiveTimer = 0
-    var liveTimerForProject = String()
-    var isTimerRunningOnWatch = false
     /*
      This is how the localStore will look like.
      var store =
@@ -68,12 +92,12 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
      */
     
     
+    
     //WATCH
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         configureWCSession()
     }
     
@@ -97,27 +121,21 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             }
             if (message["startTimerFor"] as? String) != nil {
                 
-                // user has started timer in watch
-                // we can start a timer here and send the data to the particular tableviewcell
-                self.isTimerRunningOnWatch = true
-                self.liveTimerForProject = message["startTimerFor"] as! String
-                if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
-                    let indexPath = IndexPath(row: rowForCell, section: 0)
-                    let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                    tableRow.liveTimer.isHidden = false
+                if ProjectTimer.sharedInstance.isTimerRunning() {
+                    print("cant start timer, another one is already running in \(ProjectTimer.sharedInstance.projectName)")
+                } else {
+                    ProjectTimer.sharedInstance.startTimer()
+                    ProjectTimer.sharedInstance.projectName = message["startTimerFor"] as! String
                 }
                 
 
-                self.liveTimerFromWatch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
-                
                 // save the given item to the coredata create a new field called fromAppleWatch which we have to set to true here.
                 
                 if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: self.managedObjectContext!)  as? Project {
                     // setting from apple watch to true as this comes from the apple watch
-                    newTaskInProject.task_start_date = Date() as NSDate
+                    newTaskInProject.task_start_date = message["task_start_date"] as? NSDate
                     newTaskInProject.from_apple_watch = true
                     newTaskInProject.project_name = message["startTimerFor"] as! String?
-                    newTaskInProject.start_time = Int64(NSTimeIntervalSince1970)
                     newTaskInProject.is_task_running = true
                     
                 }
@@ -132,22 +150,15 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             }
             if (message["stopTimerFor"] as? String) != nil {
                 
-                // send message to viewTaskViewController to stop the timer
-                self.isTimerRunningOnWatch = false
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopPhoneTimer"), object: nil)
-
-                if let rowForCell = self.uniqueProjects.index(of: message["stopTimerFor"] as! String) {
-                    let indexPath = IndexPath(row: rowForCell, section: 0)
-                    let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                    tableRow.liveTimer.isHidden = true
-                    tableRow.liveTimer.text = "00:00:00"
+                if ProjectTimer.sharedInstance.isTimerRunning() {
+                    //stop the timer
+                    ProjectTimer.sharedInstance.stopTimer()
+                } else {
+                    print("you need to start a timer before stopping it!")
                 }
-                self.liveTimerFromWatch.invalidate()
-                self.totalSecondsForLiveTimer = 0
+                
                 
                 let project_name = message["stopTimerFor"] as! String?
-                let total_task_time = message["total_task_time"] as! Double
-                
                 let fetchRequest =  NSFetchRequest<Project>(entityName: "Project")
                 //        let predicate = NSPredicate(format: "any project_name = %@", name)
                 let predicate1 = NSPredicate(format: "project_name == %@", project_name!)
@@ -160,16 +171,22 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     
                     let project = try self.managedObjectContext!.fetch(fetchRequest)
                     // now set the task end date, is task running and total task time and then save the project
-                    let task_end_date = Date()
-                    project.first?.task_end_date = task_end_date as NSDate?
+                    
+                    let task_start_date = project.first?.task_start_date
+                    let task_end_date = message["task_end_date"] as? NSDate
+                    
+                    // time is now calculated using the difference in two dates.
+                    let total_task_time = task_end_date?.timeIntervalSince((task_start_date! as Date))
+                    project.first?.task_end_date = message["task_end_date"] as? NSDate
                     project.first?.is_task_running = false
-                    project.first?.total_task_time = Double(total_task_time)
+                    project.first?.total_task_time = Double(total_task_time!)
                     
                     
                     do {
                         self.loadList()
                         replyHandler(["savedToCoreData": "YOU SAVED TO THE DB"])
                         try self.managedObjectContext!.save()
+                        self.tableView.reloadData()
                         
                     } catch let error as NSError {
                         print("unable to save project. \(error)")
@@ -208,18 +225,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     
     }
     
-
-    func updateTimer() {
-        totalSecondsForLiveTimer += 1
-        if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
-            let indexPath = IndexPath(row: rowForCell, section: 0)
-            let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-            secondsToHsMsSs(seconds: Int(totalSecondsForLiveTimer), result: {(hours, minutes, seconds) in
-                tableRow.liveTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
-            })
-            
-        }
-    }
     func setupStore() {
 
         // SETTING UP THE STORE
@@ -284,8 +289,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     // if sender is segue then run this else do not run this.
                     // but if a timer is running already, then do not send data to watch.
                     sendDataToWatch()
-                } else {
-                    isTimerRunningOnWatch = true
                 }
             } catch let error as NSError {
                 print("Could not fetch any running tasks. \(error), \(error.userInfo)")
@@ -295,23 +298,20 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         }
         setupStore()
         self.tableView.reloadData()
-        
-        if runningTask.count != 0 {
-            if let rowForCell = self.uniqueProjects.index(of: self.liveTimerForProject) {
+        }
+    
+    
+    func timerStoppedOnPhone(notification: Notification) {
+        if let userInfo = notification.userInfo, let project_name = userInfo["project_name"] as? String {
+            
+            if let rowForCell = self.uniqueProjects.index(of: project_name) {
                 let indexPath = IndexPath(row: rowForCell, section: 0)
                 let tableRow = self.tableView.cellForRow(at: indexPath) as! TasksTableViewCell
-                tableRow.liveTimer.isHidden = false
+                tableRow.liveTimer.isHidden = true
 
+                tableRow.liveTimer.text = "00:00:00"
             }
-            
         }
-        
-        }
-    
-    
-    func timerStoppedOnPhone() {
-        
-        
         // unwrapping the session so that if it is nil then it won't call this code.
         if let watchSession = session {
             watchSession.sendMessage(["timerStoppedOnPhone": true],  replyHandler: { replyData in print("message sent") }, errorHandler: { error in print("error in sending message to phone \(error)") })
@@ -384,15 +384,11 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         
         //check if the timer is running on the watch and for which cell item
 //        then unhide the timer for that particular cell and hide for the rest
-        if isTimerRunningOnWatch {
-            
-            if liveTimerForProject == project_name {
+            if ProjectTimer.sharedInstance.projectName == project_name {
                 cell.liveTimer.isHidden = false
             } else {
                 cell.liveTimer.isHidden = true
             }
-            
-        }
 
         secondsToHsMsSs(seconds: Int(total_time), result: {(hours, minutes, seconds) in
             cell.taskTime.text = "\(timeToText(s: hours))h\(timeToText(s: minutes))m\(timeToText(s: seconds))s"
@@ -436,8 +432,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     
                     if runningTask.count == 0 {
                         sendDataToWatch()
-                    } else {
-                        isTimerRunningOnWatch = true
                     }
                 } catch let error as NSError {
                     print("Could not fetch any running tasks. \(error), \(error.userInfo)")

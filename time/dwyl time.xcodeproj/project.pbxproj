@@ -29,6 +29,7 @@
 		0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */; };
 		0D662CE21E70537900AFDE32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D662CE11E70537900AFDE32 /* Task.swift */; };
 		0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */; };
+		0DB2792D1EC4B2350011559E /* ProjectTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2792C1EC4B2350011559E /* ProjectTimer.swift */; };
 		0DC628C11E7C3F7C00B47419 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628BF1E7C3F7C00B47419 /* Interface.storyboard */; };
 		0DC628C31E7C3F7C00B47419 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DC628C21E7C3F7C00B47419 /* Assets.xcassets */; };
 		0DC628CA1E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DC628C91E7C3F7C00B47419 /* dwyl time-apple-watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -128,6 +129,7 @@
 		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
 		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0DB2792C1EC4B2350011559E /* ProjectTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTimer.swift; sourceTree = "<group>"; };
 		0DC628BD1E7C3F7C00B47419 /* dwyl time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dwyl time.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC628C01E7C3F7C00B47419 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0DC628C21E7C3F7C00B47419 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				0D11C4711E96A15200689D48 /* setNavbarLogo.swift */,
 				0DCC075B1E9BA9C400868547 /* formatTime.swift */,
 				0D243CD11EAE192700053265 /* materialColors.swift */,
+				0DB2792C1EC4B2350011559E /* ProjectTimer.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */,
 				0DCC075C1E9BA9C400868547 /* formatTime.swift in Sources */,
 				0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */,
+				0DB2792D1EC4B2350011559E /* ProjectTimer.swift in Sources */,
 				0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */,
 				0D11C4721E96A15200689D48 /* setNavbarLogo.swift in Sources */,
 				0D243CD21EAE192700053265 /* materialColors.swift in Sources */,
