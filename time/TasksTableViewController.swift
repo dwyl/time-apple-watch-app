@@ -40,7 +40,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         notification.addObserver(self, selector:#selector(self.handleUpdateTimer), name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
         notification.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         notification.addObserver(self, selector: #selector(timerStoppedOnPhone), name: NSNotification.Name(rawValue: "timerStoppedOnPhone"), object: nil)
-        notification.addObserver(self, selector: #selector(reloadTimerOnAppStart), name: NSNotification.Name(rawValue: "reloadTimerOnAppStart"), object: nil)
     }
     
     func handleUpdateTimer(notification:Notification) -> Void {
@@ -323,35 +322,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 
         
     }
-    
-    func reloadTimerOnAppStart(notification:Notification) {
-        
-        print("You reloaded timer on app start")
-        // check if db has any outstanding running tasks
-        // if it does then start the singleton timer
-        // display it accordingly on the view.
-        let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
-        fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
-        
-        do {
-            let RunningProject = try managedObjectContext!.fetch(fetchRequest)
-            
-            for project in RunningProject {
-                print("project \(project.project_name) \(project.task_start_date)")
-            }
-            if RunningProject.count == 1 {
-                ProjectTimer.sharedInstance.startTimer()
-                ProjectTimer.sharedInstance.projectName = (RunningProject.first?.project_name)!
-                ProjectTimer.sharedInstance.startDate = (RunningProject.first?.task_start_date as Date?)!
-                handleUpdateTimer(notification: notification)
-            }
-        
-        
-        } catch let error as NSError {
-            print("unable to get projects from core data. \(error)")
-        }
-    }
-    
     
     // WATCH MESSAGE FUNCTIONS
     

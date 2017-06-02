@@ -6,18 +6,40 @@
 //  Copyright © 2017 dwyl. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
 class ProjectTimer {
     
     static let sharedInstance = ProjectTimer()
-    private init() { }
+    private init() {
+    print("you are in projectTimer")
+    }
 
     var startDate = Date()
     var timeInSeconds = 0.0
     var timer = Timer()
     var timerRunning = false
     var projectName = String()
+    
+    func loadState() {
+        print("Loading STATE")
+        let managedObjectContext: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+        fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+        // fetch where task is running.
+        do {
+            let RunningProject = try managedObjectContext!.fetch(fetchRequest)
+            if RunningProject.count == 1 {
+                startTimer()
+                projectName = (RunningProject.first?.project_name)!
+                startDate = (RunningProject.first?.task_start_date as Date?)!
+                updateTimer()
+            }
+        } catch let error as NSError {
+            print("unable to get projects from core data. \(error)")
+        }
+    }
     
     func startTimer() {
         timerRunning = true
