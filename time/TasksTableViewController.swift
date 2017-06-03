@@ -323,7 +323,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         
     }
     
-    
     // WATCH MESSAGE FUNCTIONS
     
     func sendDataToWatch() {

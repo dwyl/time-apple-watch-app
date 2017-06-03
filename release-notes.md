@@ -4,7 +4,12 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (WIP Build 11) _Current_
+## Version 1.1 (WIP Build 13) _Current_
+
+- Timer state is reloaded if the user force quits the app and rejoins. :tada:
+
+
+## Version 1.1 (WIP Build 11)
 
 **Additions**
 - If a user tries to start a new timer whilst another one is running then they will be prompted with an alert
