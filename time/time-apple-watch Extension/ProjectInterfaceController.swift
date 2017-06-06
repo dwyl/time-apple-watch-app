@@ -102,6 +102,31 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                 self.reloadData()
                 self.timerTotal.invalidate()
             }
+            if (message["timerStartedOnPhone"]) != nil {
+                let project_name = message["project_name"] as! String
+                // now that the timer has started on the phone
+                // lets start it on the watch.
+                // first step creat the watch singleton!!
+                self.currentTimerForProjectName = project_name
+                self.projectTable.setNumberOfRows(self.uniqueProjects.count, withRowType: "ProjectName")
+                self.isTimerRunning = true
+                self.timerTotal = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimerOnWatch), userInfo: nil, repeats: true)
+
+                for i in 0..<self.projectTable.numberOfRows {
+
+                    if let controller = self.projectTable.rowController(at: i) as? ProjectRowController {
+                        controller.ProjectName.setText(self.uniqueProjects[i])
+                        let red = self.store[self.uniqueProjects[i]]?["red"]
+                        let green = self.store[self.uniqueProjects[i]]?["green"]
+                        let blue = self.store[self.uniqueProjects[i]]?["blue"]
+                        controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
+                        if (self.uniqueProjects[i] == project_name) {
+                            controller.startTimerForRow()
+                        }
+                 
+                    }
+                }
+            }
         }
     }
     

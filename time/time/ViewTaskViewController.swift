@@ -100,6 +100,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             playButton.isEnabled = false
             ProjectTimer.sharedInstance.projectName = project_name
             createTask(project_name: project_name, start_time: start_time)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "timerStartedOnPhone"), object: nil, userInfo: ["project_name": project_name, "start_time": start_time])
         }
       }
 
