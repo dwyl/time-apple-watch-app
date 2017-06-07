@@ -120,6 +120,29 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             if (message["project"] as? Int) != nil {
                 replyHandler(["project": self.store , "uniqueProjects": self.uniqueProjects])
             }
+            if (message["isTaskRunning"] != nil) {
+                
+                // fetch running task from database
+                // if task is running send project name and start time over to the watch
+                // else send false as there is no task running
+                
+                let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+                fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+                // fetch where task is running.
+                do {
+                    let RunningProject = try self.managedObjectContext!.fetch(fetchRequest)
+                    if RunningProject.count == 1 {
+                        let projectName = RunningProject.first?.project_name
+                        let startDate = RunningProject.first?.task_start_date
+                        replyHandler(["project_name": projectName ?? "noProject", "start_date": startDate ?? Date()])
+                    } else {
+                        replyHandler(["project_name": "noProject"])
+                    }
+                } catch let error as NSError {
+                    print("unable to get projects from core data. \(error)")
+                }
+                
+            }
             if (message["startTimerFor"] as? String) != nil {
 
                 if ProjectTimer.sharedInstance.isTimerRunning() {

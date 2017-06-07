@@ -105,7 +105,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             //When the user select start
             // create an item in the database and set the start_time to timeIntervalSince1970, project name and is_task_running to true
-            let start_time = NSTimeIntervalSince1970
+            let start_time = Date()
             let project_name = self.project_name
             
             ProjectTimer.sharedInstance.startTimer()
@@ -133,11 +133,10 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             }
     }
     
-    func createTask(project_name: String, start_time: Double) {
+    func createTask(project_name: String, start_time: Date) {
         // create item in database where we set the name and start time
         if let newTaskInProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext!)  as? Project {
             newTaskInProject.project_name = project_name
-            newTaskInProject.start_time = Int64(start_time)
             newTaskInProject.is_task_running = true
             newTaskInProject.task_start_date = Date() as NSDate
         }

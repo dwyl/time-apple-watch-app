@@ -12,6 +12,8 @@ import WatchConnectivity
 
 class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     
+    
+    
     // MARK: SETUP
     @IBOutlet var projectTable: WKInterfaceTable!
     var store = [String: Dictionary<String, Any> ]()
@@ -32,7 +34,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     // set it's delegate to the project interface controller and activate the session.
     override init() {
         super.init()
-        
+        print("INIT OVERRIDE")
         session?.delegate = self
         session?.activate()
     }
@@ -42,6 +44,74 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         //fetching data from watch
         fetchDataFromWatch(session: session)
 
+    }
+    
+    
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
+        if WCSession.isSupported() {
+            let wcsession = WCSession.default()
+            wcsession.delegate = self
+            wcsession.activate()
+        }
+        
+        fetchDataFromWatch(session: (session)!)
+        
+    }
+
+
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        print("willActivate")
+        super.willActivate()
+
+        // ping the phone
+        
+        session?.sendMessage(["isTaskRunning": true], replyHandler: {
+            replyData in
+            
+            if let project_name = replyData["project_name"] as? String {    
+                if project_name != "noProject" {
+                    
+                    let start_date = replyData["start_date"] as! Date
+
+                    // check if a task is running on the phone
+                    // if it is then show it running on the watch....
+                    self.currentTimerForProjectName = project_name
+                    self.projectTable.setNumberOfRows(self.uniqueProjects.count, withRowType: "ProjectName")
+                    self.isTimerRunning = true
+                    self.timerTotal = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimerOnWatch), userInfo: nil, repeats: true)
+                    
+                    for i in 0..<self.projectTable.numberOfRows {
+                        
+                        if let controller = self.projectTable.rowController(at: i) as? ProjectRowController {
+                            controller.ProjectName.setText(self.uniqueProjects[i])
+                            let red = self.store[self.uniqueProjects[i]]?["red"]
+                            let green = self.store[self.uniqueProjects[i]]?["green"]
+                            let blue = self.store[self.uniqueProjects[i]]?["blue"]
+                            controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
+                            if (self.uniqueProjects[i] == project_name) {
+                                controller.startTimerForRow(date: start_date)
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            print("You have sent the message!!! \(replyData)")
+        }, errorHandler: { error in
+            print("could not send name of the project for which the timer has started")
+        })
+
+        
+        
+    }
+    
+    override func didDeactivate() {
+        print("didDeactivate")
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
     }
     
     // Loading the data into the tableview on the apple watch
@@ -115,6 +185,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
             }
             if (message["timerStartedOnPhone"]) != nil {
                 let project_name = message["project_name"] as! String
+                let start_date = message["start_time"] as! Date
                 // now that the timer has started on the phone
                 // lets start it on the watch.
                 // first step creat the watch singleton!!
@@ -132,7 +203,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                         let blue = self.store[self.uniqueProjects[i]]?["blue"]
                         controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
                         if (self.uniqueProjects[i] == project_name) {
-                            controller.startTimerForRow()
+                            controller.startTimerForRow(date: start_date)
                         }
                  
                     }
@@ -140,23 +211,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
             }
         }
     }
-    
-    override func awake(withContext context: Any?) {
-        print("AWAKEEEE")
-        super.awake(withContext: context)
-        fetchDataFromWatch(session: (session)!)
-        
-    }
-    
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
 
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         
@@ -168,7 +223,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
             //currently not much apart from changing the background color but this is where a lot of work will need to take place.
             // if timer is not running then start the timer
             if !isTimerRunning {
-                cell.startTimerForRow()
+                cell.startTimerForRow(date: Date())
                 startTimer(forProject: uniqueProjects[rowIndex])
             } else {
                 
@@ -198,7 +253,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                         cell.stopTimerForRow()
                     }
                     startTimer(forProject: uniqueProjects[rowIndex])
-                    cell.startTimerForRow()
+                    cell.startTimerForRow(date: Date())
                 }
                 
             }

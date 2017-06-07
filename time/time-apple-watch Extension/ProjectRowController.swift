@@ -21,10 +21,10 @@ class ProjectRowController: NSObject {
     let stopImage = UIImage(named: "fa-stop")
     
     
-    func startTimerForRow() {
+    func startTimerForRow(date: Date) {
         timerGroup.setHidden(false)
         timer.setHidden(false)
-        timer.setDate(Date(timeIntervalSinceNow: 0.0))
+        timer.setDate(date)
         timer.start()
         startTimer.setImage(stopImage)
     }
