@@ -69,6 +69,9 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
     func subscribeToNotifications() {
         let notification = NotificationCenter.default
         notification.addObserver(self, selector:#selector(self.handleUpdateTimer), name: Notification.Name(rawValue: "TimerUpdated"), object: nil)
+        notification.addObserver(self, selector: #selector(self.handleReloadTimer), name: NSNotification.Name(rawValue: "resetTimer"), object: nil)
+
+        
     }
 
     @objc func handleUpdateTimer(notification: Notification) {
@@ -77,6 +80,15 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
                 secondsToHsMsSs(seconds: timeInSeconds) { (hours, minutes, seconds) in
                     self.totalTimer.text = "\(timeToText(s: hours)):\(timeToText(s: minutes)):\(timeToText(s: seconds))"
                 }
+            }
+        }
+    }
+    
+    @objc func handleReloadTimer(notification: Notification) {
+        if let userInfo = notification.userInfo, let projectName = userInfo["project_name"] as? String {
+            if self.project_name == projectName {
+                totalTimer.text = "00:00:00"
+                playButton.isEnabled = true
             }
         }
     }

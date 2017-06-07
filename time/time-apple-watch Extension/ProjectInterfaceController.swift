@@ -66,6 +66,17 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     func fetchDataFromWatch (session: WCSession) {
         
         // Once the session is active, send a message to the iphone
+        
+        // check if timer is running 
+        // send message to fetch data if it isn't running. 
+        // update timer if its running on phone.
+        // else update the store and reload data. 
+        if !isTimerRunning {
+            
+        }
+        
+        
+        
         session.sendMessage(applicationData,
                             replyHandler: { replyData in
                                 // handle reply from iPhone app here
@@ -131,9 +142,10 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     override func awake(withContext context: Any?) {
+        print("AWAKEEEE")
         super.awake(withContext: context)
         fetchDataFromWatch(session: (session)!)
-
+        
     }
     
     override func willActivate() {
