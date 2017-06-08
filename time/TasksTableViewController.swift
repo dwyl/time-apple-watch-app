@@ -120,6 +120,29 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             if (message["project"] as? Int) != nil {
                 replyHandler(["project": self.store , "uniqueProjects": self.uniqueProjects])
             }
+            if (message["isTaskRunning"] != nil) {
+                
+                // fetch running task from database
+                // if task is running send project name and start time over to the watch
+                // else send false as there is no task running
+                
+                let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
+                fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
+                // fetch where task is running.
+                do {
+                    let RunningProject = try self.managedObjectContext!.fetch(fetchRequest)
+                    if RunningProject.count == 1 {
+                        let projectName = RunningProject.first?.project_name
+                        let startDate = RunningProject.first?.task_start_date
+                        replyHandler(["project_name": projectName ?? "noProject", "start_date": startDate ?? Date()])
+                    } else {
+                        replyHandler(["project_name": "noProject"])
+                    }
+                } catch let error as NSError {
+                    print("unable to get projects from core data. \(error)")
+                }
+                
+            }
             if (message["startTimerFor"] as? String) != nil {
 
                 if ProjectTimer.sharedInstance.isTimerRunning() {
@@ -150,21 +173,25 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 
             }
             if (message["stopTimerFor"] as? String) != nil {
-
-                if ProjectTimer.sharedInstance.isTimerRunning() {
-                    //stop the timer
-                    ProjectTimer.sharedInstance.stopTimer()
-                } else {
-                    print("you need to start a timer before stopping it!")
-                }
-
-
+                
+                
                 let project_name = message["stopTimerFor"] as! String?
                 let fetchRequest =  NSFetchRequest<Project>(entityName: "Project")
                 //        let predicate = NSPredicate(format: "any project_name = %@", name)
                 let predicate1 = NSPredicate(format: "project_name == %@", project_name!)
                 let predicate2 = NSPredicate(format: "is_task_running == YES")
                 let predicateCompound = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1,predicate2])
+                
+
+                if ProjectTimer.sharedInstance.isTimerRunning() {
+                    //stop the timer
+                    ProjectTimer.sharedInstance.stopTimer()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue:("resetTimer")), object: nil, userInfo: ["project_name": project_name])
+                } else {
+                    print("you need to start a timer before stopping it!")
+                }
+
+
 
                 do {
                     fetchRequest.predicate = predicateCompound

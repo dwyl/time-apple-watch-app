@@ -4,7 +4,14 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (WIP Build 14) _Current_
+## Version 1.1 (WIP Build 15) _Current_
+
+- updated the way the watch was being synced.
+    - If the watch returns from the background we are now fetching the latest information from the iPhone and then displaying a live timer accordingly
+- Also fixed issue When the timer is stopped on the watch and the user is in the project details view.
+
+
+## Version 1.1 (WIP Build 14)
 
 - Syncing timer both ways. Users can now see the timer running on the watch if they've started it on the Phone.
 
