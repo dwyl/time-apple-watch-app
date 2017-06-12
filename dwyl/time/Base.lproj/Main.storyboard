@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bcg-iI-cGb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bcg-iI-cGb">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,13 +13,13 @@
         <!--Tasks Table View Controller-->
         <scene sceneID="2CK-Hp-eiJ">
             <objects>
-                <tableViewController id="N4H-fn-RGJ" customClass="TasksTableViewController" customModule="dwyl_time" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="N4H-fn-RGJ" customClass="TasksTableViewController" customModule="dwyl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SFA-rL-1ml">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="102" id="MIY-oi-rfe" customClass="TasksTableViewCell" customModule="dwyl_time" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="102" id="MIY-oi-rfe" customClass="TasksTableViewCell" customModule="dwyl" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MIY-oi-rfe" id="ylN-dr-3gf">
@@ -90,7 +90,7 @@
         <!--Add Task View Controller-->
         <scene sceneID="Sd6-eH-PBY">
             <objects>
-                <viewController id="epq-p4-vSg" customClass="AddTaskViewController" customModule="dwyl_time" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="epq-p4-vSg" customClass="AddTaskViewController" customModule="dwyl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SMM-Ks-IHC"/>
                         <viewControllerLayoutGuide type="bottom" id="TH5-ej-3gn"/>
@@ -109,7 +109,7 @@
                                 <rect key="frame" x="16" y="76" width="288" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,7 +148,7 @@
         <!--View Task View Controller-->
         <scene sceneID="uoH-Bl-JAl">
             <objects>
-                <viewController id="YQT-9a-4qo" customClass="ViewTaskViewController" customModule="dwyl_time" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YQT-9a-4qo" customClass="ViewTaskViewController" customModule="dwyl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CBx-lT-Au3"/>
                         <viewControllerLayoutGuide type="bottom" id="tKZ-1V-w5I"/>
@@ -180,11 +180,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="70" id="p0G-LG-nm4" customClass="TaskListTableViewCell" customModule="dwyl_time" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="70" id="p0G-LG-nm4" customClass="TaskListTableViewCell" customModule="dwyl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0G-LG-nm4" id="ddm-Wr-99F">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-vI-Yxl">
