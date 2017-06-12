@@ -4,6 +4,13 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
+## Version 1.1 (WIP Build 15)
+
+- updated name of the app to `dwyl`
+- updated the text input issue where the first letter was not auto capitalized, described in  [issue 50](https://github.com/dwyl/time-apple-watch-app/issues/50)
+- also updated the flow of the add view so that the user does not have to click done and then save. If the user clicks done, it will return user to the table view automatically.
+
+
 ## Version 1.1 (WIP Build 15) _Current_
 
 - updated the way the watch was being synced.

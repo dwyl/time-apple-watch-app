@@ -78,9 +78,6 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
             dismiss(animated: true, completion: nil)
         }
-        
-
-        
     }
     
     func doesProjectExist (name: String) -> Bool {
@@ -171,6 +168,15 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         taskName.resignFirstResponder()
         
+        let name = taskName.text ?? ""
+        let time = 12345667
+        let rng = Int(arc4random_uniform(UInt32(18)))
+        let red = randomColors[rng].red!
+        let green = randomColors[rng].green!
+        let blue = randomColors[rng].blue!
+        self.save(name: name, time: Double(time), red: red, green: green, blue: blue)
+        dismiss(animated: true, completion: nil)
+
         //potentially select the save button??
         return true
     }
