@@ -24,10 +24,10 @@
 		0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */; };
 		0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */; };
 		0D243CD21EAE192700053265 /* materialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D243CD11EAE192700053265 /* materialColors.swift */; };
+		0D42F4061EEFFD1D00471321 /* ProjectTimerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D42F4051EEFFD1D00471321 /* ProjectTimerTest.swift */; };
 		0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */; };
 		0D662CE21E70537900AFDE32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D662CE11E70537900AFDE32 /* Task.swift */; };
 		0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */; };
-		0DA4CF1E1EEE9A7F00EE6744 /* ProjectTimerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA4CF1D1EEE9A7F00EE6744 /* ProjectTimerTest.swift */; };
 		0DA4CF211EEEA25700EE6744 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4CF1F1EEEA25700EE6744 /* Crashlytics.framework */; };
 		0DA4CF221EEEA25700EE6744 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4CF201EEEA25700EE6744 /* Fabric.framework */; };
 		0DB2792D1EC4B2350011559E /* ProjectTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2792C1EC4B2350011559E /* ProjectTimer.swift */; };
@@ -125,10 +125,10 @@
 		0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddTaskViewController.swift; path = ../AddTaskViewController.swift; sourceTree = "<group>"; };
 		0D243CD11EAE192700053265 /* materialColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = materialColors.swift; sourceTree = "<group>"; };
+		0D42F4051EEFFD1D00471321 /* ProjectTimerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTimerTest.swift; sourceTree = "<group>"; };
 		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
 		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0DA4CF1D1EEE9A7F00EE6744 /* ProjectTimerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTimerTest.swift; sourceTree = "<group>"; };
 		0DA4CF1F1EEEA25700EE6744 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0DA4CF201EEEA25700EE6744 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		0DB2792C1EC4B2350011559E /* ProjectTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTimer.swift; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 			children = (
 				0DCC07601E9CF7EB00868547 /* formatTimeTest.swift */,
 				0DCC07621E9D37C300868547 /* setNavbarLogoTest.swift */,
-				0DA4CF1D1EEE9A7F00EE6744 /* ProjectTimerTest.swift */,
+				0D42F4051EEFFD1D00471321 /* ProjectTimerTest.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -537,7 +537,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DA4CF1E1EEE9A7F00EE6744 /* ProjectTimerTest.swift in Sources */,
 				0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */,
 				0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */,
 				0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */,
@@ -564,6 +563,7 @@
 				0DCC07611E9CF7EB00868547 /* formatTimeTest.swift in Sources */,
 				0DCC07631E9D37C300868547 /* setNavbarLogoTest.swift in Sources */,
 				0D2038211E6D82FD008CB3F4 /* timeTests.swift in Sources */,
+				0D42F4061EEFFD1D00471321 /* ProjectTimerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
