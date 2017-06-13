@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import time
+@testable import dwyl
 
 
 class timeTests: XCTestCase {
