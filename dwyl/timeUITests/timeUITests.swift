@@ -60,9 +60,9 @@ class timeUITests: XCTestCase {
         
         let app = XCUIApplication()
         
-        app.tables.staticTexts["test"].tap()
+        app.tables.staticTexts["Test"].tap()
         
-        let titleExists = app.staticTexts["test"].exists
+        let titleExists = app.staticTexts["Test"].exists
         XCTAssertEqual(titleExists, true, "Project Title exists in the project detail view")
 
         let timerIsShownWithNoTimerRunning = app.staticTexts["00:00:00"].exists
@@ -114,8 +114,8 @@ class timeUITests: XCTestCase {
         app.buttons["▶️"].tap()
         backButton.tap()
         
-        let liveTimerValue = app.staticTexts["liveTimer"].value as! String
-        XCTAssertNotEqual(liveTimerValue, "00:00:00")
+        let liveTimerValue = app.staticTexts.element(matching: .any, identifier: "totalTime").label
+        XCTAssertNotEqual(liveTimerValue, "00:00:00", "Timer is running as the label is not set to default")
         
 
         // see the timer running
@@ -131,5 +131,57 @@ class timeUITests: XCTestCase {
         // XCTAssertEqual(liveTimerHittable, true)
     }
 
+    
+    func testRunningTimerForAnotherProject() {
+        let app = XCUIApplication()
+        let backButton = app.navigationBars["dwyl.ViewTaskView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
+        
+        app.tables.staticTexts["Test"].tap()
+        app.buttons["▶️"].tap()
+        backButton.tap()
+        app.navigationBars["dwyl.TasksTableView"].buttons["Add"].tap()
+        let newTaskTextField = app.textFields["New Task"]
+        newTaskTextField.tap()
+        newTaskTextField.typeText("Testing")
+        app.typeText("\r")
+
+        app.tables.staticTexts["Testing"].tap()
+        app.buttons["▶️"].tap()
+        let appAlert = app.alerts["Time is already running"].exists
+        XCTAssertEqual(appAlert, true, "app alert has popped up")
+        
+        app.alerts["Time is already running"].buttons["OK"].tap()
+        backButton.tap()
+        
+        
+        let firstChild = app.tables.children(matching:.any).element(boundBy: 1)
+        if firstChild.exists {
+            let liveTimerValue = firstChild.staticTexts.element(matching: .any, identifier: "totalTime").label
+            XCTAssertNotEqual(liveTimerValue, "00:00:00")
+        }
+    }
+    
+    func testDeleteProject() {
+        let app = XCUIApplication()
+        let tablesQuery = app.tables.cells
+        
+        tablesQuery.element(boundBy: 0).swipeLeft()
+        tablesQuery.element(boundBy: 0).buttons["Delete"].tap()
+        XCTAssertEqual(tablesQuery.count, 1, "Testing Project row has been deleted")
+    }
+    
+    func testStopTimerAfterReopeningApp() {
+        let app = XCUIApplication()
+        let backButton = app.navigationBars["dwyl.ViewTaskView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0)
+        var initialTotalTime = String()
+        var newTotalTime = String()
+    
+        initialTotalTime = app.staticTexts.element(matching: .any, identifier: "totalTime").label
+        app.tables.staticTexts["Test"].tap()
+        app.buttons["⏹"].tap()
+        backButton.tap()
+        newTotalTime = app.staticTexts.element(matching: .any, identifier: "totalTime").label
+        XCTAssertNotEqual(initialTotalTime, newTotalTime, "Initial Total time \(initialTotalTime) is not equal to the new total time \(newTotalTime) as the time from the previous timer has been added on")
+    }
     
 }
