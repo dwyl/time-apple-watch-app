@@ -429,12 +429,14 @@
 					};
 					0D20381B1E6D82FD008CB3F4 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3T4BK2BXHV;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0D2038041E6D82FD008CB3F4;
 					};
 					0D2038261E6D82FD008CB3F4 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3T4BK2BXHV;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0D2038041E6D82FD008CB3F4;
 					};
@@ -779,6 +781,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = timeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dwyl.timeTests;
@@ -796,6 +799,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = timeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dwyl.timeTests;
@@ -810,12 +814,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = timeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dwyl.timeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = time;
+				TEST_TARGET_NAME = dwyl;
 			};
 			name = Debug;
 		};
@@ -823,12 +829,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 3T4BK2BXHV;
 				INFOPLIST_FILE = timeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dwyl.timeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = time;
+				TEST_TARGET_NAME = dwyl;
 			};
 			name = Release;
 		};
