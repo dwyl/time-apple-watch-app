@@ -108,7 +108,7 @@ class ViewTaskViewController: UIViewController, UITableViewDataSource, UITableVi
             let start_time = Date()
             let project_name = self.project_name
             
-            ProjectTimer.sharedInstance.startTimer()
+            ProjectTimer.sharedInstance.startTimer(name: project_name)
             playButton.isEnabled = false
             ProjectTimer.sharedInstance.projectName = project_name
             createTask(project_name: project_name, start_time: start_time)
