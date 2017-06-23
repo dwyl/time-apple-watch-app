@@ -31,7 +31,7 @@ class ProjectTimer {
         do {
             let RunningProject = try managedObjectContext!.fetch(fetchRequest)
             if RunningProject.count == 1 {
-                startTimer()
+                startTimer(name: (RunningProject.first?.project_name)!)
                 projectName = (RunningProject.first?.project_name)!
                 startDate = (RunningProject.first?.task_start_date as Date?)!
                 updateTimer()
@@ -41,11 +41,26 @@ class ProjectTimer {
         }
     }
     
-    func startTimer() {
+    func startTimer(name: String) {
         timerRunning = true
         startDate = Date()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        
+        // create a json object. 
+        do {
+            //     let jsonData = try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
+            let convertedDate = dateToString(date: startDate)
+            let jsonData = try JSONSerialization.data(withJSONObject: ["project_name": name, "start_date": convertedDate, "isTaskRunning": true], options: .prettyPrinted)
+            let jsonToString = String(data: jsonData, encoding: String.Encoding.utf8) // the data will be converted to the string
+
+            print(jsonToString ?? "no data")
+        }
+        catch {
+            print(error.localizedDescription)
+        }
     }
+    
+
     
     func stopTimer() {
         startDate = Date()

@@ -148,7 +148,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                 if ProjectTimer.sharedInstance.isTimerRunning() {
                     print("cant start timer, another one is already running in \(ProjectTimer.sharedInstance.projectName)")
                 } else {
-                    ProjectTimer.sharedInstance.startTimer()
+                    ProjectTimer.sharedInstance.startTimer(name: (message["startTimerFor"] as! String?)!)
                     ProjectTimer.sharedInstance.projectName = message["startTimerFor"] as! String
                 }
 
