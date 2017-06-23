@@ -53,7 +53,8 @@ class ProjectTimer {
             let jsonData = try JSONSerialization.data(withJSONObject: ["project_name": name, "start_date": convertedDate, "isTaskRunning": true], options: .prettyPrinted)
             let jsonToString = String(data: jsonData, encoding: String.Encoding.utf8) // the data will be converted to the string
 
-            print(jsonToString ?? "no data")
+            let hashedString = StringToHash(jsonToString!)
+            print(hashedString ?? "no data")
         }
         catch {
             print(error.localizedDescription)
