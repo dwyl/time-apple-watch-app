@@ -19,7 +19,7 @@
 		0D2038131E6D82FD008CB3F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D2038121E6D82FD008CB3F4 /* Assets.xcassets */; };
 		0D2038161E6D82FD008CB3F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2038141E6D82FD008CB3F4 /* LaunchScreen.storyboard */; };
 		0D2038211E6D82FD008CB3F4 /* timeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038201E6D82FD008CB3F4 /* timeTests.swift */; };
-		0D20382C1E6D82FD008CB3F4 /* timeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20382B1E6D82FD008CB3F4 /* timeUITests.swift */; };
+		0D20382C1E6D82FD008CB3F4 /* dwylUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20382B1E6D82FD008CB3F4 /* dwylUITests.swift */; };
 		0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */; };
 		0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */; };
 		0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038431E70180C008CB3F4 /* AddTaskViewController.swift */; };
@@ -121,7 +121,7 @@
 		0D2038201E6D82FD008CB3F4 /* timeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeTests.swift; sourceTree = "<group>"; };
 		0D2038221E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D2038271E6D82FD008CB3F4 /* dwylUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dwylUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D20382B1E6D82FD008CB3F4 /* timeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeUITests.swift; sourceTree = "<group>"; };
+		0D20382B1E6D82FD008CB3F4 /* dwylUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dwylUITests.swift; sourceTree = "<group>"; };
 		0D20382D1E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D20383D1E6D8A23008CB3F4 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksTableViewController.swift; path = ../TasksTableViewController.swift; sourceTree = "<group>"; };
 		0D2038411E6DA9EA008CB3F4 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +136,7 @@
 		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DA4CF1F1EEEA25700EE6744 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0DA4CF201EEEA25700EE6744 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		0DA5A80A1F14EB27006D9E22 /* dwyl-apple-watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dwyl-apple-watch Extension.entitlements"; sourceTree = SOURCE_ROOT; };
 		0DB2792C1EC4B2350011559E /* ProjectTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTimer.swift; sourceTree = "<group>"; };
 		0DC628BD1E7C3F7C00B47419 /* dwyl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dwyl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC628C01E7C3F7C00B47419 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -223,6 +224,7 @@
 				0DC628BE1E7C3F7C00B47419 /* dwyl-apple-watch */,
 				0DC628CD1E7C3F7C00B47419 /* dwyl-apple-watch Extension */,
 				0D2038061E6D82FD008CB3F4 /* Products */,
+				0DA5A80B1F14EB27006D9E22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,7 +277,7 @@
 		0D20382A1E6D82FD008CB3F4 /* dwylUITests */ = {
 			isa = PBXGroup;
 			children = (
-				0D20382B1E6D82FD008CB3F4 /* timeUITests.swift */,
+				0D20382B1E6D82FD008CB3F4 /* dwylUITests.swift */,
 				0D20382D1E6D82FD008CB3F4 /* Info.plist */,
 			);
 			name = dwylUITests;
@@ -292,6 +294,13 @@
 			name = lib;
 			sourceTree = "<group>";
 		};
+		0DA5A80B1F14EB27006D9E22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0DC628BE1E7C3F7C00B47419 /* dwyl-apple-watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +315,7 @@
 		0DC628CD1E7C3F7C00B47419 /* dwyl-apple-watch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0DA5A80A1F14EB27006D9E22 /* dwyl-apple-watch Extension.entitlements */,
 				0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */,
 				0DC628D21E7C3F7C00B47419 /* ExtensionDelegate.swift */,
 				0DC628D41E7C3F7C00B47419 /* NotificationController.swift */,
@@ -457,6 +467,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3T4BK2BXHV;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit.watchos = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -583,7 +598,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D20382C1E6D82FD008CB3F4 /* timeUITests.swift in Sources */,
+				0D20382C1E6D82FD008CB3F4 /* dwylUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
