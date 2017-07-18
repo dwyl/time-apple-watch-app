@@ -10,12 +10,9 @@
 		0D11C4721E96A15200689D48 /* setNavbarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11C4711E96A15200689D48 /* setNavbarLogo.swift */; };
 		0D11C4741E96A37E00689D48 /* fetchProjectNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D11C4731E96A37E00689D48 /* fetchProjectNames.swift */; };
 		0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */; };
-		0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */; };
-		0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */; };
 		0D1D193A1E796B36003C9B39 /* TaskListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D19391E796B36003C9B39 /* TaskListTableViewCell.swift */; };
 		0D2038091E6D82FD008CB3F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */; };
 		0D20380E1E6D82FD008CB3F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D20380C1E6D82FD008CB3F4 /* Main.storyboard */; };
-		0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */; };
 		0D2038131E6D82FD008CB3F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D2038121E6D82FD008CB3F4 /* Assets.xcassets */; };
 		0D2038161E6D82FD008CB3F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2038141E6D82FD008CB3F4 /* LaunchScreen.storyboard */; };
 		0D2038211E6D82FD008CB3F4 /* timeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2038201E6D82FD008CB3F4 /* timeTests.swift */; };
@@ -31,6 +28,9 @@
 		0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */; };
 		0D662CE21E70537900AFDE32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D662CE11E70537900AFDE32 /* Task.swift */; };
 		0D6ECE131E8A7B5000F2D1B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */; };
+		0D97F7721F1E375800FB2AF2 /* dwyl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D97F7701F1E375800FB2AF2 /* dwyl.xcdatamodeld */; };
+		0D97F77F1F1E391D00FB2AF2 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D97F77D1F1E391D00FB2AF2 /* Project+CoreDataClass.swift */; };
+		0D97F7801F1E391D00FB2AF2 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D97F77E1F1E391D00FB2AF2 /* Project+CoreDataProperties.swift */; };
 		0DA4CF211EEEA25700EE6744 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4CF1F1EEEA25700EE6744 /* Crashlytics.framework */; };
 		0DA4CF221EEEA25700EE6744 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA4CF201EEEA25700EE6744 /* Fabric.framework */; };
 		0DB2792D1EC4B2350011559E /* ProjectTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2792C1EC4B2350011559E /* ProjectTimer.swift */; };
@@ -108,13 +108,10 @@
 		0D11C4711E96A15200689D48 /* setNavbarLogo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = setNavbarLogo.swift; sourceTree = "<group>"; };
 		0D11C4731E96A37E00689D48 /* fetchProjectNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchProjectNames.swift; sourceTree = "<group>"; };
 		0D1D19091E76B7C6003C9B39 /* ViewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTaskViewController.swift; sourceTree = "<group>"; };
-		0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0D1D19391E796B36003C9B39 /* TaskListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListTableViewCell.swift; sourceTree = "<group>"; };
 		0D2038051E6D82FD008CB3F4 /* dwyl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dwyl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D2038081E6D82FD008CB3F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D20380D1E6D82FD008CB3F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0D2038101E6D82FD008CB3F4 /* time.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = time.xcdatamodel; sourceTree = "<group>"; };
 		0D2038121E6D82FD008CB3F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D2038151E6D82FD008CB3F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D2038171E6D82FD008CB3F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +133,9 @@
 		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
 		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0D6ECE121E8A7B5000F2D1B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0D97F7711F1E375800FB2AF2 /* dwyl.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = dwyl.xcdatamodel; sourceTree = "<group>"; };
+		0D97F77D1F1E391D00FB2AF2 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataClass.swift"; path = "../Project+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0D97F77E1F1E391D00FB2AF2 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataProperties.swift"; path = "../Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0DA4CF1F1EEEA25700EE6744 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0DA4CF201EEEA25700EE6744 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		0DA5A80A1F14EB27006D9E22 /* dwyl-apple-watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "dwyl-apple-watch Extension.entitlements"; sourceTree = SOURCE_ROOT; };
@@ -207,9 +207,9 @@
 		0D1D19341E7956F4003C9B39 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				0D1D19351E795B6F003C9B39 /* Project+CoreDataClass.swift */,
-				0D1D19361E795B6F003C9B39 /* Project+CoreDataProperties.swift */,
-				0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */,
+				0D97F77D1F1E391D00FB2AF2 /* Project+CoreDataClass.swift */,
+				0D97F77E1F1E391D00FB2AF2 /* Project+CoreDataProperties.swift */,
+				0D97F7701F1E375800FB2AF2 /* dwyl.xcdatamodeld */,
 				0D11C4731E96A37E00689D48 /* fetchProjectNames.swift */,
 			);
 			name = "Core Data";
@@ -567,21 +567,21 @@
 			files = (
 				0D2038421E6DA9EA008CB3F4 /* TasksTableViewCell.swift in Sources */,
 				0D20383E1E6D8A23008CB3F4 /* TasksTableViewController.swift in Sources */,
-				0D1D19381E795B6F003C9B39 /* Project+CoreDataProperties.swift in Sources */,
 				0DCC075C1E9BA9C400868547 /* formatTime.swift in Sources */,
-				0D2038111E6D82FD008CB3F4 /* time.xcdatamodeld in Sources */,
 				0DB2792D1EC4B2350011559E /* ProjectTimer.swift in Sources */,
-				0D1D19371E795B6F003C9B39 /* Project+CoreDataClass.swift in Sources */,
 				0D24BB961EFC292D009D2334 /* stringToHash.swift in Sources */,
 				0D24BB911EFC0F8B009D2334 /* dateConverter.swift in Sources */,
 				0D11C4721E96A15200689D48 /* setNavbarLogo.swift in Sources */,
 				0D243CD21EAE192700053265 /* materialColors.swift in Sources */,
 				0D1D193A1E796B36003C9B39 /* TaskListTableViewCell.swift in Sources */,
+				0D97F7721F1E375800FB2AF2 /* dwyl.xcdatamodeld in Sources */,
 				0D2038091E6D82FD008CB3F4 /* AppDelegate.swift in Sources */,
 				0D1D190A1E76B7C6003C9B39 /* ViewTaskViewController.swift in Sources */,
 				0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */,
 				0D662CE21E70537900AFDE32 /* Task.swift in Sources */,
 				0D11C4741E96A37E00689D48 /* fetchProjectNames.swift in Sources */,
+				0D97F77F1F1E391D00FB2AF2 /* Project+CoreDataClass.swift in Sources */,
+				0D97F7801F1E391D00FB2AF2 /* Project+CoreDataProperties.swift in Sources */,
 				0D2038441E70180C008CB3F4 /* AddTaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1001,13 +1001,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0D20380F1E6D82FD008CB3F4 /* time.xcdatamodeld */ = {
+		0D97F7701F1E375800FB2AF2 /* dwyl.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0D2038101E6D82FD008CB3F4 /* time.xcdatamodel */,
+				0D97F7711F1E375800FB2AF2 /* dwyl.xcdatamodel */,
 			);
-			currentVersion = 0D2038101E6D82FD008CB3F4 /* time.xcdatamodel */;
-			path = time.xcdatamodeld;
+			currentVersion = 0D97F7711F1E375800FB2AF2 /* dwyl.xcdatamodel */;
+			name = dwyl.xcdatamodeld;
+			path = ../dwyl.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

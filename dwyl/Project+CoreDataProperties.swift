@@ -1,8 +1,8 @@
 //
 //  Project+CoreDataProperties.swift
-//  time
+//  dwyl
 //
-//  Created by Sohil Pandya on 18/04/2017.
+//  Created by Sohil Pandya on 18/07/2017.
 //  Copyright © 2017 dwyl. All rights reserved.
 //
 
@@ -22,7 +22,6 @@ extension Project {
     @NSManaged public var green: Double
     @NSManaged public var id: Int16
     @NSManaged public var is_task_running: Bool
-    @NSManaged public var project_name: String?
     @NSManaged public var red: Double
     @NSManaged public var start_time: Int64
     @NSManaged public var task_description: String?
@@ -30,6 +29,6 @@ extension Project {
     @NSManaged public var task_name: String?
     @NSManaged public var task_start_date: NSDate?
     @NSManaged public var total_task_time: Double
-    @NSManaged public var ui_color: NSObject?
+    @NSManaged public var project_name: String?
 
 }
