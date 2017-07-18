@@ -4,30 +4,38 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (WIP Build 15)
+## Version 1.1 (Build 17) _Current_
+
+- Added Modular Small and Module Large Complications, When a timer is running, it will show the live time on the watch face as long as you have the complications showing. Below is a screenshot of how it will look.
+
+| **Timer not running** | **Timer running** |
+| --- | --- |
+| ![watch-no-timer](https://user-images.githubusercontent.com/2305591/28313863-4ae4472a-6bb0-11e7-9bbf-062e36ee2a5c.png) | ![watch-timer](https://user-images.githubusercontent.com/2305591/28313876-5879ea16-6bb0-11e7-8644-297cb66041b1.png) |
+
+## Version 1.1 (Build 16)
 
 - updated name of the app to `dwyl`
 - updated the text input issue where the first letter was not auto capitalized, described in  [issue 50](https://github.com/dwyl/time-apple-watch-app/issues/50)
 - also updated the flow of the add view so that the user does not have to click done and then save. If the user clicks done, it will return user to the table view automatically.
 
 
-## Version 1.1 (WIP Build 15) _Current_
+## Version 1.1 (Build 15)
 
 - updated the way the watch was being synced.
     - If the watch returns from the background we are now fetching the latest information from the iPhone and then displaying a live timer accordingly
 - Also fixed issue When the timer is stopped on the watch and the user is in the project details view.
 
 
-## Version 1.1 (WIP Build 14)
+## Version 1.1 (Build 14)
 
 - Syncing timer both ways. Users can now see the timer running on the watch if they've started it on the Phone.
 
-## Version 1.1 (WIP Build 13)
+## Version 1.1 (Build 13)
 
 - Timer state is reloaded if the user force quits the app and rejoins. :tada:
 
 
-## Version 1.1 (WIP Build 11)
+## Version 1.1 (Build 11)
 
 **Additions**
 - If a user tries to start a new timer whilst another one is running then they will be prompted with an alert

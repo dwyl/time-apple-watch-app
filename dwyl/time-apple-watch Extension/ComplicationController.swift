@@ -12,7 +12,6 @@ import ClockKit
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Timeline Configuration
-    var oldDate = Date()
     
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
 //        handler([.forward, .backward])
@@ -37,19 +36,38 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the current timeline entry
         
         switch complication.family {
+            
         case .modularSmall:
-            let template = CLKComplicationTemplateModularSmallStackText()
-            template.line1TextProvider = CLKSimpleTextProvider(text: "dwyl")
-            template.line2TextProvider = CLKRelativeDateTextProvider(date: oldDate, style: .timer, units: [.hour, .minute, .second])
-            handler(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
+            
+            if let startDate = WatchTimer.sharedInstance.startDate {
+                let template = CLKComplicationTemplateModularSmallStackText()
+                template.line1TextProvider = CLKSimpleTextProvider(text: "dwyl")
+                template.line2TextProvider = CLKRelativeDateTextProvider(date: startDate, style: .timer, units: [.hour, .minute, .second])
+                handler(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
+                
+            } else {
+                let template = CLKComplicationTemplateModularSmallStackText()
+                template.line1TextProvider = CLKSimpleTextProvider(text: "dwyl")
+                template.line2TextProvider = CLKSimpleTextProvider(text: "-")
+                handler(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
+            }
+    
         case .modularLarge:
             
-            let time = CLKRelativeDateTextProvider(date: oldDate, style: .timer, units: [.hour, .minute, .second])
+            if let startDate = WatchTimer.sharedInstance.startDate {
+                let time = CLKRelativeDateTextProvider(date: startDate, style: .timer, units: [.hour, .minute, .second])
+                let template = CLKComplicationTemplateModularLargeTallBody()
+                template.bodyTextProvider = time
+                template.headerTextProvider = CLKSimpleTextProvider(text: "dwyl")
+                handler(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
+            } else {
+                let template = CLKComplicationTemplateModularLargeStandardBody()
+                template.body1TextProvider = CLKSimpleTextProvider(text: "-")
+                template.body2TextProvider = CLKSimpleTextProvider(text: "no task running")
+                template.headerTextProvider = CLKSimpleTextProvider(text: "dwyl")
+                handler(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
+            }
 
-            let template = CLKComplicationTemplateModularLargeTallBody()
-            template.bodyTextProvider = time
-            template.headerTextProvider = CLKSimpleTextProvider(text: "dwyl")
-            handler(CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template))
         default:
             print("Unknown complication type: \(complication.family)")
             handler(nil)
@@ -75,17 +93,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             print("YOU ARE IN MODULAR SMALL")
             let template = CLKComplicationTemplateModularSmallStackText()
             template.line1TextProvider = CLKSimpleTextProvider(text: "dwyl")
-            template.line2TextProvider = CLKRelativeDateTextProvider(date: oldDate, style: .timer, units: [.hour, .minute, .second])
+            template.line2TextProvider = CLKRelativeDateTextProvider(date: Date(), style: .timer, units: [.hour, .minute, .second])
             handler(template)
         }
         if complication.family == .modularLarge {
             print("YOU ARE IN MODULAR LARGE")
-            let template = CLKComplicationTemplateModularLargeTable()
+            let time = CLKRelativeDateTextProvider(date: Date(), style: .timer, units: [.hour, .minute, .second])
+            let template = CLKComplicationTemplateModularLargeTallBody()
+            template.bodyTextProvider = time
             template.headerTextProvider = CLKSimpleTextProvider(text: "dwyl")
-            template.row1Column1TextProvider = CLKSimpleTextProvider(text: "Sohil")
-            template.row1Column2TextProvider = CLKSimpleTextProvider(text: "Pandya")
-            template.row2Column1TextProvider = CLKSimpleTextProvider(text: "time")
-            template.row2Column2TextProvider = CLKSimpleTextProvider(text: "time")
             handler(template)
         }
         else {

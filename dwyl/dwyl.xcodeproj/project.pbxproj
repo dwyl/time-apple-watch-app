@@ -26,6 +26,7 @@
 		0D243CD21EAE192700053265 /* materialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D243CD11EAE192700053265 /* materialColors.swift */; };
 		0D24BB911EFC0F8B009D2334 /* dateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24BB901EFC0F8B009D2334 /* dateConverter.swift */; };
 		0D24BB961EFC292D009D2334 /* stringToHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D24BB951EFC292D009D2334 /* stringToHash.swift */; };
+		0D290BC01F1D18D0001278CC /* WatchTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D290BBE1F1D0BB7001278CC /* WatchTimer.swift */; };
 		0D42F4061EEFFD1D00471321 /* ProjectTimerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D42F4051EEFFD1D00471321 /* ProjectTimerTest.swift */; };
 		0D5AA1451E71881E002D87C3 /* TaskCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */; };
 		0D662CE21E70537900AFDE32 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D662CE11E70537900AFDE32 /* Task.swift */; };
@@ -130,6 +131,7 @@
 		0D24BB901EFC0F8B009D2334 /* dateConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateConverter.swift; sourceTree = "<group>"; };
 		0D24BB941EFC2832009D2334 /* dwyl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dwyl-Bridging-Header.h"; sourceTree = "<group>"; };
 		0D24BB951EFC292D009D2334 /* stringToHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringToHash.swift; sourceTree = "<group>"; };
+		0D290BBE1F1D0BB7001278CC /* WatchTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTimer.swift; sourceTree = "<group>"; };
 		0D42F4051EEFFD1D00471321 /* ProjectTimerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTimerTest.swift; sourceTree = "<group>"; };
 		0D5AA1441E71881E002D87C3 /* TaskCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCoreData.swift; sourceTree = "<group>"; };
 		0D662CE11E70537900AFDE32 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				0DC628CE1E7C3F7C00B47419 /* Supporting Files */,
 				0DC628E61E7D266C00B47419 /* ProjectInterfaceController.swift */,
 				0DC628E81E80078B00B47419 /* ProjectRowController.swift */,
+				0D290BBE1F1D0BB7001278CC /* WatchTimer.swift */,
 			);
 			name = "dwyl-apple-watch Extension";
 			path = "time-apple-watch Extension";
@@ -606,6 +609,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D290BC01F1D18D0001278CC /* WatchTimer.swift in Sources */,
 				0DC628D51E7C3F7C00B47419 /* NotificationController.swift in Sources */,
 				0DC628E71E7D266C00B47419 /* ProjectInterfaceController.swift in Sources */,
 				0DC628D71E7C3F7C00B47419 /* ComplicationController.swift in Sources */,
