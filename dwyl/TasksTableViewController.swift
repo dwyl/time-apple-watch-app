@@ -29,7 +29,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("DEINIT")
     }
 
 
@@ -332,7 +331,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     do {
                         fetchedProjects = try managedObjectContext!.fetch(fetchRequest)
                         projects = fetchedProjects
-                        print(uniqueProjects)
                         sendDataToWatch()
                         
                     } catch let error as NSError {
@@ -495,8 +493,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     runningTask = try managedObjectContext!.fetch(fetchRunningTaskRequest)
 
                     if runningTask.count == 0 {
-                        print(store)
-                        print(uniqueProjects)
                         sendDataToWatch()
                     }
                 } catch let error as NSError {

@@ -164,7 +164,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         DispatchQueue.main.async {
             if (message["project"]) != nil {
                 let receivedListOfUniqueProjects = message["uniqueProjects"] as! [String]
-                print("\(receivedListOfUniqueProjects) <<<<<<<<")
                 if self.uniqueProjects == receivedListOfUniqueProjects {
                     // if the list of items being received are the same then we do not want to reload the data.
                     replyHandler(["set": true])
