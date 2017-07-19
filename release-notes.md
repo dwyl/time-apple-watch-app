@@ -4,7 +4,12 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (Build 17) _Current_
+## Version 1.1 (Build 21) _Current_
+
+- Bug fixes, app crashed due to a change in core data table
+- Update another issue where the projects were not syncing across to the apple watch when adding a new project on the watch.
+
+## Version 1.1 (Build 17)
 
 - Added Modular Small and Module Large Complications, When a timer is running, it will show the live time on the watch face as long as you have the complications showing. Below is a screenshot of how it will look.
 

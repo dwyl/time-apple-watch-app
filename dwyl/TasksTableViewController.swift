@@ -290,7 +290,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
 
         // Store is now updated
 
-
     }
 
     // MARK: Notification Center
@@ -315,7 +314,33 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     // This will auto update the list and stop the timer that may have been running on your apple watch. so need to think of how to tackle it differently in the future
                     // if sender is segue then run this else do not run this.
                     // but if a timer is running already, then do not send data to watch.
-                    sendDataToWatch()
+
+
+                    let entity = NSEntityDescription.entity( forEntityName: "Project",  in:managedObjectContext! )
+                    let request = NSFetchRequest<NSFetchRequestResult>()
+                    request.entity = entity
+                    request.resultType = .dictionaryResultType
+                    request.returnsDistinctResults = true
+                    request.propertiesToFetch = [ "project_name" ]
+                    
+                    let fetchRequest =
+                        NSFetchRequest<Project>(entityName: "Project")
+                    
+                    var fetchedProjects = [Project]()
+                    
+                    //         fetching all information from the db
+                    do {
+                        fetchedProjects = try managedObjectContext!.fetch(fetchRequest)
+                        projects = fetchedProjects
+                        print(uniqueProjects)
+                        sendDataToWatch()
+                        
+                    } catch let error as NSError {
+                        print("Could not fetch. \(error), \(error.userInfo)")
+                    }
+                    
+                    
+                    
                 }
             } catch let error as NSError {
                 print("Could not fetch any running tasks. \(error), \(error.userInfo)")
@@ -356,7 +381,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
             if let watchSession = session {
                 watchSession.sendMessage(["timerStartedOnPhone": true, "project_name": project_name, "start_time": start_time],
                                          replyHandler: { replyData in
-                                            print("Information has been received by the watch")
+                                            print("Information about the new timer has been has been received by the watch")
                 }, errorHandler: { Error in
                     print("error in sending new data to watch \(Error)")
                 })
@@ -369,7 +394,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         // unwrapping the session so that if it is nil then it won't call this code.
         if let watchsession = session {
             watchsession.sendMessage(["project": self.store, "uniqueProjects": self.uniqueProjects],
-                                 replyHandler: { replyData in print("Information has been received by the watch") } ,
+                                 replyHandler: { replyData in print("Information about the new projects has been received by the watch") } ,
                                  errorHandler: { error in print("error in sending new data to watch \(error)") })
         }
     }
@@ -470,6 +495,8 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     runningTask = try managedObjectContext!.fetch(fetchRunningTaskRequest)
 
                     if runningTask.count == 0 {
+                        print(store)
+                        print(uniqueProjects)
                         sendDataToWatch()
                     }
                 } catch let error as NSError {
