@@ -164,7 +164,6 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         DispatchQueue.main.async {
             if (message["project"]) != nil {
                 let receivedListOfUniqueProjects = message["uniqueProjects"] as! [String]
-                
                 if self.uniqueProjects == receivedListOfUniqueProjects {
                     // if the list of items being received are the same then we do not want to reload the data.
                     replyHandler(["set": true])
@@ -178,13 +177,21 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
             if (message["timerStoppedOnPhone"]) != nil {
                 self.reloadData()
                 self.timerTotal.invalidate()
+                // singleton data source
+                WatchTimer.sharedInstance.startDate = nil
+                WatchTimer.sharedInstance.projectName = nil
+                self.reloadComplication()
             }
             if (message["timerStartedOnPhone"]) != nil {
                 let project_name = message["project_name"] as! String
                 let start_date = message["start_time"] as! Date
                 // now that the timer has started on the phone
                 // lets start it on the watch.
-                // first step creat the watch singleton!!
+                // singleton data source
+                WatchTimer.sharedInstance.startDate = start_date
+                WatchTimer.sharedInstance.projectName = project_name
+                self.reloadComplication()
+
                 self.currentTimerForProjectName = project_name
                 self.projectTable.setNumberOfRows(self.uniqueProjects.count, withRowType: "ProjectName")
                 self.isTimerRunning = true
@@ -259,12 +266,17 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         }
     }
     
-    
     func startTimer(forProject project:String) {
         // when the timer is not running
         // start the timer
         currentTimerForProjectName = project
         // send a message to the phone which will save this data into the core data
+        
+        // singleton data source
+        WatchTimer.sharedInstance.startDate = Date()
+        WatchTimer.sharedInstance.projectName = project
+        
+        reloadComplication()
         session?.sendMessage(["startTimerFor": project, "task_start_date": Date()], replyHandler: {
             replyData in
             print("You have sent the message!!! \(replyData)")
@@ -273,10 +285,19 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         })
         isTimerRunning = true
         timerTotal = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimerOnWatch), userInfo: nil, repeats: true)
+
     }
     
+
     func stopTimer(forProject project:String, totalTime time:Double) {
         self.timerTotal.invalidate()
+        
+        // singleton data source
+        WatchTimer.sharedInstance.startDate = nil
+        WatchTimer.sharedInstance.projectName = nil
+        
+        reloadComplication()
+        
         // send a message to the phone which will update the existing project with the total time
         session?.sendMessage(["stopTimerFor": currentTimerForProjectName, "task_end_date": Date()], replyHandler: {
             replyData in
@@ -302,5 +323,14 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         }
         
     }
+    
+    // This function finds all of the active complications and then reloads them on the watch face.
+    func reloadComplication() {
+        let server = CLKComplicationServer.sharedInstance()
+        for complication in server.activeComplications! {
+            server.reloadTimeline(for: complication)
+        }
+    }
+    
 
 }
