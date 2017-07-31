@@ -117,14 +117,6 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
         //Use this to update the UI instantaneously (otherwise, takes a little while)
         DispatchQueue.main.async {
             if (message["project"] as? Int) != nil {
-                replyHandler(["project": self.store , "uniqueProjects": self.uniqueProjects])
-            }
-            if (message["isTaskRunning"] != nil) {
-                
-                // fetch running task from database
-                // if task is running send project name and start time over to the watch
-                // else send false as there is no task running
-                
                 let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
                 fetchRequest.predicate = NSPredicate(format: "is_task_running == YES")
                 // fetch where task is running.
@@ -133,9 +125,9 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     if RunningProject.count == 1 {
                         let projectName = RunningProject.first?.project_name
                         let startDate = RunningProject.first?.task_start_date
-                        replyHandler(["project_name": projectName ?? "noProject", "start_date": startDate ?? Date()])
+                        replyHandler(["project_name": projectName ?? "noProject", "start_date": startDate ?? Date(), "project": self.store , "uniqueProjects": self.uniqueProjects, "isTimerRunning": true])
                     } else {
-                        replyHandler(["project_name": "noProject"])
+                        replyHandler(["project_name": "noProject", "project": self.store , "uniqueProjects": self.uniqueProjects, "isTimerRunning": false ])
                     }
                 } catch let error as NSError {
                     print("unable to get projects from core data. \(error)")

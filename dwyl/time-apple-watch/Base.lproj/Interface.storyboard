@@ -8,15 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
     </dependencies>
     <scenes>
-        <!--Project Interface Controller-->
+        <!--dwyl-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="ProjectInterfaceController" customModule="dwyl_apple_watch_Extension">
+                <controller title="dwyl" id="AgC-eL-Hgc" customClass="ProjectInterfaceController" customModule="dwyl_apple_watch_Extension">
                     <items>
-                        <imageView width="29" height="15" alignment="center" image="dwyl-full-color" contentMode="scaleAspectFit" id="eLu-Gz-59K"/>
-                        <label alignment="center" text="Time" id="7AJ-59-x2Y">
-                            <color key="textColor" red="0.29411764709999999" green="0.75294117650000003" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
-                        </label>
                         <table alignment="left" id="I6n-kN-ee4">
                             <items>
                                 <tableRow identifier="ProjectName" id="fvy-Yh-0qa" customClass="ProjectRowController" customModule="dwyl_apple_watch_Extension">
@@ -84,4 +80,5 @@
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.52916735410690308" green="0.80490773916244507" blue="0.7568623423576355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
