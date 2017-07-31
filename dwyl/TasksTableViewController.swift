@@ -331,6 +331,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
                     do {
                         fetchedProjects = try managedObjectContext!.fetch(fetchRequest)
                         projects = fetchedProjects
+                        setupStore()
                         sendDataToWatch()
                         
                     } catch let error as NSError {
@@ -391,6 +392,7 @@ class TasksTableViewController: UITableViewController, WCSessionDelegate {
     func sendDataToWatch() {
         // unwrapping the session so that if it is nil then it won't call this code.
         if let watchsession = session {
+            print(self.store)
             watchsession.sendMessage(["project": self.store, "uniqueProjects": self.uniqueProjects],
                                  replyHandler: { replyData in print("Information about the new projects has been received by the watch") } ,
                                  errorHandler: { error in print("error in sending new data to watch \(error)") })
