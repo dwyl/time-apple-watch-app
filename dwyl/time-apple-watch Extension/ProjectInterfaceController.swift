@@ -64,45 +64,54 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         super.willActivate()
 
         // ping the phone
-        
-        session?.sendMessage(["isTaskRunning": true], replyHandler: {
-            replyData in
-            
-            if let project_name = replyData["project_name"] as? String {    
-                if project_name != "noProject" {
-                    
-                    let start_date = replyData["start_date"] as! Date
 
-                    // check if a task is running on the phone
-                    // if it is then show it running on the watch....
-                    self.currentTimerForProjectName = project_name
-                    self.projectTable.setNumberOfRows(self.uniqueProjects.count, withRowType: "ProjectName")
-                    self.isTimerRunning = true
-                    self.timerTotal = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimerOnWatch), userInfo: nil, repeats: true)
-                    
-                    for i in 0..<self.projectTable.numberOfRows {
+        if !WatchTimer.sharedInstance.isTimerRunning {
+            session?.sendMessage(applicationData, replyHandler: {
+                replyData in
+                
+                if let project_name = replyData["project_name"] as? String {
+                    if project_name != "noProject" && project_name != self.currentTimerForProjectName {
                         
-                        if let controller = self.projectTable.rowController(at: i) as? ProjectRowController {
-                            controller.ProjectName.setText(self.uniqueProjects[i])
-                            let red = self.store[self.uniqueProjects[i]]?["red"]
-                            let green = self.store[self.uniqueProjects[i]]?["green"]
-                            let blue = self.store[self.uniqueProjects[i]]?["blue"]
-                            controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
-                            if (self.uniqueProjects[i] == project_name) {
-                                controller.startTimerForRow(date: start_date)
+                        self.uniqueProjects = replyData["uniqueProjects"] as! [String]
+                        self.store = replyData["project"] as! [String : Dictionary<String, Any>]
+                        
+                        let start_date = replyData["start_date"] as! Date
+                        
+                        // check if a task is running on the phone
+                        // if it is then show it running on the watch....
+                        self.currentTimerForProjectName = project_name
+                        self.projectTable.setNumberOfRows(self.uniqueProjects.count, withRowType: "ProjectName")
+                        self.isTimerRunning = true
+                        
+                        WatchTimer.sharedInstance.startDate = start_date
+                        WatchTimer.sharedInstance.projectName = project_name
+                        WatchTimer.sharedInstance.isTimerRunning = true
+                        
+                        self.timerTotal = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimerOnWatch), userInfo: nil, repeats: true)
+                        
+                        DispatchQueue.main.async {
+                            for i in 0..<self.projectTable.numberOfRows {
+                                
+                                if let controller = self.projectTable.rowController(at: i) as? ProjectRowController {
+                                    controller.ProjectName.setText(self.uniqueProjects[i])
+                                    let red = self.store[self.uniqueProjects[i]]?["red"]
+                                    let green = self.store[self.uniqueProjects[i]]?["green"]
+                                    let blue = self.store[self.uniqueProjects[i]]?["blue"]
+                                    controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
+                                    if (self.uniqueProjects[i] == project_name) {
+                                        controller.startTimerForRow(date: start_date)
+                                    }
+                                    
+                                }
                             }
-                            
                         }
+                        
                     }
                 }
-            }
-            print("You have sent the message!!! \(replyData)")
-        }, errorHandler: { error in
-            print("could not send name of the project for which the timer has started")
-        })
-
-        
-        
+            }, errorHandler: { error in
+                print("could not send name of the project for which the timer has started")
+            })
+        }
     }
     
     override func didDeactivate() {
@@ -137,24 +146,65 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         // send message to fetch data if it isn't running. 
         // update timer if its running on phone.
         // else update the store and reload data. 
-        if !isTimerRunning {
-            
-        }
         
+
         
-        
-        session.sendMessage(applicationData,
-                            replyHandler: { replyData in
-                                // handle reply from iPhone app here
-                                // we are setting the store and unique projects once we recive them from the iPhone
-                                self.store = replyData["project"] as! [String : Dictionary<String, Any>]
-                                self.uniqueProjects = replyData["uniqueProjects"] as! [String]
-                                self.reloadData()
+            session.sendMessage(applicationData, replyHandler: { replyData in
+                // handle reply from iPhone app here
+                // we are setting the store and unique projects once we recive them from the iPhone
+                self.store = replyData["project"] as! [String : Dictionary<String, Any>]
+                self.uniqueProjects = replyData["uniqueProjects"] as! [String]
+                
+                if let isTimerRunning = replyData["isTimerRunning"] as? Bool {
+                    // if no timer running then reload data
+                    if !isTimerRunning {
+                        self.reloadData()
+                    } else {
+                        
+                        if let project_name = replyData["project_name"] as? String {
+                            if project_name != "noProject" && project_name != self.currentTimerForProjectName {
                                 
-        }, errorHandler: { error in
-            // catch any errors here
-            print(error)
-        })
+                                self.uniqueProjects = replyData["uniqueProjects"] as! [String]
+                                self.store = replyData["project"] as! [String : Dictionary<String, Any>]
+                                
+                                let start_date = replyData["start_date"] as! Date
+                                
+                                // check if a task is running on the phone
+                                // if it is then show it running on the watch....
+                                self.currentTimerForProjectName = project_name
+                                self.projectTable.setNumberOfRows(self.uniqueProjects.count, withRowType: "ProjectName")
+                                self.isTimerRunning = true
+                                
+                                WatchTimer.sharedInstance.startDate = start_date
+                                WatchTimer.sharedInstance.projectName = project_name
+                                WatchTimer.sharedInstance.isTimerRunning = true
+                                
+                                self.timerTotal = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimerOnWatch), userInfo: nil, repeats: true)
+                                
+                                DispatchQueue.main.async {
+                                    for i in 0..<self.projectTable.numberOfRows {
+                                        
+                                        if let controller = self.projectTable.rowController(at: i) as? ProjectRowController {
+                                            controller.ProjectName.setText(self.uniqueProjects[i])
+                                            let red = self.store[self.uniqueProjects[i]]?["red"]
+                                            let green = self.store[self.uniqueProjects[i]]?["green"]
+                                            let blue = self.store[self.uniqueProjects[i]]?["blue"]
+                                            controller.projectGroup.setBackgroundColor(UIColor(red: red as! CGFloat, green: green as! CGFloat, blue: blue as! CGFloat, alpha: 1))
+                                            if (self.uniqueProjects[i] == project_name) {
+                                                controller.startTimerForRow(date: start_date)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }     
+                }
+            }, errorHandler: { error in
+                // catch any errors here
+                print(error)
+            })
+        
     }
 
     
@@ -180,6 +230,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                 // singleton data source
                 WatchTimer.sharedInstance.startDate = nil
                 WatchTimer.sharedInstance.projectName = nil
+                WatchTimer.sharedInstance.isTimerRunning = false
                 self.reloadComplication()
             }
             if (message["timerStartedOnPhone"]) != nil {
@@ -190,6 +241,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
                 // singleton data source
                 WatchTimer.sharedInstance.startDate = start_date
                 WatchTimer.sharedInstance.projectName = project_name
+                WatchTimer.sharedInstance.isTimerRunning = true
                 self.reloadComplication()
 
                 self.currentTimerForProjectName = project_name
@@ -275,6 +327,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         // singleton data source
         WatchTimer.sharedInstance.startDate = Date()
         WatchTimer.sharedInstance.projectName = project
+        WatchTimer.sharedInstance.isTimerRunning = true
         
         reloadComplication()
         session?.sendMessage(["startTimerFor": project, "task_start_date": Date()], replyHandler: {
@@ -295,6 +348,7 @@ class ProjectInterfaceController: WKInterfaceController, WCSessionDelegate {
         // singleton data source
         WatchTimer.sharedInstance.startDate = nil
         WatchTimer.sharedInstance.projectName = nil
+        WatchTimer.sharedInstance.isTimerRunning = false
         
         reloadComplication()
         

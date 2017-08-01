@@ -4,7 +4,16 @@ We'll be updating this document along with each update that is merged into maste
 
 We are now on Testflight :tada:, please forward us an email at hello@dwyl.io to request beta access
 
-## Version 1.1 (Build 21) _Current_
+## Version 1.1 (Build 22) _Current_
+
+- Bug fixed, [fixed the issue where the watch app table was refreshing twice](https://github.com/dwyl/time-apple-watch-app/issues/94)
+- Updated Watch UI so that the name of the app appears in the top left corner.
+
+| **App UI Change** |
+| --- |
+| ![watch-UI-change](https://user-images.githubusercontent.com/2305591/28832235-dba55c12-76d3-11e7-9c0d-5a0ef468d161.png) |
+
+## Version 1.1 (Build 21)
 
 - Bug fixes, app crashed due to a change in core data table
 - Update another issue where the projects were not syncing across to the apple watch when adding a new project on the watch.

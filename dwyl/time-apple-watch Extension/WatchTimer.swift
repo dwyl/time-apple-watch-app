@@ -17,5 +17,6 @@ class WatchTimer {
     
     var startDate: Date? = nil
     var projectName: String? = nil
+    var isTimerRunning: Bool = false
 }
  
